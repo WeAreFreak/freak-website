@@ -2272,7 +2272,7 @@ function renderMoods() {   // the options for the world you are in
       return `<button type="button" role="radio" data-mood="${k}" aria-checked="${k === Sound.mood}"><b>${m.label}</b><small>${m.note}</small></button>`; }).join('');
 }
 renderMoods();
-let moodsOpen = false;   // opens each time sound is turned on; the X closes it and the sound keeps playing
+let moodsOpen = false;   // opens each time sound is turned on; the X, Escape or a click outside closes it, and the sound keeps playing
 function showMoods() { moodsEl.hidden = !Sound.on || !moodsOpen || !!openSheet; }
 moodsEl.addEventListener('click', e => {
   if (e.target.closest('.moods-x')) { moodsOpen = false; showMoods(); soundBtn.focus(); return; }
@@ -2282,6 +2282,10 @@ moodsEl.addEventListener('click', e => {
 });
 addEventListener('hashchange', () => setTimeout(showMoods, 60));
 addEventListener('keydown', e => { if (e.key === 'Escape' && !moodsEl.hidden) { moodsOpen = false; showMoods(); } });
+addEventListener('pointerdown', e => {   // a press anywhere outside the panel (or the sound button) closes it
+  if (moodsEl.hidden || moodsEl.contains(e.target) || soundBtn.contains(e.target)) return;
+  moodsOpen = false; showMoods();
+}, true);
 soundBtn.addEventListener('click', () => {
   const v = Sound.set(!Sound.on);
   soundBtn.setAttribute('aria-pressed', String(v));
