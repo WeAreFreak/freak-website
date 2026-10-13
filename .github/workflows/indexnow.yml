@@ -38,8 +38,10 @@ jobs:
           KEY=$(python3 -c "import json;print(json.load(open('src/content/site.json'))['indexnow_key'])")
           out=""; bad=0
           for u in / /work /work/hoover /capabilities /sitemap.xml /robots.txt /llms.txt /$KEY.txt "/cbto9su/x.php" /budweiser; do
-            c=$(curl -s -o /dev/null -w '%{http_code}' "https://wearefreak.com$u"); out="$out $u=$c"
+            c=$(curl -s -o /dev/null -w '%{http_code}' "https://wearefreak.com$u")
+            if [ "${c#3}" != "$c" ]; then c="$c>$(curl -s -o /dev/null -w '%{redirect_url}' "https://wearefreak.com$u")>$(curl -sL -o /dev/null -w '%{http_code}' "https://wearefreak.com$u")"; fi
+            out="$out $u=$c"
           done
           echo "::notice title=Live check::$out"
-          case "$out" in *" /="200*) ;; *) bad=1 ;; esac
+          case "$out" in *" /="200*|*" /="30*">200"*) ;; *) bad=1 ;; esac
           exit $bad
