@@ -64,12 +64,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .top > * { pointer-events: auto; }
 /* Intro: header and card wait off-stage while the camera flies in, then reveal in sequence */
 .top .brand img { clip-path: inset(0 0 0 0); transition: clip-path 1.2s var(--ease); }
-.top .nav button { transition: border-color .3s var(--ease), opacity .7s var(--ease), transform .7s var(--ease); }
-.top .nav button:nth-child(2) { transition-delay: 0s, .08s, .08s; }
-.top .nav button:nth-child(3) { transition-delay: 0s, .16s, .16s; }
-.top .nav button:nth-child(4) { transition-delay: 0s, .24s, .24s; }
+.top .nav a { transition: border-color .3s var(--ease), opacity .7s var(--ease), transform .7s var(--ease); }
+.top .nav a:nth-child(2) { transition-delay: 0s, .08s, .08s; }
+.top .nav a:nth-child(3) { transition-delay: 0s, .16s, .16s; }
+.top .nav a:nth-child(4) { transition-delay: 0s, .24s, .24s; }
 html.intro .top .brand img { clip-path: inset(0 100% 0 0); }
-html.intro .top .nav button { opacity: 0; transform: translateY(-8px); }
+html.intro .top .nav a { opacity: 0; transform: translateY(-8px); }
 html.intro .top::before { opacity: 0; }
 .top::before { transition: opacity 1.2s var(--ease); }
 html.intro .card { opacity: 0; transform: translateY(28px); pointer-events: none; }
@@ -80,13 +80,13 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 .brand { display: block; width: clamp(92px, 9vw, 124px); background: none; border: 0; padding: 0; }
 .brand img { display: block; width: 100%; height: auto; filter: invert(1); }
 .nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
-.nav button {
+.nav a {
   background: none; border: 0; padding: 4px 0; color: var(--on-glass);
   font-size: 15px; font-weight: 500; letter-spacing: .01em;
   text-shadow: 0 1px 12px rgba(0,0,0,.35);
   border-bottom: 1.5px solid transparent; transition: border-color .3s var(--ease);
 }
-.nav button[aria-current="true"] { border-bottom-color: var(--on-glass); }
+.nav a[aria-current="true"] { border-bottom-color: var(--on-glass); }
 
 /* ---------- card ---------- */
 .card {
@@ -152,8 +152,8 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 }
 .sheet-bar .brand img { filter: none; }
 .sheet-bar nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px); }
-.sheet-bar nav button { background: none; border: 0; padding: 4px 0; font-size: 15px; color: var(--ink); border-bottom: 1.5px solid transparent; }
-.sheet-bar nav button[aria-current="true"] { border-bottom-color: var(--ink); }
+.sheet-bar nav a { background: none; border: 0; padding: 4px 0; font-size: 15px; color: var(--ink); border-bottom: 1.5px solid transparent; }
+.sheet-bar nav a[aria-current="true"] { border-bottom-color: var(--ink); }
 .close {
   width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ecebe8; color: var(--ink);
   display: grid; place-items: center; flex: none;
@@ -202,7 +202,7 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 .carousel-nav svg { width: 16px; height: 16px; }
 .carousel img { flex: none; height: clamp(240px, 34vw, 440px); width: auto; max-width: none; border-radius: 12px; scroll-snap-align: start; display: block; background: #f1efeb; }
 .cs-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding-block: 28px 8px; border-top: 1px solid var(--rule); }
-.cs-nav button { background: none; border: 0; padding: 8px 0; font-size: 15px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+.cs-nav a { background: none; border: 0; padding: 8px 0; font-size: 15px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
 .cs-nav .prev { justify-self: start; }
 .cs-nav .next { justify-self: end; }
 .cs-nav .back { justify-self: center; border: 1px solid var(--ink); border-radius: 999px; padding: 9px 18px; }
@@ -255,9 +255,9 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
   .pillar { grid-template-columns: minmax(0, 1fr); }
   .pillar .num { padding-top: 0; }
   .proof { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .sheet-bar nav button[data-open] { display: none; }
+  .sheet-bar nav a[data-open] { display: none; }
   .card { left: 16px; right: 16px; width: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); padding: 18px 18px 14px; }
-  .nav button { font-size: 14px; }
+  .nav a { font-size: 14px; }
   .nav { gap: 12px; }
   .top .brand { width: 84px; }
   .hint { display: none; }
@@ -473,6 +473,39 @@ html.intro .moods { display: none; }
   .marquee { -webkit-mask-image: none; mask-image: none; }
 }
 @media (prefers-reduced-motion: reduce) { .marquee .dup { display: none; } }
+
+/* links that used to be buttons keep their look */
+a.brand, .nav a, .sheet-bar nav a, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { color: inherit; text-decoration: none; }
+.sheet-bar nav a { color: var(--ink); }
+a.link-btn { color: var(--paper); }
+.foot a { border-bottom: 1px solid rgba(236, 234, 229, .35); transition: border-color .2s; }
+.foot a:hover { border-bottom-color: var(--lime); }
+.foot .policies { display: flex; gap: 6px; flex-wrap: wrap; }
+.foot .policies span { opacity: .5; }
+
+/* 'what we do', on the card */
+.card-eyebrow { margin: 0 0 14px; font-family: var(--body); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--on-glass-quiet); }
+.card-eyebrow b { color: var(--lime); font-weight: 500; }
+
+/* case study story: label on the left, words on the right */
+.mod-story, .mod-results { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 40px); align-items: start; }
+.mod-story > .label, .mod-results > .label { padding-top: 7px; }
+.mod-story .story { display: grid; gap: 18px; min-width: 0; }
+.mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
+.mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
+.mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
+a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
+a.cta svg { width: 16px; height: 16px; }
+@media (max-width: 720px) { .mod-story, .mod-results { grid-template-columns: 1fr; } .mod-story > .label, .mod-results > .label { padding-top: 0; } }
+
+/* policies */
+.legal { max-width: 70ch; display: grid; gap: 14px; padding-bottom: 48px; }
+.legal h2 { margin: 22px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.2; }
+.legal p, .legal li { margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; }
+.legal ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.legal .updated { color: var(--quiet); font-size: 14px; }
+.legal a { color: inherit; }
 </style>
 
 <canvas id="world" aria-hidden="true"></canvas>
@@ -483,14 +516,15 @@ html.intro .moods { display: none; }
 <header class="top">
   <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
   <nav class="nav" aria-label="Main">
-    <button data-open="work">Work</button>
-    <button data-open="capabilities">Capabilities</button>
-    <button data-open="contact">Contact</button>
-    <button data-open="about">About</button>
+    <a href="/work" data-open="work">Work</a>
+    <a href="/capabilities" data-open="capabilities">Capabilities</a>
+    <a href="/contact" data-open="contact">Contact</a>
+    <a href="/about" data-open="about">About</a>
   </nav>
 </header>
 
 <section class="card" id="card" aria-live="polite">
+  <h1 class="card-eyebrow">Independent creative <b>and</b> data agency</h1>
   <div class="card-swap" id="cardSwap">
     <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 4</span></div>
     <button class="open-btn magnet" id="cardOpen"><span class="cta-label" id="cardCta">See the work</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
@@ -512,8 +546,8 @@ html.intro .moods { display: none; }
 <!-- Work: grid and case study share one sheet -->
 <section class="sheet" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle" hidden>
   <div class="sheet-bar">
-    <button class="brand" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></button>
-    <nav aria-label="Pages"><button data-open="work" aria-current="true">Work</button><button data-open="capabilities">Capabilities</button><button data-open="contact">Contact</button><button data-open="about">About</button>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap" id="workGrid">
@@ -521,13 +555,13 @@ html.intro .moods { display: none; }
     <div class="grid" id="tiles"></div>
   </div>
   <article class="wrap" id="caseStudy" hidden></article>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div>studio@wearefreak.com</div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div>Terms · Privacy · Cookies</div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
-    <button class="brand" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></button>
-    <nav aria-label="Pages"><button data-open="work">Work</button><button data-open="capabilities" aria-current="true">Capabilities</button><button data-open="contact">Contact</button><button data-open="about">About</button>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="cap" id="capPage">
@@ -617,13 +651,13 @@ html.intro .moods { display: none; }
     </div>
   </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div>studio@wearefreak.com</div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div>Terms · Privacy · Cookies</div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
-    <button class="brand" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></button>
-    <nav aria-label="Pages"><button data-open="work">Work</button><button data-open="capabilities">Capabilities</button><button data-open="contact">Contact</button><button data-open="about" aria-current="true">About</button>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -640,18 +674,18 @@ html.intro .moods { display: none; }
         <ul class="services">
           <li>Design</li><li>Brand Marketing</li><li>Social Media</li><li>Art Direction</li><li>Motion Design</li><li>Brand Strategy</li><li>Visual Identity</li><li>Copywriting</li><li>Sound Design</li><li>E-commerce</li><li>Illustration</li>
         </ul>
-        <button class="link-btn" data-open="capabilities" style="margin-top:18px">All capabilities<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        <a class="link-btn" href="/capabilities" data-open="capabilities" style="margin-top:18px">All capabilities<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
     </div>
     <div class="photo" style="margin-top:40px"><img src="img/team.webp" alt="The Freak team in the studio" loading="lazy" width="1600" height="1197"></div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div>studio@wearefreak.com</div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div>Terms · Privacy · Cookies</div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
-    <button class="brand" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></button>
-    <nav aria-label="Pages"><button data-open="work">Work</button><button data-open="capabilities">Capabilities</button><button data-open="contact" aria-current="true">Contact</button><button data-open="about">About</button>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -667,8 +701,10 @@ html.intro .moods { display: none; }
       <div class="photo"><img src="img/office.webp" alt="The Freak studio in London" loading="lazy" width="1600" height="1135"></div>
     </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div>studio@wearefreak.com</div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div>Terms · Privacy · Cookies</div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
+
+<!--@@LEGAL@@-->
 
 <script type="importmap">
 { "imports": {
@@ -695,121 +731,30 @@ const STOPS = [
 /* Case studies. Modules render in this order and are skipped when empty:
    hero image, video, text, numbers, quote, carousel. */
 const CS = 'img/cs/';
-const WORK = [
-  { id: 'hoover', client: 'Hoover', title: 'From live shoot to listing', tags: ['Live Production', 'E-commerce', 'Amazon', 'Photography', 'Film'], img: 'img/hoover.webp',
-    video: { src: 'vid/hoover.mp4', poster: 'vid/hoover.webp' },
-    text: [
-      "Hoover needed new photography and film for 15 of its vacuum cleaners, from cordless sticks and uprights to cylinders, a robot and a wet and dry floor washer. Its existing imagery felt dark and sterile, and didn't look like the homes of the 20 to 40-year-olds it wanted to reach. The brief asked for more colour, a lived-in feel and more dynamic angles.",
-      "We produced the shoot end to end: the location, casting, set design, props and wardrobe, a film crew and a stills team, all planned product by product in a shot matrix. Before filming we tested debris on every machine, to find the cereal, coffee and crumbs that picked up cleanly on camera and reset quickly between takes. Over five days in a London family home we shot product films for web and Amazon and more than 120 retouched lifestyle images.",
-      "Then we turned the shoot into e-commerce. For every product we wrote search-led titles and listing copy, and designed the image stack above the fold and the A+ content below it for desktop and mobile, then reformatted it all for Argos and other retailers. We're now taking the work into Amazon DSP advertising and retailer campaigns.",
-    ],
-    numbers: [['30%', 'sales increase'], ['15', 'products shot and listed'], ['120+', 'retouched lifestyle images']],
-    quote: ['I just wanted to give you the good news that sales are already up 30%, fantastic work as always.', 'Caitlyn May, Head of Commercial, Hoover'],
-    carousel: ['hoover_1', 'hoover_2', 'hoover_3', 'hoover_4', 'hoover_5', 'hoover_6', 'hoover_7', 'hoover_8', 'hoover_9'] },
-  { id: 'rnib', client: 'RNIB', title: 'A learning portal for sight loss awareness', tags: ['LMS', 'E-learning', 'UX/UI Design', 'Accessibility', 'Gamification', 'Web Build'], img: 'img/rnib.webp',
-    text: [
-      "RNIB wanted the public and its corporate partners to understand sight loss, and to know what to do differently. That called for a learning platform anyone could use, with short, practical modules that turn awareness into action and accessibility built in from the first screen. It builds on four years of work together, including the social action quiz that now sits inside the platform.",
-      "We designed and built the RNIB Learning Portal, a learning management system with four modules: living independently, how small everyday actions create or remove barriers, how to offer assistance, and how sight loss is experienced. Each one mixes film, quizzes and hands-on tasks, from a matching game about everyday tools to a sight simulator that compares 20/20 vision with glaucoma, macular degeneration, cataracts and diabetic retinopathy, with an accessibility mode on every activity.",
-      "Points, levels, an anonymised leaderboard and shareable certificates keep people learning, and a digital pledge wall turns what they've learned into commitments. We tested the portal with RNIB's user panels and refined it from their feedback, then built a secure back end on AWS. RNIB's strategy team has signed it off ahead of a pilot launch.",
-    ],
-    numbers: [['4', 'learning modules'], ['4', 'eye conditions in the sight simulator']],
-    quote: ['We had a look at the content you shared and we all agree, it is looking really good. It looks clean, professional, engaging and on-brand!', 'Lisa Hughes, RNIB'],
-    carousel: ['rnib_1', 'rnib_2', 'rnib_3', 'rnib_4', 'rnib_5', 'rnib_6'] },
-  { id: 'hovis', client: 'Hovis', title: 'Strength Baked In', tags: ['Social Media', 'Creative Ideation', 'Strategy', 'Film'], img: 'img/hovis.webp',
-    text: [
-      "Hovis is a much-loved British brand with a rich heritage and a loyal following. The job was to connect it with a new generation online, and to keep it connecting as the social algorithms kept shifting underneath it.",
-      "We built a fresh social strategy and content programme around the Strength Baked In platform. Its centrepiece was London's ghost signs: the faded Hovis adverts painted onto brick walls generations ago. We filmed their restoration and used them to tell a story about heritage and the strength of everyday people.",
-      "It's an ongoing partnership. We've more than doubled Hovis's Instagram following, bringing in thousands of new followers, and since the new website launched in 2024 organic page visits have more than doubled too.",
-    ],
-    numbers: [['4.5m', 'people reached'], ['5.2m', 'impressions'], ['2.5m', 'video plays']],
-    quote: ['Other agencies you feel like you are towing them along. Freak land their expertise well and confidently and leave you with a feeling that all is covered.', 'Marketing Manager, Hovis'],
-    carousel: ['hovis_main', 'hovis_secondary1', 'hovis_secondary2'] },
-  { id: 'va', client: 'V&A', title: 'Mapping Glastonbury', tags: ['Interactive', '3D', 'Web App'], img: 'img/va.webp',
-    video: { src: 'vid/va.mp4', poster: 'vid/va.webp' },
-    text: [
-      "The V&A wanted to open up its Glastonbury Festival archive to everyone: posters, photographs, interviews and recordings gathered across the festival's history.",
-      "We designed and built Mapping Glastonbury, an interactive web app with five 3D maps of the festival site across the decades. Visitors fly over the fields, move through the years and open memories, sounds, visions and locations pinned to the landscape, including stories sent in by festival-goers themselves.",
-      "Built with Three.js and Nuxt, the maps link to more than 500 archive items, and the app is still live on the V&A website.",
-    ],
-    numbers: [['5', '3D maps of the festival'], ['500+', 'archive items']],
-    carousel: ['va_1', 'va_2', 'va_3', 'va_4'] },
-  { id: 'drscholls', client: "Dr Scholl's", title: 'Marketing across social and e-commerce', tags: ['Social Media', 'E-commerce', 'Visual Identity', 'Influencer'], img: 'img/drscholls.webp',
-    video: { src: 'vid/drscholls.mp4', poster: 'vid/drscholls.webp', portrait: true },
-    text: [
-      "We run Dr. Scholl's marketing across social, e-commerce and creative strategy, for a range that goes from everyday comfort insoles to specialist pain relief. The creative has to speak to runners, to people on their feet all day at work and to everyone in between, while every piece stays unmistakably Dr. Scholl's.",
-      "Part of the job was carrying the brand through its global change of name from Scholl to Dr. Scholl's, refreshing packaging and on-site messaging so customers knew it was the same trusted product. We also built a proper Amazon presence from the ground up: Brand Registry in every EU market, a dedicated Brand Store in each one, and listings optimised for both Amazon search and Google.",
-      "On top of that we ran influencer campaigns across six markets. The partnership started in 2022 and its scope has grown every year since.",
-    ],
-    numbers: [['£2.7m+', 'sales increase'], ['120m', 'impressions'], ['4x', 'return on ad spend']],
-    quote: ['Freak always show agility and adaptation to your strategy. They are a game changer for content.', 'Global eComm Director'],
-    carousel: ['drscholls_2', 'drscholls_3', 'drscholls_4'] },
-  { id: 'feliway', client: 'Feliway', title: 'Amazon content that doubled sales', tags: ['E-commerce', 'Amazon', 'Design', 'Copywriting', 'Localisation'], img: 'img/feliway.webp',
-    text: [
-      "Feliway's diffusers help cats feel calm at home. We were asked to grow the brand's sales on Amazon, where the listings needed to work harder in search and explain the product far more clearly.",
-      "We researched what cat owners actually search for and built a content toolkit around Amazon's search algorithm, then rewrote every product page with clearer headlines and tighter bullet points. New A+ and B+ content, the enhanced modules on an Amazon product page, explains the science simply, compares Feliway with the alternatives and shows set-up in three steps.",
-      "We localised the content for other markets, including a French Brand Store, and added a new brand story to Amazon UK. Monthly sales doubled.",
-    ],
-    numbers: [['2x', 'monthly sales'], ['+30%', 'ordered revenue'], ['8,000', 'units a month']],
-    carousel: ['feliway_atf1', 'feliway_atf2', 'feliway_atf3', 'feliway_btf1', 'feliway_btf2'] },
-  { id: 'macmillan', client: 'Macmillan Cancer Support', title: 'Check Your Balls', tags: ['Social Media', 'Copywriting', 'Real-time'], img: 'img/macmillan.webp',
-    video: { src: 'vid/macmillan.mp4', poster: 'vid/macmillan.webp' },
-    text: [
-      "Macmillan Cancer Support wanted more men talking about testicular cancer, and checking themselves for it. The brief was short: encourage men to check their balls.",
-      "We timed it to Wimbledon. With the tournament as a real-time hook, we made six pieces of light-hearted social content, from tennis balls on court to people on the street holding up the balls they'd checked, and took it from brief to delivery in ten days on a £1,000 promotion budget.",
-      "The posts averaged a 28% engagement rate, passed 1.2m views and won the Drum Award for Content Marketing.",
-    ],
-    numbers: [['1.2m', 'views'], ['28%', 'average engagement rate'], ['2', 'industry awards']],
-    quote: ["Freak turned a simple insight into an incredibly impactful creative idea. They then implemented this within a very limited budget and delivered a campaign that punched well above its weight, as the awards show.", 'Alex Betti, Macmillan Cancer Support'],
-    carousel: ['macmillan_1', 'macmillan_2', 'macmillan_3', 'macmillan_4'] },
-  { id: 'evermix', client: 'Evermix', title: 'Making Sound Resound', tags: ['Rebrand', 'Visual Identity', 'Social Media', 'Motion Design'], img: 'img/evermix.webp',
-    video: { src: 'vid/evermix.mp4', poster: 'vid/evermix.webp' },
-    text: [
-      "Evermix makes portable audio kit for artists, DJs and performers. It needed a brand as loud as the scene it sells into.",
-      "We started with a full brand audit, then rebuilt the identity: a new type system, a high-energy palette, and motion and social guidelines built around the feel of nightlife and music, carried by the line Making Sound Resound.",
-      "Since the refresh we've run Evermix's social month to month, from behind-the-scenes studio sessions to creator campaigns, alongside its e-commerce content and website. Reach across its socials is up five times.",
-    ],
-    numbers: [['5x', 'reach across socials'], ['387%', 'follower growth'], ['23k', 'followers']],
-    quote: ["Freak understood our brand from day one. Rather than changing who we are, they elevated what already made Evermix special. They're creative, commercially minded and a genuinely great team to work with.", 'Macky Drese, Co-Founder and CEO, Evermix'],
-    carousel: ['evermix_1', 'evermix_2', 'evermix_3', 'evermix_4', 'evermix_5'] },
-  { id: 'astus', client: 'Astus', title: 'Advertising, amplified', tags: ['Rebrand', 'Visual Identity', 'Website', 'Social Templates', 'Motion Graphics'], img: 'img/astus.webp',
-    video: { src: 'vid/astus.mp4', poster: 'vid/astus.webp' },
-    text: [
-      "Astus needed a brand that matched its ambition: sharper, bolder and built to stand out in a crowded advertising and media market. We started with one workshop question, who is Astus?, and found a message that needed simplifying.",
-      "We led a full rebrand, from a new logo and colour system to a complete set of brand guidelines, flexible enough to work everywhere from business cards to shipping containers. The result is a bold system built around a punchy palette and a mark with the same energy as the brand's own pitch: advertising, amplified.",
-      "We carried the identity through a full website build, a library of social templates and a 60-second explainer film, so Astus could launch the rebrand on every channel at once.",
-    ],
-    carousel: ['astus_car1', 'astus_car2', 'astus_car3', 'astus_cap'] },
-  { id: 'gnetwork', client: 'G.Network', title: 'The Fibre of London', tags: ['Social Media', 'Paid Social', 'Lead Generation', 'Out of Home'], img: 'img/gnetwork.webp',
-    text: [
-      "G.Network is building full-fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.",
-      "We built the social strategy and creative around those neighbourhoods: championing local businesses on G.Network's channels, running competitions and giveaways, and celebrating milestones such as its place in The Sunday Times 100 Tech. Alongside that we produce monthly campaigns across paid social, out-of-home and direct mail.",
-      "Location-targeted lead campaigns have brought in 2,322 leads at 43p each.",
-    ],
-    numbers: [['2,322', 'leads'], ['£0.43', 'cost per lead']],
-    carousel: ['gnet_sq1', 'gnet_sq2', 'gnet_sq3', 'gnet_mockups'] },
-  { id: 'nyb', client: 'New York Bakery', title: 'Channel 4 idents and Philly Deli', tags: ['Film Production', 'Creative Direction', 'Motion Graphics', 'Social Media'], img: 'img/nyb.webp',
-    video: { src: 'vid/nyb.mp4', poster: 'vid/nyb.webp', portrait: true },
-    text: [
-      "New York Bakery came to us for a TV sponsorship package of three Channel 4 idents, and then for the campaign world behind Philly Deli, its bagel partnership with Philadelphia.",
-      "The idents had under a month of planning and a single day to shoot all three. We ran casting, creative direction, pre-production, filming and post ourselves, with no handoffs. They reached 50m people, and New York Bakery has since come back to run another TV sponsorship.",
-      "For Philly Deli we created the campaign's visual world and carried it into recipe films and motion graphics for social, out-of-home and in-store designs, and creative direction for the website.",
-    ],
-    numbers: [['1', 'month to prepare'], ['3', 'films shot in one day'], ['50m', 'people reached']],
-    carousel: ['nyb_ooh', 'nyb_cafe', 'nyb_web', 'nyb_window'] },
-  { id: 'yutaka', client: 'Yutaka', title: 'Make Mealtimes Blossom', tags: ['Illustration', 'Out of Home', 'Motion Graphics', 'Artworking'], img: 'img/yutaka.webp',
-    video: { src: 'vid/yutaka.mp4', poster: 'vid/yutaka.webp', portrait: true },
-    text: [
-      "We brought Yutaka's Japanese heritage to life across London, wrapping Tube escalators and bus shelters in seasonal illustration built around the brand's Make Mealtimes Blossom platform. Soft landscapes, cherry blossom and hand-painted detail turned everyday commuter spaces into a moment of calm.",
-      "Each execution was made for its site, from full-height escalator panels at Tottenham Court Road to bus shelter posters, so the artwork felt considered rather than resized. Bold Yutaka red kept the brand unmistakable against the softness of the watercolour.",
-      "The same world carried into social banners, Instagram and in-store ads for Tesco, translated into motion for feed and story formats. Yutaka told one seasonal story from the street to the scroll, and came in 25% under its media budget.",
-    ],
-    numbers: [['20m', 'views'], ['2m', 'views for one organic ad'], ['25%', 'under media budget']],
-    quote: ['Freak is a valued extension of the Yutaka team, demonstrating passion and ownership for our brand.', 'Na Wang, Head of Marketing, Yutaka'],
-    carousel: ['yutaka_mockup', 'yutaka_hand'] }
-];
+const WORK = /*@@WORK@@*/[];
+const PAGES = /*@@PAGES@@*/{};
 
 /* ---------------- 3D world ---------------- */
 const F_SHAPE = __FSHAPE__;
+/* ---------------- addresses ----------------
+   Every page has a real address (/work, /work/hoover, /capabilities ...). Moving between them never
+   reloads: the address bar changes and the app opens the page in place. Links shared before used #work-hoover. */
+const SITE_URL = 'https://wearefreak.com';
+const SHEETS = ['capabilities', 'contact', 'about', 'terms', 'privacy', 'cookies'];
+function pathOf(name) { return !name ? '/' : name.startsWith('work-') ? '/work/' + name.slice(5) : '/' + name; }
+function routeOfPath(p) {
+  try { p = decodeURIComponent(p); } catch (e) {}
+  p = p.replace(/\/+$/, '').replace(/\.html$/, '').replace(/\/index$/, '');
+  if (!p) return '';
+  const m = p.match(/^\/work\/([\w-]+)$/);
+  return m ? 'work-' + m[1] : p.slice(1);
+}
+function currentRoute() { return routeOfPath(location.pathname); }
+function plainClick(e) { return e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey); }
+(() => {   // an old #work-hoover link: move to /work/hoover before anything reads the address
+  const h = location.hash.replace('#', '');
+  if (h && /^[\w-]+$/.test(h)) { try { history.replaceState(null, '', pathOf(h)); } catch (e) {} }
+})();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const canvas = document.getElementById('world');
 const still = document.getElementById('still');
@@ -1166,7 +1111,7 @@ async function initWorld() {
   catch (e) { fGroup = buildF(); }             // traced stand-in if the model fails to load
   scene.add(fGroup);
   addDust();
-  if (!reduced && !location.hash) introP = INTRO.start; else revealUI();
+  if (!reduced && !currentRoute()) introP = INTRO.start; else revealUI();
   placeCamera(0);
   renderer.compile(scene, camera);
   renderer.render(scene, camera);
@@ -1221,7 +1166,7 @@ const swap = document.getElementById('cardSwap');
 const dots = [...document.querySelectorAll('#dots span')];
 const prevBtn = document.getElementById('prevStop');
 const nextBtn = document.getElementById('nextStop');
-const navButtons = [...document.querySelectorAll('.top .nav button')];
+const navButtons = [...document.querySelectorAll('.top .nav a')];
 
 function showStop(i, instant, live) {
   // live: called while the visitor drags, so the menu and card follow the world; light and music wait for the release
@@ -1341,11 +1286,11 @@ addEventListener('keydown', e => {
 let openSheet = null, lastFocus = null;
 const tiles = document.getElementById('tiles');
 tiles.innerHTML = WORK.map(w => `
-  <button class="tile" data-case="${w.id}" data-cursor="View" data-preview="${w.preview || `vid/${w.id}-preview.mp4`}">
+  <a class="tile" href="/work/${w.id}" data-case="${w.id}" data-cursor="View" data-preview="${w.preview || `vid/${w.id}-preview.mp4`}">
     <div class="tile-img"><img src="${w.img}" alt="${esc(w.client)}: ${esc(w.title)}" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>${esc(w.client)}</strong><span>${esc(w.title)}</span></div>
-  </button>`).join('');
-tiles.addEventListener('click', e => { const b = e.target.closest('[data-case]'); if (b) go('work-' + b.dataset.case); });
+  </a>`).join('');
+tiles.addEventListener('click', e => { const b = e.target.closest('[data-case]'); if (b && plainClick(e)) { e.preventDefault(); go('work-' + b.dataset.case); } });
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 const arrowL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>';
@@ -1362,9 +1307,12 @@ function renderCase(id) {
   mods.push(`<div class="cs-hero${rv}"><img src="${w.img}" alt="${esc(w.client)}: ${esc(w.title)}" width="960" height="503"></div>`);
   mods.push(`<header class="cs-head${up}"${delay(150)}><span class="client">${esc(w.client)}</span><h1 id="csTitle">${esc(w.title)}</h1><div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div></header>`);
   if (w.video) mods.push(`<section class="mod mod-video${w.video.portrait ? ' portrait' : ''}${rv}"><video src="${w.video.src}" poster="${w.video.poster}" controls playsinline preload="none" aria-label="${esc(w.client)} film"></video></section>`);
+  // challenge, idea, results, quote, gallery, next step: the same order on every case study
   const paras = [].concat(w.text || []);
-  if (paras.length) mods.push(`<section class="mod mod-text">${paras.map((t, k) => `<p class="${up.trim()}"${delay(k * 90)}>${esc(t)}</p>`).join('')}</section>`);
-  if (w.numbers && w.numbers.length) mods.push(`<section class="mod"><div class="numbers">${w.numbers.map(([n, l], k) => `<div class="${up.trim()}"${delay(k * 120)}><b${fx ? ` data-count="${esc(n)}"` : ''}>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div></section>`);
+  const challenge = w.challenge || paras[0], idea = w.challenge ? paras : paras.slice(1);
+  if (challenge) mods.push(`<section class="mod mod-story"><span class="label${up}">The challenge</span><div class="story"><p class="lead${up}"${delay(90)}>${esc(challenge)}</p></div></section>`);
+  if (idea.length) mods.push(`<section class="mod mod-story"><span class="label${up}">The idea</span><div class="story">${idea.map((t, k) => `<p class="${up.trim()}"${delay(k * 90)}>${esc(t)}</p>`).join('')}</div></section>`);
+  if (w.numbers && w.numbers.length) mods.push(`<section class="mod mod-results"><span class="label${up}">The results</span><div class="numbers">${w.numbers.map(([n, l], k) => `<div class="${up.trim()}"${delay(k * 120)}><b${fx ? ` data-count="${esc(n)}"` : ''}>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div></section>`);
   if (w.quote) mods.push(fx
     ? `<section class="mod mod-quote"><blockquote><q data-lines>“${esc(w.quote[0])}”</q><cite class="up"${delay(450)}>${esc(w.quote[1])}</cite></blockquote></section>`
     : `<section class="mod mod-quote"><blockquote><q>${esc(w.quote[0])}</q><cite>${esc(w.quote[1])}</cite></blockquote></section>`);
@@ -1372,19 +1320,20 @@ function renderCase(id) {
       ? `<div class="cimg rv"${delay(k * 120)}><img src="${CS}${n}.webp" alt="${esc(w.client)} work, image ${k + 1}" loading="lazy"></div>`
       : `<img src="${CS}${n}.webp" alt="${esc(w.client)} work, image ${k + 1}" loading="lazy">`).join('')}</div>
       <div class="carousel-nav"><button data-slide="-1" aria-label="Previous images">${arrowL}</button><button data-slide="1" aria-label="More images">${arrowR}</button></div></section>`);
+  mods.push(`<section class="mod mod-cta"><h2 class="${up.trim()}">Got a brief like this?</h2><a class="cta" href="/contact" data-open="contact">Start a project${arrowR}</a></section>`);
   if (fx) {
     mods.push(`<nav class="cs-nav slim" aria-label="Case studies">
-        <button class="prev" data-case="${prev.id}">${arrowL}${esc(prev.client)}</button>
-        <button class="back" data-back>Back to case studies</button></nav>`);
-    mods.push(`<section class="cs-next" data-case="${next.id}" data-cursor="Next" role="link" tabindex="0" aria-label="Next project: ${esc(next.client)}, ${esc(next.title)}">
+        <a class="prev" href="/work/${prev.id}" data-case="${prev.id}">${arrowL}${esc(prev.client)}</a>
+        <a class="back" href="/work" data-back>Back to case studies</a></nav>`);
+    mods.push(`<a class="cs-next" href="/work/${next.id}" data-case="${next.id}" data-cursor="Next" aria-label="Next project: ${esc(next.client)}, ${esc(next.title)}">
         <div class="cs-next-frame rv"><img src="${next.img}" alt="" loading="lazy">
           <div class="cs-next-meta"><span class="label" style="color:#fff;opacity:.85">Next project</span><h2>${esc(next.client)}</h2><p>${esc(next.title)}</p></div></div>
-        <div class="cs-next-bar" aria-hidden="true"><i></i><span>${fineHover ? 'Keep scrolling, or click' : 'Tap to open'}</span></div></section>`);
+        <div class="cs-next-bar" aria-hidden="true"><i></i><span>${fineHover ? 'Keep scrolling, or click' : 'Tap to open'}</span></div></a>`);
   } else {
     mods.push(`<nav class="cs-nav" aria-label="Case studies">
-      <button class="prev" data-case="${prev.id}">${arrowL}${esc(prev.client)}</button>
-      <button class="back" data-back>Back to case studies</button>
-      <button class="next" data-case="${next.id}">${esc(next.client)}${arrowR}</button></nav>`);
+      <a class="prev" href="/work/${prev.id}" data-case="${prev.id}">${arrowL}${esc(prev.client)}</a>
+      <a class="back" href="/work" data-back>Back to case studies</a>
+      <a class="next" href="/work/${next.id}" data-case="${next.id}">${esc(next.client)}${arrowR}</a></nav>`);
   }
   const art = document.getElementById('caseStudy');
   art.classList.remove('fx');
@@ -1392,18 +1341,15 @@ function renderCase(id) {
   art.setAttribute('aria-labelledby', 'csTitle');
   return true;
 }
-document.getElementById('caseStudy').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && e.target.matches('.cs-next')) nextCase(e.target.dataset.case);
-});
 document.getElementById('caseStudy').addEventListener('click', e => {
   const b = e.target.closest('[data-case]');
-  if (b) { Sound.tick(); if (b.classList.contains('cs-next')) nextCase(b.dataset.case); else go('work-' + b.dataset.case); return; }
-  if (e.target.closest('[data-back]')) { Sound.tick(); go('work'); }
+  if (b) { if (!plainClick(e)) return; e.preventDefault(); Sound.tick(); if (b.classList.contains('cs-next')) nextCase(b.dataset.case); else go('work-' + b.dataset.case); return; }
+  if (e.target.closest('[data-back]')) { if (!plainClick(e)) return; e.preventDefault(); Sound.tick(); go('work'); }
   const sl = e.target.closest('[data-slide]');
   if (sl) { const c = sl.closest('.mod').querySelector('.carousel'); c.scrollBy({ left: Number(sl.dataset.slide) * c.clientWidth * 0.8, behavior: reduced ? 'auto' : 'smooth' }); }
 });
 
-function showSheet(name) {
+function showSheet(name, instant) {
   const el = document.getElementById('sheet-' + name);
   if (openSheet && openSheet !== el) { openSheet.classList.remove('open'); const old = openSheet; setTimeout(() => { if (old !== openSheet) old.hidden = true; }, 600); }
   const i = STOPS.findIndex(s => s.id === name);
@@ -1413,7 +1359,7 @@ function showSheet(name) {
     el.hidden = false;
     openSheet = el;
     let delay = 0;
-    if (fromWorld && canDive()) {
+    if (fromWorld && canDive() && !instant) {
       if (i >= 0) showStop(i, true);              // turn to the page's card while diving
       startDive(); delay = DIVE.openAfter;
     }
@@ -1423,7 +1369,7 @@ function showSheet(name) {
   if (i >= 0) showStop(i, true);
   return el;
 }
-function closeAll() {
+function closeAll(fromRoute) {
   if (!openSheet) return;
   const el = openSheet; openSheet = null; paused = false;
   el.classList.remove('open');
@@ -1431,34 +1377,52 @@ function closeAll() {
   try { if (worldKey !== 'desert') WORLDS[worldKey].reveal?.(); } catch (e) {}   // e.g. the orbit starts at night as you come back out
   startSurface();
   setTimeout(() => { if (openSheet !== el) el.hidden = true; }, reduced ? 0 : 600);
-  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { location.hash = ''; }
+  if (!fromRoute && location.pathname !== '/') { try { history.pushState(null, '', '/'); } catch (e) {} setHead(''); dispatchEvent(new Event('freak:route')); }
   if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   lastFocus = null;
 }
+let bootPre = !!document.querySelector('.sheet.open');   // the page arrived with its sheet already open
+function setHead(name) {
+  const p = PAGES[name] || PAGES[''];
+  if (!p) return;
+  document.title = p.title;
+  const d = document.querySelector('meta[name="description"]'); if (d) d.setAttribute('content', p.desc);
+  const c = document.querySelector('link[rel="canonical"]'); if (c) c.setAttribute('href', SITE_URL + pathOf(name));
+}
 function route() {
-  const h = decodeURIComponent(location.hash.replace('#', ''));
-  if (!h) { if (openSheet) closeAll(); return; }
+  let h = currentRoute();
+  const instant = bootPre; bootPre = false;
+  if (h && h !== 'work' && !h.startsWith('work-') && !SHEETS.includes(h)) { h = ''; try { history.replaceState(null, '', '/'); } catch (e) {} }
+  if (h.startsWith('work-') && !WORK.some(w => 'work-' + w.id === h)) { h = 'work'; try { history.replaceState(null, '', '/work'); } catch (e) {} }
+  setHead(h);
+  dispatchEvent(new Event('freak:route'));
+  if (!h) { if (openSheet) closeAll(true); return; }
   if (h === 'work' || h.startsWith('work-')) {
-    const el = showSheet('work');
+    const el = showSheet('work', instant);
     const isCase = h.startsWith('work-') && renderCase(h.slice(5));
     document.getElementById('workGrid').hidden = isCase;
     document.getElementById('caseStudy').hidden = !isCase;
-    el.scrollTop = 0;
+    if (!instant) el.scrollTop = 0;
     teardownCapFx();
-    if (isCase) setupCaseFx(h.slice(5)); else teardownFx();
+    if (isCase) setupCaseFx(h.slice(5), instant); else teardownFx();
     return;
   }
-  if (h === 'about' || h === 'contact' || h === 'capabilities') {
-    teardownFx(); teardownCapFx();
-    showSheet(h).scrollTop = 0;
-    if (h === 'capabilities') setupCapFx();
-  }
+  teardownFx(); teardownCapFx();
+  const el = showSheet(h, instant);
+  if (!instant) el.scrollTop = 0;
+  if (h === 'capabilities') setupCapFx(instant);
 }
-function go(name) { if (location.hash === '#' + name) route(); else location.hash = name; }
-addEventListener('hashchange', route);
+function go(name) {
+  const p = pathOf(name);
+  if (location.pathname !== p) { try { history.pushState(null, '', p); } catch (e) { location.href = p; return; } }
+  route();
+}
+addEventListener('popstate', route);
 document.addEventListener('click', e => {
-  const open = e.target.closest('[data-open]'); if (open) { go(open.dataset.open); return; }
-  if (e.target.closest('[data-close]')) closeAll();
+  const open = e.target.closest('[data-open]');
+  if (open) { if (open.tagName === 'A' && !plainClick(e)) return; e.preventDefault(); go(open.dataset.open); return; }
+  const shut = e.target.closest('[data-close]');
+  if (shut) { if (shut.tagName === 'A' && !plainClick(e)) return; e.preventDefault(); closeAll(); }
   const cp = e.target.closest('[data-copy]');
   if (cp) {
     const text = cp.dataset.copy;
@@ -1572,21 +1536,26 @@ function teardownFx() {
   if (fxResize) { removeEventListener('resize', fxResize); fxResize = null; }
   smoothOff();
 }
-function setupCaseFx(id) {
+function shownNow(root, scroller, sel) {
+  const h = scroller.clientHeight;
+  root.querySelectorAll(sel).forEach(el => { const r = el.getBoundingClientRect(); if (r.top < h && r.bottom > 0) { el.classList.add('in'); el.dataset.shown = '1'; } });
+}
+function setupCaseFx(id, instant) {
   teardownFx();
   const w = WORK.find(x => x.id === id);
   const art = document.getElementById('caseStudy'), sheet = document.getElementById('sheet-work');
   art.classList.remove('leaving');
-  if (!reduced) { art.classList.remove('enter'); void art.offsetWidth; art.classList.add('enter'); }
+  if (!reduced && !instant) { art.classList.remove('enter'); void art.offsetWidth; art.classList.add('enter'); }
   if (!w || w.fx === false || reduced) return;
+  if (instant) shownNow(art, sheet, '.rv:not(.cimg), .up, [data-count], [data-lines], .carousel, .cimg');
   art.classList.add('fx');
-  art.querySelectorAll('[data-count]').forEach(b => { b.textContent = formatCount(b.dataset.count, 0); });
+  art.querySelectorAll('[data-count]:not([data-shown])').forEach(b => { b.textContent = formatCount(b.dataset.count, 0); });
   art.querySelectorAll('[data-lines]').forEach(splitLines);
   if (document.fonts) document.fonts.ready.then(() => art.querySelectorAll('[data-lines]').forEach(splitLines));
   fxIO = new IntersectionObserver(entries => {
     for (const en of entries) if (en.isIntersecting) { reveal(en.target); fxIO.unobserve(en.target); }
   }, { root: sheet, threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
-  art.querySelectorAll('.rv:not(.cimg), .up, [data-count], [data-lines], .carousel').forEach(el => fxIO.observe(el));
+  art.querySelectorAll('.rv:not(.cimg), .up, [data-count], [data-lines], .carousel').forEach(el => { if (!el.dataset.shown) fxIO.observe(el); });
   let rt = 0;
   fxResize = () => { clearTimeout(rt); rt = setTimeout(() => art.querySelectorAll('[data-lines]').forEach(splitLines), 200); };
   addEventListener('resize', fxResize);
@@ -1634,7 +1603,7 @@ if (fineHover && !reduced) {
     if (lab && label.textContent !== lab) label.textContent = lab;
   });
   addEventListener('pointerdown', () => cur.classList.add('down'));
-  addEventListener('hashchange', () => cur.classList.remove('label', 'link'));   // the page changed under a still pointer
+  addEventListener('freak:route', () => cur.classList.remove('label', 'link'));   // the page changed under a still pointer
   addEventListener('pointerup', () => cur.classList.remove('down'));
   document.addEventListener('pointerleave', () => cur.classList.add('gone'));
   addEventListener('blur', () => cur.classList.add('gone'));
@@ -2042,7 +2011,7 @@ moodsEl.addEventListener('click', e => {
   Sound.setMood(b.dataset.mood);
   moodsEl.querySelectorAll('[data-mood]').forEach(x => x.setAttribute('aria-checked', String(x === b)));
 });
-addEventListener('hashchange', () => setTimeout(showMoods, 60));
+addEventListener('freak:route', () => setTimeout(showMoods, 60));
 addEventListener('keydown', e => { if (e.key === 'Escape' && !moodsEl.hidden) { moodsOpen = false; showMoods(); } });
 addEventListener('pointerdown', e => {   // a press anywhere outside the panel (or the sound button) closes it
   if (moodsEl.hidden || moodsEl.contains(e.target) || soundBtn.contains(e.target)) return;
@@ -2074,7 +2043,7 @@ capPage.querySelectorAll('.pillar').forEach(li => {
   li.querySelector('.pillar-body').insertAdjacentHTML('beforeend', `<div class="pillar-proof">
     <div class="pp-frame"><video muted loop playsinline preload="none" poster="img/${p.c}.webp" data-src="vid/${p.c}-preview.mp4" aria-hidden="true"></video></div>
     <b>${esc(p.stat)}</b><span>${esc(p.label)}</span>
-    <button class="stage-link" data-open="work-${p.c}">See it in <span>${esc(clientOf(p.c))}</span>${arrowR}</button></div>`);
+    <a class="stage-link" href="/work/${p.c}" data-open="work-${p.c}">See it in <span>${esc(clientOf(p.c))}</span>${arrowR}</a></div>`);
 });
 let capIO = null, pillarIO = null, filmIO = null, stageIndex = -1;
 function setStage(i) {
@@ -2097,16 +2066,17 @@ function setStage(i) {
   next.classList.add('on'); cur.classList.remove('on');
   setTimeout(() => { if (!cur.classList.contains('on')) cur.pause(); }, 700);
 }
-function setupCapFx() {
+function setupCapFx(instant) {
   teardownCapFx();
   setStage(0);
   if (reduced) return;
+  if (instant) shownNow(capPage, capSheet, '.up, [data-count], .how-steps');
   capPage.classList.add('fx');
-  capPage.querySelectorAll('[data-count]').forEach(b => { b.textContent = formatCount(b.dataset.count, 0); });
+  capPage.querySelectorAll('[data-count]:not([data-shown])').forEach(b => { b.textContent = formatCount(b.dataset.count, 0); });
   capIO = new IntersectionObserver(entries => {
     for (const en of entries) if (en.isIntersecting) { reveal(en.target); capIO.unobserve(en.target); }
   }, { root: capSheet, threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
-  capPage.querySelectorAll('.up, [data-count], .how-steps').forEach(el => capIO.observe(el));
+  capPage.querySelectorAll('.up, [data-count], .how-steps').forEach(el => { if (!el.dataset.shown) capIO.observe(el); });
   // the section crossing the middle of the screen drives the pinned stage
   pillarIO = new IntersectionObserver(entries => {
     for (const en of entries) if (en.isIntersecting) setStage(+en.target.dataset.proof);

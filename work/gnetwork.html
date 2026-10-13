@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<base href="/">
+<title>The Fibre of London | G.Network case study | Freak</title>
+<meta name="description" content="G.Network is building full-fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.">
+<link rel="canonical" href="https://wearefreak.com/work/gnetwork">
+<meta name="theme-color" content="#232323">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+<meta property="og:site_name" content="Freak">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Fibre of London | G.Network case study | Freak">
+<meta property="og:description" content="G.Network is building full-fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.">
+<meta property="og:url" content="https://wearefreak.com/work/gnetwork">
+<meta property="og:image" content="https://wearefreak.com/img/share/gnetwork.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Bebas+Neue&family=Monoton&display=swap">
+<style>
+/* Layout: full-bleed 3D desert world; wordmark and nav float on top, one glass card bottom-left
+   tracks the current stop; every page opens as a white sheet that slides over the world. */
+:root {
+  --grit: #232323;          /* True Grit: world chrome, footer */
+  --paper: #ffffff;         /* sheet pages, as in the Figma */
+  --ink: #141414;
+  --quiet: #6c6a66;         /* warm grey, biased to the desert */
+  --rule: #e6e3de;
+  --lime: #a6f20a;          /* Electric Ego, from the F icon */
+  --berry: #6b1d3f;         /* Freakberry */
+  --glass: rgba(24, 22, 21, 0.62);
+  --glass-line: rgba(255, 255, 255, 0.16);
+  --on-glass: #f7f5f1;
+  --on-glass-quiet: rgba(247, 245, 241, 0.72);
+  --display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --body: "Plus Jakarta Sans", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  margin: 0; background: var(--grit); color: var(--ink);
+  font-family: var(--body); font-weight: 400; font-size: 16px; line-height: 1.55;
+  overflow: hidden; -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+/* ---------- world ---------- */
+#world { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#world.dragging { cursor: grabbing; }
+.labels { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+.city-label { position: absolute; left: 0; top: 0; font: 600 11px/1 var(--body, 'Plus Jakarta Sans', system-ui, sans-serif); letter-spacing: .12em; text-transform: uppercase; color: #fff;
+  text-shadow: 0 0 8px rgba(255, 120, 190, .9), 0 0 2px rgba(0, 0, 0, .8); white-space: nowrap; transition: opacity .4s; }
+.city-label::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 3px rgba(255, 150, 210, .9); margin-right: 7px; vertical-align: 1px; }
+.still {
+  position: fixed; inset: 0; background: var(--grit) center / cover no-repeat;
+  background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAAwAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDi95pQxq/DctCmBaW5bGNxjGaryq00pkKIpPZF2j8q77M59CIHNSqmaVIT6VbggJI4quUVyJLUt2qYaa5/hNbWnWG9hkV1un+H0mQfLUtpDWp5wdNcfwmoXtSvavT7/wAOCKM4SuS1HTijEKM/ShNMHdHLMmKjJxWjPbFSapvCc9KrlFcrljSbzUvkk9qTyD6UuVhc6o6H9KT+wz6ise21NbxW8t2+XqG4NSmViMFjj0zXG8ZLax1LCJ6qRqpohJ4xV230Q5HArmgxX7vGfSgM2eCfzpfXH2H9UXc9E0/SlQjcB+ddNbT2dggElxFESQMyOowT0HJrxhWwecn6nNWUkUjDRq2ezDOfzrOVe+5aw9j2S/BmQ9B6VyWqWsQZg8sMZPOC4B/WuGZkV3kUENJjdlic/hVSWGCSQu8KMx4ywyaFXsJ0Gzpp9IEg3IVYHnIIIqk+hnPSsZFWEYjUIPRRinISv3SR+JrT6210J+qX6mqNEIPanf2KD2H51liV/wC8350yW8MK73Zgo6tkDFP65LsH1NfzHLwXcsE4mU/MOD7ituHVbWVAWkEbd1b/ABqGbR7eQ7lLRk9gRimLokQ5aZyPQACuWThI3jGpHY0klSUbo3Vx/snNOBBOO9RW0MVvFtiAC9Sc5JqQOFJPPvWRuvMlVR+XtThw2O/pTRMAoHH0oLjJOMfQUh2BiR0XPP0xTSMru9aUyKcE9x2pm4t6jHAyKABunWjqPTFABbjHT2ppIwOcH3P8j6UxC9D1qhrMRltlkX/lmcke1Xx+Az3pCM8FsjvTTs7iaurH/9k=");
+  filter: blur(18px) saturate(1.1); transform: scale(1.15);
+  transition: opacity .9s var(--ease); pointer-events: none;
+}
+.still.gone { opacity: 0; }
+.no-gl .still { filter: none; transform: none; background-image: url("img/pano.jpg"); background-size: 260% auto; background-position: 50% 52%; }
+.loading-note {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  color: var(--on-glass); font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+  transition: opacity .5s var(--ease); pointer-events: none;
+}
+.loading-note.gone { opacity: 0; }
+
+/* ---------- header ---------- */
+.top {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: calc(env(safe-area-inset-top, 0px) + 22px) clamp(16px, 4vw, 48px) 0;
+  pointer-events: none;
+}
+.top > * { pointer-events: auto; }
+/* Intro: header and card wait off-stage while the camera flies in, then reveal in sequence */
+.top .brand img { clip-path: inset(0 0 0 0); transition: clip-path 1.2s var(--ease); }
+.top .nav a { transition: border-color .3s var(--ease), opacity .7s var(--ease), transform .7s var(--ease); }
+.top .nav a:nth-child(2) { transition-delay: 0s, .08s, .08s; }
+.top .nav a:nth-child(3) { transition-delay: 0s, .16s, .16s; }
+.top .nav a:nth-child(4) { transition-delay: 0s, .24s, .24s; }
+html.intro .top .brand img { clip-path: inset(0 100% 0 0); }
+html.intro .top .nav a { opacity: 0; transform: translateY(-8px); }
+html.intro .top::before { opacity: 0; }
+.top::before { transition: opacity 1.2s var(--ease); }
+html.intro .card { opacity: 0; transform: translateY(28px); pointer-events: none; }
+html.revealing .card { transition-duration: .9s; transition-delay: .45s; }
+html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-events: none; }
+.top::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: calc(100% + 56px); z-index: -1; pointer-events: none;
+  background: linear-gradient(rgba(28, 16, 10, .5), rgba(28, 16, 10, .22) 55%, rgba(28, 16, 10, 0)); }
+.brand { display: block; width: clamp(92px, 9vw, 124px); background: none; border: 0; padding: 0; }
+.brand img { display: block; width: 100%; height: auto; filter: invert(1); }
+.nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
+.nav a {
+  background: none; border: 0; padding: 4px 0; color: var(--on-glass);
+  font-size: 15px; font-weight: 500; letter-spacing: .01em;
+  text-shadow: 0 1px 12px rgba(0,0,0,.35);
+  border-bottom: 1.5px solid transparent; transition: border-color .3s var(--ease);
+}
+.nav a[aria-current="true"] { border-bottom-color: var(--on-glass); }
+
+/* ---------- card ---------- */
+.card {
+  position: fixed; z-index: 4;
+  left: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px));
+  width: min(400px, calc(100% - 32px));
+  background: var(--glass); color: var(--on-glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid var(--glass-line); border-radius: 18px;
+  padding: 22px 22px 16px; display: grid; gap: 14px;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.card.moving { opacity: .7; transform: translateY(4px); }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.card-count { font-size: 12px; letter-spacing: .14em; color: var(--on-glass-quiet); font-variant-numeric: tabular-nums; }
+.card h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 4.4vw, 52px); line-height: 1; letter-spacing: -.01em; }
+.card-swap { display: grid; gap: 16px; }
+/* Card changes: title letters rise into place one after another; the old title lifts away first */
+.card h2 { display: flex; flex-wrap: wrap; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+.card h2 .ltr { display: inline-block; white-space: pre; animation: ltrIn .7s var(--ease) both; animation-delay: calc(var(--i) * 28ms); }
+.card h2.out .ltr { animation: ltrOut .22s ease-in both; animation-delay: calc(var(--i) * 12ms); }
+@keyframes ltrIn { from { transform: translateY(105%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes ltrOut { to { transform: translateY(-70%); opacity: 0; } }
+.card-count, .open-btn .cta-label { transition: opacity .25s var(--ease), transform .35s var(--ease); }
+.card.swapping .card-count, .card.swapping .open-btn .cta-label { opacity: 0; transform: translateY(6px); }
+.open-btn {
+  justify-self: start; display: inline-flex; align-items: center; gap: 10px;
+  background: var(--lime); color: var(--grit); border: 0; border-radius: 999px;
+  padding: 11px 18px 11px 20px; font-weight: 600; font-size: 15px;
+  transition: transform .2s var(--ease);
+}
+.open-btn svg { width: 16px; height: 16px; transition: transform .35s var(--ease); }
+.open-btn:hover svg { transform: translateX(3px); }
+/* Magnetic buttons: pulled a few pixels towards the cursor (set from script), label travels a bit further */
+.magnet { transition: transform .5s cubic-bezier(.2, .9, .3, 1.3); will-change: transform; }
+.magnet.near { transition-duration: .18s; transition-timing-function: ease-out; }
+.magnet > span, .magnet > svg { transition: transform .5s cubic-bezier(.2, .9, .3, 1.3); }
+.card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--glass-line); padding-top: 12px; }
+.steps { display: flex; align-items: center; gap: 8px; }
+.round {
+  width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: transparent; border: 1px solid var(--glass-line); color: var(--on-glass);
+}
+.round:disabled { opacity: .35; cursor: default; }
+.round svg { width: 14px; height: 14px; }
+.dots { display: flex; gap: 6px; padding: 0 4px; }
+.dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--on-glass-quiet); opacity: .4; transition: opacity .3s, transform .3s; }
+.dots span.on { opacity: 1; transform: scale(1.3); background: var(--lime); }
+.hint { font-size: 12px; color: var(--on-glass-quiet); }
+
+/* ---------- sheets ---------- */
+.sheet {
+  position: fixed; inset: 0; z-index: 10; background: var(--paper); color: var(--ink);
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  transform: translateY(100%); transition: transform .6s var(--ease);
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.sheet.open { transform: none; }
+.sheet-bar {
+  position: sticky; top: 0; z-index: 2; background: var(--paper);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px clamp(16px, 4vw, 48px);
+}
+.sheet-bar .brand img { filter: none; }
+.sheet-bar nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px); }
+.sheet-bar nav a { background: none; border: 0; padding: 4px 0; font-size: 15px; color: var(--ink); border-bottom: 1.5px solid transparent; }
+.sheet-bar nav a[aria-current="true"] { border-bottom-color: var(--ink); }
+.close {
+  width: 44px; height: 44px; border-radius: 50%; border: 0; background: #ecebe8; color: var(--ink);
+  display: grid; place-items: center; flex: none;
+}
+.close svg { width: 18px; height: 18px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 8px 72px; }
+.page-head { display: grid; gap: 6px; padding-block: 24px 28px; }
+.page-head h1, .cs-head h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(36px, 5vw, 64px); line-height: 1.05; letter-spacing: -.015em; text-wrap: balance; }
+.page-head p { margin: 0; color: var(--quiet); max-width: 60ch; }
+.label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--quiet); }
+
+/* work grid */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 22px); }
+.tile { display: grid; gap: 10px; background: none; border: 0; padding: 0; text-align: left; color: var(--ink); }
+.tile-img { border-radius: 12px; overflow: hidden; aspect-ratio: 1.91 / 1; background: #f1efeb; max-width: 100%; }
+.tile-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+.tile:hover .tile-img img { transform: scale(1.03); }
+.tile-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; min-width: 0; }
+.tile-meta strong { font-weight: 600; font-size: 15px; }
+.tile-meta span { color: var(--quiet); font-size: 14px; text-align: right; }
+
+/* case study: modules stack in a fixed order and skip when empty */
+.cs-hero { border-radius: 14px; overflow: hidden; aspect-ratio: 1.91 / 1; max-width: 100%; background: #f1efeb; }
+.cs-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cs-head { display: grid; gap: 10px; padding-block: 28px 8px; }
+.cs-head .client { font-size: 15px; font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.mod { padding-block: 24px; border-top: 1px solid var(--rule); }
+.mod-text { display: grid; gap: 18px; }
+.mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
+.mod-text p:first-child { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; }
+.numbers div { display: grid; gap: 2px; }
+.numbers b { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4vw, 48px); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.numbers span { color: var(--quiet); font-size: 14px; }
+.mod-quote blockquote { margin: 0; display: grid; gap: 12px; max-width: 46ch; }
+.mod-quote q { font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; quotes: "\201C" "\201D"; }
+.mod-quote cite { font-style: normal; color: var(--quiet); font-size: 14px; }
+.mod-video video { width: 100%; max-width: 100%; border-radius: 12px; display: block; background: #f1efeb; }
+.mod-video.portrait video { width: auto; max-height: min(78vh, 760px); margin-inline: auto; }
+/* carousel: a filmstrip at one height so mixed shapes keep their proportions */
+.carousel { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; scrollbar-width: thin; }
+.carousel-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.carousel-nav button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); display: grid; place-items: center; }
+.carousel-nav svg { width: 16px; height: 16px; }
+.carousel img { flex: none; height: clamp(240px, 34vw, 440px); width: auto; max-width: none; border-radius: 12px; scroll-snap-align: start; display: block; background: #f1efeb; }
+.cs-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding-block: 28px 8px; border-top: 1px solid var(--rule); }
+.cs-nav a { background: none; border: 0; padding: 8px 0; font-size: 15px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+.cs-nav .prev { justify-self: start; }
+.cs-nav .next { justify-self: end; }
+.cs-nav .back { justify-self: center; border: 1px solid var(--ink); border-radius: 999px; padding: 9px 18px; }
+.cs-nav svg { width: 16px; height: 16px; }
+
+/* capabilities */
+.cap-intro { display: grid; gap: 14px; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; }
+.cap-intro p { margin: 0; }
+.proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; padding-block: 32px; margin-top: 28px; border-block: 1px solid var(--rule); }
+.proof div { display: grid; gap: 2px; }
+.proof b { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4vw, 52px); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.proof span { color: var(--quiet); font-size: 14px; max-width: 26ch; }
+.pillars { list-style: none; margin: 0; padding: 0; }
+.pillar { display: grid; grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.15fr); gap: 8px clamp(18px, 3vw, 40px); padding-block: 26px; border-bottom: 1px solid var(--rule); align-items: start; }
+.pillar .num { font-size: 13px; letter-spacing: .14em; color: var(--quiet); font-variant-numeric: tabular-nums; padding-top: 8px; }
+.pillar h2 { margin: 0 0 6px; font-family: var(--display); font-weight: 400; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; }
+.pillar p { margin: 0; color: var(--quiet); max-width: 40ch; }
+.pillar ul { list-style: none; margin: 0; padding: 4px 0 0; display: grid; gap: 8px; }
+.pillar li { padding-left: 18px; position: relative; }
+.pillar li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--lime); }
+.sectors { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.sectors span { font-size: 14px; border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.cap-foot { display: grid; gap: 12px; padding-top: 40px; }
+.cap-foot h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(24px, 2.6vw, 32px); }
+.link-btn { justify-self: start; display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); border: 0; border-radius: 999px; padding: 11px 18px 11px 20px; font-weight: 600; font-size: 15px; }
+.link-btn svg { width: 16px; height: 16px; }
+
+/* about + contact */
+.about-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.about-copy { display: grid; gap: 14px; max-width: 58ch; }
+.about-copy p { margin: 0; }
+.services { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.services li { font-family: var(--display); font-size: clamp(24px, 2.6vw, 32px); line-height: 1.2; color: var(--quiet); }
+.services li:nth-child(2) { color: var(--ink); }
+.photo { border-radius: 14px; overflow: hidden; max-width: 100%; }
+.photo img { display: block; width: 100%; height: auto; }
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.contacts { display: grid; gap: 18px; }
+.contacts div { display: grid; gap: 2px; }
+.mail { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mail code { font-family: var(--body); font-size: 20px; user-select: all; }
+.mail.lead code { background: var(--lime); padding: 0 4px; }
+.copy { font-size: 13px; background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 3px 10px; color: var(--quiet); }
+.foot { background: var(--grit); color: #eceae5; }
+.foot .wrap { padding-block: 36px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; font-size: 14px; }
+.foot .label { color: var(--lime); }
+
+@media (max-width: 720px) {
+  .grid, .about-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .pillar { grid-template-columns: minmax(0, 1fr); }
+  .pillar .num { padding-top: 0; }
+  .proof { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .sheet-bar nav a[data-open] { display: none; }
+  .card { left: 16px; right: 16px; width: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); padding: 18px 18px 14px; }
+  .nav a { font-size: 14px; }
+  .nav { gap: 12px; }
+  .top .brand { width: 84px; }
+  .hint { display: none; }
+  .cs-nav { grid-template-columns: 1fr 1fr; }
+  .cs-nav .back { grid-column: 1 / -1; grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet, .card, .card-swap, .still, .tile-img img { transition: none; }
+  .card h2 .ltr, .card h2.out .ltr { animation: none; }
+}
+
+/* ---------- page effects (Hovis first) ---------- */
+#caseStudy.enter { animation: csIn .55s var(--ease) both; }
+#caseStudy.leaving { opacity: 0; transform: translateY(-12px); transition: opacity .35s ease-in, transform .35s ease-in; }
+@keyframes csIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.fx .rv { clip-path: inset(16% 0 0 0 round 14px); opacity: 0; transition: clip-path 1.2s var(--ease), opacity .6s var(--ease); }
+.fx .rv.in { clip-path: inset(0 0 0 0 round 14px); opacity: 1; }
+.fx .rv img { transform: scale(1.12); transition: transform 1.8s var(--ease); }
+.fx .rv.in img { transform: none; }
+.fx .up { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.fx .up.in { opacity: 1; transform: none; }
+.fx q[data-lines] { quotes: none; display: block; }
+.fx .ql { display: block; overflow: hidden; padding-bottom: .06em; }
+.fx .ql > span { display: block; transform: translateY(105%); transition: transform 1s var(--ease); transition-delay: calc(var(--l) * 110ms); }
+.fx [data-lines].in .ql > span { transform: none; }
+.carousel .cimg { flex: none; border-radius: 12px; overflow: hidden; scroll-snap-align: start; }
+.carousel .cimg img { border-radius: 0; }
+/* next project: big preview you can click or keep scrolling into */
+.cs-next { display: grid; gap: 14px; padding-block: 36px 8px; border-top: 1px solid var(--rule); cursor: pointer; }
+.cs-next-frame { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 2.2 / 1; max-width: 100%; background: #f1efeb; }
+.cs-next-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); transform: scale(calc(1 + var(--pull, 0) * .06)); }
+.cs-next:hover .cs-next-frame img { transform: scale(calc(1.03 + var(--pull, 0) * .06)); }
+.fx .cs-next-frame.rv.in img { transform: scale(calc(1 + var(--pull, 0) * .06)); transition: transform .5s var(--ease); }
+.fx .cs-next:hover .cs-next-frame.rv.in img { transform: scale(calc(1.03 + var(--pull, 0) * .06)); }
+.cs-next-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(18px, 3vw, 32px); color: #fff; display: grid; gap: 4px;
+  background: linear-gradient(transparent, rgba(10, 10, 10, .55)); }
+.cs-next-meta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; }
+.cs-next-meta p { margin: 0; font-size: 16px; opacity: .9; }
+.cs-next-bar { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--quiet); }
+.cs-next-bar i { flex: 1; height: 2px; background: var(--rule); position: relative; overflow: hidden; border-radius: 2px; }
+.cs-next-bar i::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform-origin: left; transform: scaleX(var(--pull, 0)); }
+.cs-nav.slim { grid-template-columns: 1fr auto; }
+.tile-img { position: relative; }
+.tile-film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s var(--ease); }
+.tile-film.on { opacity: 1; }
+
+/* custom cursor (mouse and trackpad only) */
+html.has-cursor, html.has-cursor * { cursor: none !important; }
+.cursor { position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; transition: opacity .25s; }
+.cursor.gone { opacity: 0; }
+.cursor-dot, .cursor-ring { position: absolute; left: 0; top: 0; border-radius: 50%; }
+.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--lime); box-shadow: 0 0 0 1px rgba(20, 20, 20, .3); transition: opacity .2s, transform .25s var(--ease); }
+.cursor-ring { width: 36px; height: 36px; margin: -18px 0 0 -18px; border: 1.5px solid var(--lime); opacity: 0; transform: scale(.4);
+  display: grid; place-items: center; transition: transform .35s var(--ease), opacity .25s, width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background-color .25s, border-color .25s; }
+.cursor-ring b { font: 600 10px/1 var(--body); letter-spacing: .04em; color: var(--grit); opacity: 0; transition: opacity .2s; white-space: nowrap; }
+.cursor.link .cursor-ring { opacity: 1; transform: scale(1); }
+.cursor.link .cursor-dot { transform: scale(.5); }
+.cursor.paper .cursor-ring { border-color: var(--ink); }
+.cursor.label .cursor-ring { opacity: 1; transform: scale(1); width: 61px; height: 61px; margin: -30.5px 0 0 -30.5px; background: var(--lime); border-color: var(--lime); }
+.cursor.label .cursor-ring b { opacity: 1; }
+.cursor.label .cursor-dot { opacity: 0; }
+.cursor.down .cursor-ring { transform: scale(.86); }
+
+/* sound toggle */
+.sound { position: fixed; z-index: 6; right: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px));
+  display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--glass-line);
+  background: var(--glass); color: var(--on-glass); font-size: 13px; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease); }
+html.intro .sound { opacity: 0; transform: translateY(10px); pointer-events: none; }
+.bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+.bars i { width: 2px; height: 12px; background: currentColor; border-radius: 1px; transform-origin: bottom; transform: scaleY(.25); transition: transform .3s; }
+.sound[aria-pressed="true"] .bars i { animation: bar 1s ease-in-out infinite; background: var(--lime); }
+.sound[aria-pressed="true"] .bars i:nth-child(2) { animation-delay: -.3s; }
+.sound[aria-pressed="true"] .bars i:nth-child(3) { animation-delay: -.6s; }
+.sound[aria-pressed="true"] .bars i:nth-child(4) { animation-delay: -.15s; }
+@keyframes bar { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+/* sound options picker (for review) */
+.moods { position: fixed; z-index: 6; right: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px) + 54px);
+  display: grid; gap: 4px; width: min(268px, calc(100vw - 32px)); padding: 10px; border-radius: 16px; border: 1px solid var(--glass-line);
+  background: var(--glass); color: var(--on-glass); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); animation: moodsIn .4s var(--ease); }
+@keyframes moodsIn { from { opacity: 0; transform: translateY(8px); } }
+.moods-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 2px 6px; }
+.moods-h { margin: 0; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .75; }
+.moods-x { flex: none; width: 28px; height: 28px; display: grid; place-items: center; padding: 0; border-radius: 50%;
+  border: 1px solid var(--glass-line); background: transparent; color: inherit; transition: background-color .2s, border-color .2s; }
+.moods-x svg { width: 12px; height: 12px; }
+.moods-x:hover { background: rgba(255, 255, 255, .1); border-color: var(--on-glass); }
+.moods [data-mood] { display: grid; gap: 3px; text-align: left; padding: 8px 10px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: inherit; font: inherit; }
+.moods [data-mood]:hover { background: rgba(255, 255, 255, .07); }
+.moods [data-mood] b { font-size: 13px; font-weight: 600; }
+.moods [data-mood] small { font-size: 11.5px; line-height: 1.4; opacity: .72; }
+.moods [data-mood][aria-checked="true"] { border-color: var(--lime); }
+.moods [data-mood][aria-checked="true"] b { color: var(--lime); }
+html.intro .moods { display: none; }
+@media (max-width: 720px) {
+  .moods { bottom: auto; top: calc(env(safe-area-inset-top, 0px) + 64px + 46px); width: min(200px, calc(100vw - 32px)); padding: 8px; }
+  .moods [data-mood] { padding: 7px 9px; }
+  .moods [data-mood] small { display: none; }
+}
+@media (max-width: 720px) {
+  .cs-next-frame { aspect-ratio: 1.45 / 1; }
+  .sound { bottom: auto; top: calc(env(safe-area-inset-top, 0px) + 64px); padding: 8px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sound[aria-pressed="true"] .bars i { animation: none; transform: scaleY(.7); }
+}
+
+/* ---------- capabilities, premium pass ---------- */
+.proof b, .reach-stats b { font-variant-numeric: tabular-nums; }
+.pillars-wrap { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 72px); align-items: start; margin-top: 12px; }
+.pillar-stage { position: sticky; top: 96px; display: grid; gap: 16px; padding-block: 28px; }
+.stage-frame { position: relative; aspect-ratio: 1.91 / 1; border-radius: 16px; overflow: hidden; background: #f1efeb; max-width: 100%; }
+.stage-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s var(--ease); }
+.stage-frame video.on { opacity: 1; }
+.stage-proof { display: grid; gap: 2px; min-height: 92px; }
+.stage-proof b { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 4.4vw, 60px); line-height: 1.02; }
+.stage-proof span { color: var(--quiet); max-width: 36ch; }
+.stage-proof.swap b, .stage-proof.swap span { animation: stageIn .6s var(--ease) both; }
+.stage-proof.swap span { animation-delay: .08s; }
+@keyframes stageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.stage-link { justify-self: start; display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--ink); border-radius: 999px; padding: 9px 16px; font-size: 14px; color: var(--ink); }
+.stage-link svg { width: 15px; height: 15px; transition: transform .3s var(--ease); }
+.stage-link:hover svg { transform: translateX(3px); }
+.stage-steps { list-style: none; margin: 4px 0 0; padding: 0; display: flex; gap: 14px; font-size: 12px; letter-spacing: .12em; color: var(--quiet); font-variant-numeric: tabular-nums; }
+.stage-steps li { position: relative; padding-top: 10px; transition: color .3s; }
+.stage-steps li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--rule); }
+.stage-steps li.on { color: var(--ink); }
+.stage-steps li.on::before { background: var(--lime); }
+.pillars-wrap .pillar { grid-template-columns: 44px minmax(0, 1fr); min-height: 62vh; align-content: center; padding-block: 40px; transition: opacity .5s var(--ease); }
+.pillars-wrap .pillar-body { display: grid; gap: 14px; }
+.pillars-wrap .pillar-body > p { max-width: 44ch; }
+.cap.fx .pillars-wrap .pillar { opacity: .32; }
+.cap.fx .pillars-wrap .pillar.active { opacity: 1; }
+.pillar-proof { display: none; }
+/* how we work */
+.how { padding-block: 72px 24px; }
+.how-head h2, .reach-head h2 { margin: 6px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
+.how-steps { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; position: relative; padding-top: 26px; }
+.how-steps::before { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px; background: var(--rule); }
+.how-steps::after { content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px; background: var(--ink); transform-origin: left; transform: scaleX(1); }
+.how-steps li { display: grid; gap: 6px; align-content: start; position: relative; }
+.how-steps li::before { content: ""; position: absolute; top: -27px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 3px var(--paper); }
+.how-steps .n { font-size: 12px; letter-spacing: .14em; color: var(--quiet); }
+.how-steps b { font-family: var(--display); font-weight: 400; font-size: 24px; }
+.how-steps p { margin: 0; color: var(--quiet); font-size: 14px; }
+.cap.fx .how-steps::after { transform: scaleX(0); transition: transform 1.6s var(--ease); }
+.cap.fx .how-steps.in::after { transform: scaleX(1); }
+.cap.fx .how-steps li { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.cap.fx .how-steps.in li { opacity: 1; transform: none; }
+.cap.fx .how-steps li:nth-child(2) { transition-delay: .18s; } .cap.fx .how-steps li:nth-child(3) { transition-delay: .36s; }
+.cap.fx .how-steps li:nth-child(4) { transition-delay: .54s; } .cap.fx .how-steps li:nth-child(5) { transition-delay: .72s; }
+.cap.fx .how-steps li:nth-child(6) { transition-delay: .9s; }
+/* reach map */
+.reach { background: var(--grit); color: #f7f5f1; padding-block: 76px 64px; margin-top: 56px; }
+.reach .label { color: var(--lime); }
+.reach-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 320px); gap: 32px; align-items: end; }
+.reach-head p { margin: 0; color: rgba(247, 245, 241, .7); font-size: 15px; line-height: 1.6; }
+.hint-touch { display: none; }
+.regions { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 14px; }
+.regions button { font-size: 13px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; padding: 7px 13px; background: none; color: #f7f5f1; transition: background .25s, color .25s, border-color .25s; }
+.regions button.on { background: var(--lime); color: var(--grit); border-color: var(--lime); }
+.map-stage { position: relative; }
+#reachMap { display: block; width: 100%; height: auto; touch-action: pan-y; }
+.map-tip { position: absolute; left: 0; top: 0; pointer-events: none; background: #fff; color: var(--ink); border-radius: 12px; padding: 10px 14px; box-shadow: 0 12px 30px rgba(0, 0, 0, .35); display: grid; gap: 2px; min-width: 150px; transform: translate(16px, -50%); }
+.map-tip b, .map-card b { font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 1.15; }
+.map-tip span, .map-card span { font-size: 13px; color: var(--quiet); }
+.map-tip i, .map-card i { font-style: normal; font-size: 12px; background: #eef9d8; color: var(--ink); border-radius: 999px; padding: 2px 8px; justify-self: start; margin-top: 4px; }
+.map-card { background: #fff; color: var(--ink); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; margin-top: 12px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: rgba(247, 245, 241, .66); margin-top: 16px; }
+.legend em { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.lg-lime { background: var(--lime); } .lg-white { background: #fff; } .lg-grey { background: #4a4743; }
+.reach-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 30px; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, .12); }
+.reach-stats div { display: grid; gap: 2px; }
+.reach-stats b { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4vw, 48px); line-height: 1.05; }
+.reach-stats span { color: rgba(247, 245, 241, .66); font-size: 14px; }
+.country-list { margin-top: 26px; font-size: 14px; color: rgba(247, 245, 241, .8); }
+.country-list summary { cursor: pointer; color: #f7f5f1; }
+.country-list h4 { margin: 16px 0 4px; font-weight: 600; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); }
+.country-list p { margin: 0; max-width: 90ch; line-height: 1.7; }
+/* clients and sectors */
+.clients { padding-block: 64px 8px; display: grid; gap: 14px; }
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee .track { display: flex; width: max-content; animation: marq 48s linear infinite; }
+.marquee.small .track { animation-duration: 64s; }
+.marquee.reverse .track { animation-direction: reverse; }
+.marquee:hover .track { animation-play-state: paused; }
+.marquee .item { display: inline-flex; align-items: center; white-space: nowrap; }
+.marquee .item::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); margin: 0 clamp(18px, 2.4vw, 32px); }
+.marquee.big .item { font-family: var(--display); font-size: clamp(30px, 4vw, 52px); line-height: 1.25; }
+.marquee.small .item { font-size: 16px; color: var(--quiet); }
+@keyframes marq { to { transform: translateX(-50%); } }
+@media (max-width: 900px) {
+  .pillars-wrap { grid-template-columns: minmax(0, 1fr); }
+  .pillar-stage { display: none; }
+  .pillars-wrap .pillar { min-height: 0; opacity: 1 !important; }
+  .pillar-proof { display: grid; gap: 8px; margin-top: 6px; }
+  .pillar-proof .pp-frame { position: relative; aspect-ratio: 1.91 / 1; border-radius: 12px; overflow: hidden; background: #f1efeb; max-width: 100%; }
+  .pillar-proof video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pillar-proof b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.05; }
+  .pillar-proof span { color: var(--quiet); font-size: 14px; }
+  .how-steps { grid-template-columns: minmax(0, 1fr); padding-top: 0; padding-left: 26px; gap: 22px; }
+  .how-steps::before, .how-steps::after { left: 4px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
+  .how-steps::after { transform-origin: top; }
+  .cap.fx .how-steps::after { transform: scaleY(0); }
+  .cap.fx .how-steps.in::after { transform: scaleY(1); }
+  .how-steps li::before { top: 6px; left: -26px; }
+  .reach-head { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .reach-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (hover: none), (pointer: coarse) { .hint-fine { display: none; } .hint-touch { display: inline; } }
+@media (prefers-reduced-motion: reduce) {
+  .marquee .track { animation: none; flex-wrap: wrap; width: auto; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+}
+@media (prefers-reduced-motion: reduce) { .marquee .dup { display: none; } }
+
+/* links that used to be buttons keep their look */
+a.brand, .nav a, .sheet-bar nav a, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { color: inherit; text-decoration: none; }
+.sheet-bar nav a { color: var(--ink); }
+a.link-btn { color: var(--paper); }
+.foot a { border-bottom: 1px solid rgba(236, 234, 229, .35); transition: border-color .2s; }
+.foot a:hover { border-bottom-color: var(--lime); }
+.foot .policies { display: flex; gap: 6px; flex-wrap: wrap; }
+.foot .policies span { opacity: .5; }
+
+/* 'what we do', on the card */
+.card-eyebrow { margin: 0 0 14px; font-family: var(--body); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--on-glass-quiet); }
+.card-eyebrow b { color: var(--lime); font-weight: 500; }
+
+/* case study story: label on the left, words on the right */
+.mod-story, .mod-results { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 40px); align-items: start; }
+.mod-story > .label, .mod-results > .label { padding-top: 7px; }
+.mod-story .story { display: grid; gap: 18px; min-width: 0; }
+.mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
+.mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
+.mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
+a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
+a.cta svg { width: 16px; height: 16px; }
+@media (max-width: 720px) { .mod-story, .mod-results { grid-template-columns: 1fr; } .mod-story > .label, .mod-results > .label { padding-top: 0; } }
+
+/* policies */
+.legal { max-width: 70ch; display: grid; gap: 14px; padding-bottom: 48px; }
+.legal h2 { margin: 22px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.2; }
+.legal p, .legal li { margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; }
+.legal ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.legal .updated { color: var(--quiet); font-size: 14px; }
+.legal a { color: inherit; }
+</style>
+</head>
+<body>
+<canvas id="world" aria-hidden="true"></canvas>
+<div class="labels" id="labels" aria-hidden="true" hidden></div>
+<div class="still" id="still"></div>
+<div class="loading-note" id="loadingNote">Entering Freak, Welcome</div>
+
+<header class="top">
+  <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+  <nav class="nav" aria-label="Main">
+    <a href="/work" data-open="work">Work</a>
+    <a href="/capabilities" data-open="capabilities">Capabilities</a>
+    <a href="/contact" data-open="contact">Contact</a>
+    <a href="/about" data-open="about">About</a>
+  </nav>
+</header>
+
+<section class="card" id="card" aria-live="polite">
+  <h1 class="card-eyebrow">Independent creative <b>and</b> data agency</h1>
+  <div class="card-swap" id="cardSwap">
+    <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 4</span></div>
+    <button class="open-btn magnet" id="cardOpen"><span class="cta-label" id="cardCta">See the work</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+  </div>
+  <div class="card-foot">
+    <div class="steps">
+      <button class="round magnet" id="prevStop" aria-label="Previous card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+      <div class="dots" id="dots"><span></span><span></span><span></span><span></span></div>
+      <button class="round magnet" id="nextStop" aria-label="Next card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
+    </div>
+    <span class="hint" id="dragHint">Drag the desert to turn</span>
+  </div>
+</section>
+
+
+<button class="sound" id="soundBtn" aria-pressed="false" aria-label="Sound off. Turn on ambient sound"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sound-label">Sound off</span></button>
+<div class="moods" id="moods" role="radiogroup" aria-label="Sound options" hidden></div>
+
+<!-- Work: grid and case study share one sheet -->
+<section class="sheet open" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle">
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap" id="workGrid" hidden>
+    <div class="page-head"><span class="label">Work</span><h1 id="workTitle">Brands we've made braver</h1><p>Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech.</p></div>
+    <div class="grid" id="tiles">
+  <a class="tile" href="/work/hoover" data-case="hoover" data-cursor="View" data-preview="vid/hoover-preview.mp4">
+    <div class="tile-img"><img src="img/hoover.webp" alt="Hoover: From live shoot to listing" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Hoover</strong><span>From live shoot to listing</span></div>
+  </a>
+  <a class="tile" href="/work/rnib" data-case="rnib" data-cursor="View" data-preview="vid/rnib-preview.mp4">
+    <div class="tile-img"><img src="img/rnib.webp" alt="RNIB: A learning portal for sight loss awareness" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>RNIB</strong><span>A learning portal for sight loss awareness</span></div>
+  </a>
+  <a class="tile" href="/work/hovis" data-case="hovis" data-cursor="View" data-preview="vid/hovis-preview.mp4">
+    <div class="tile-img"><img src="img/hovis.webp" alt="Hovis: Strength Baked In" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Hovis</strong><span>Strength Baked In</span></div>
+  </a>
+  <a class="tile" href="/work/va" data-case="va" data-cursor="View" data-preview="vid/va-preview.mp4">
+    <div class="tile-img"><img src="img/va.webp" alt="V&amp;A: Mapping Glastonbury" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>V&amp;A</strong><span>Mapping Glastonbury</span></div>
+  </a>
+  <a class="tile" href="/work/drscholls" data-case="drscholls" data-cursor="View" data-preview="vid/drscholls-preview.mp4">
+    <div class="tile-img"><img src="img/drscholls.webp" alt="Dr Scholl's: Marketing across social and e-commerce" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Dr Scholl's</strong><span>Marketing across social and e-commerce</span></div>
+  </a>
+  <a class="tile" href="/work/feliway" data-case="feliway" data-cursor="View" data-preview="vid/feliway-preview.mp4">
+    <div class="tile-img"><img src="img/feliway.webp" alt="Feliway: Amazon content that doubled sales" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Feliway</strong><span>Amazon content that doubled sales</span></div>
+  </a>
+  <a class="tile" href="/work/macmillan" data-case="macmillan" data-cursor="View" data-preview="vid/macmillan-preview.mp4">
+    <div class="tile-img"><img src="img/macmillan.webp" alt="Macmillan Cancer Support: Check Your Balls" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Macmillan Cancer Support</strong><span>Check Your Balls</span></div>
+  </a>
+  <a class="tile" href="/work/evermix" data-case="evermix" data-cursor="View" data-preview="vid/evermix-preview.mp4">
+    <div class="tile-img"><img src="img/evermix.webp" alt="Evermix: Making Sound Resound" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Evermix</strong><span>Making Sound Resound</span></div>
+  </a>
+  <a class="tile" href="/work/astus" data-case="astus" data-cursor="View" data-preview="vid/astus-preview.mp4">
+    <div class="tile-img"><img src="img/astus.webp" alt="Astus: Advertising, amplified" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Astus</strong><span>Advertising, amplified</span></div>
+  </a>
+  <a class="tile" href="/work/gnetwork" data-case="gnetwork" data-cursor="View" data-preview="vid/gnetwork-preview.mp4">
+    <div class="tile-img"><img src="img/gnetwork.webp" alt="G.Network: The Fibre of London" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>G.Network</strong><span>The Fibre of London</span></div>
+  </a>
+  <a class="tile" href="/work/nyb" data-case="nyb" data-cursor="View" data-preview="vid/nyb-preview.mp4">
+    <div class="tile-img"><img src="img/nyb.webp" alt="New York Bakery: Channel 4 idents and Philly Deli" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>New York Bakery</strong><span>Channel 4 idents and Philly Deli</span></div>
+  </a>
+  <a class="tile" href="/work/yutaka" data-case="yutaka" data-cursor="View" data-preview="vid/yutaka-preview.mp4">
+    <div class="tile-img"><img src="img/yutaka.webp" alt="Yutaka: Make Mealtimes Blossom" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Yutaka</strong><span>Make Mealtimes Blossom</span></div>
+  </a>
+</div>
+  </div>
+  <article class="wrap" id="caseStudy" aria-labelledby="csTitle"><div class="cs-hero rv"><img src="img/gnetwork.webp" alt="G.Network: The Fibre of London" width="960" height="503"></div><header class="cs-head up" style="transition-delay:150ms"><span class="client">G.Network</span><h1 id="csTitle">The Fibre of London</h1><div class="tags"><span>Social Media</span><span>Paid Social</span><span>Lead Generation</span><span>Out of Home</span></div></header><section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up" style="transition-delay:90ms">G.Network is building full-fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.</p></div></section><section class="mod mod-story"><span class="label up">The idea</span><div class="story"><p class="up" style="transition-delay:0ms">We built the social strategy and creative around those neighbourhoods: championing local businesses on G.Network's channels, running competitions and giveaways, and celebrating milestones such as its place in The Sunday Times 100 Tech. Alongside that we produce monthly campaigns across paid social, out-of-home and direct mail.</p><p class="up" style="transition-delay:90ms">Location-targeted lead campaigns have brought in 2,322 leads at 43p each.</p></div></section><section class="mod mod-results"><span class="label up">The results</span><div class="numbers"><div class="up" style="transition-delay:0ms"><b data-count="2,322">2,322</b><span>leads</span></div><div class="up" style="transition-delay:120ms"><b data-count="£0.43">£0.43</b><span>cost per lead</span></div></div></section><section class="mod"><div class="carousel" tabindex="0" aria-label="G.Network gallery"><div class="cimg rv" style="transition-delay:0ms"><img src="img/cs/gnet_sq1.webp" alt="G.Network work, image 1" loading="lazy"></div><div class="cimg rv" style="transition-delay:120ms"><img src="img/cs/gnet_sq2.webp" alt="G.Network work, image 2" loading="lazy"></div><div class="cimg rv" style="transition-delay:240ms"><img src="img/cs/gnet_sq3.webp" alt="G.Network work, image 3" loading="lazy"></div><div class="cimg rv" style="transition-delay:360ms"><img src="img/cs/gnet_mockups.webp" alt="G.Network work, image 4" loading="lazy"></div></div>
+      <div class="carousel-nav"><button data-slide="-1" aria-label="Previous images"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button><button data-slide="1" aria-label="More images"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div></section><section class="mod mod-cta"><h2 class="up">Got a brief like this?</h2><a class="cta" href="/contact" data-open="contact">Start a project<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></section><nav class="cs-nav slim" aria-label="Case studies">
+        <a class="prev" href="/work/astus" data-case="astus"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>Astus</a>
+        <a class="back" href="/work" data-back>Back to case studies</a></nav><a class="cs-next" href="/work/nyb" data-case="nyb" data-cursor="Next" aria-label="Next project: New York Bakery, Channel 4 idents and Philly Deli">
+        <div class="cs-next-frame rv"><img src="img/nyb.webp" alt="" loading="lazy">
+          <div class="cs-next-meta"><span class="label" style="color:#fff;opacity:.85">Next project</span><h2>New York Bakery</h2><p>Channel 4 idents and Philly Deli</p></div></div>
+        <div class="cs-next-bar" aria-hidden="true"><i></i><span>Keep scrolling, or click</span></div></a></article>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="cap" id="capPage">
+  <div class="wrap">
+    <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative and data, under one roof.</h1></div>
+    <div class="cap-intro up">
+      <p>Freak is an independent, full-service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue.</p>
+      <p>Everything is made in-house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
+    </div>
+    <div class="proof">
+      <div class="up"><b data-count="100+">100+</b><span>countries served</span></div>
+      <div class="up"><b data-count="20,000+">20,000+</b><span>assets a year produced for a single global brand</span></div>
+      <div class="up"><b data-count="Up to 25">Up to 25</b><span>markets localised from one master campaign</span></div>
+    </div>
+
+    <!-- What we do: the stage on the left stays pinned and shows proof for the section being read -->
+    <div class="pillars-wrap">
+      <aside class="pillar-stage" aria-label="Proof for the section in view">
+        <div class="stage-frame"><video class="sv on" muted loop playsinline preload="none" aria-hidden="true"></video><video class="sv" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+        <div class="stage-proof"><b id="stageStat">2x</b><span id="stageLabel">monthly Amazon sales for Feliway</span></div>
+        <button class="stage-link" id="stageLink" data-open="work-feliway">See it in <span>Feliway</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        <ol class="stage-steps" aria-hidden="true"><li class="on">01</li><li>02</li><li>03</li><li>04</li><li>05</li></ol>
+      </aside>
+      <ol class="pillars">
+        <li class="pillar" data-proof="0"><span class="num">01</span><div class="pillar-body"><h2>Strategy</h2><p>Research, data and planning that show where the growth is, then prove it worked.</p>
+          <ul><li>Brand development and positioning</li><li>Market, competitor and SEO keyword research</li><li>Content optimisation and A/B testing</li><li>Multi-channel data analytics and reporting</li></ul></div></li>
+        <li class="pillar" data-proof="1"><span class="num">02</span><div class="pillar-body"><h2>Creative</h2><p>Ideas built to travel, from a global master to every format and channel it needs.</p>
+          <ul><li>Brand campaigns and key visuals</li><li>Social media content, always-on and reactive</li><li>Product advertising for Amazon, Meta and retail media</li><li>Copywriting, art direction and illustration</li></ul></div></li>
+        <li class="pillar" data-proof="2"><span class="num">03</span><div class="pillar-body"><h2>Production Studio</h2><p>Our own studio, so ideas go from storyboard to finished asset without a handoff.</p>
+          <ul><li>Photography and videography, on location or in our studio</li><li>Green screen, podcast and editing suites</li><li>3D, CGI, motion graphics and animation</li><li>AI production, trained on rights-cleared shoots</li></ul></div></li>
+        <li class="pillar" data-proof="3"><span class="num">04</span><div class="pillar-body"><h2>Activation</h2><p>Getting the work in front of the right people, in every market and language.</p>
+          <ul><li>Global transcreation, from 5 to 25 markets</li><li>Influencer campaigns, seeding and gifting</li><li>Community management and social reporting</li><li>Amazon Brand Stores and sales-event content</li></ul></div></li>
+        <li class="pillar" data-proof="4"><span class="num">05</span><div class="pillar-body"><h2>Technical</h2><p>The platforms that keep a brand selling, built and looked after in-house.</p>
+          <ul><li>Website build, maintenance and SEO</li><li>Web apps and microsites, from product finders to 3D maps</li><li>Amazon catalogue management and listing fixes</li><li>Product content at scale for Amazon and retailer sites</li></ul></div></li>
+      </ol>
+    </div>
+
+    <section class="how" aria-labelledby="howTitle">
+      <div class="how-head up"><span class="label">How we work</span><h2 id="howTitle">One team, from brief to results.</h2></div>
+      <ol class="how-steps">
+        <li><span class="n">01</span><b>Brief</b><p>We pull the brief apart and ask the questions that shape the work.</p></li>
+        <li><span class="n">02</span><b>Strategy</b><p>Research and data show where the growth is.</p></li>
+        <li><span class="n">03</span><b>Create</b><p>Ideas and options, developed with your team.</p></li>
+        <li><span class="n">04</span><b>Produce</b><p>Shot, designed and animated in our own studio.</p></li>
+        <li><span class="n">05</span><b>Launch</b><p>Localised, checked and scheduled on every channel.</p></li>
+        <li><span class="n">06</span><b>Measure</b><p>Tested and reported, so the next round works harder.</p></li>
+      </ol>
+    </section>
+  </div>
+
+  <!-- Reach: interactive dot map -->
+  <section class="reach" aria-labelledby="reachTitle">
+    <div class="wrap">
+      <div class="reach-head">
+        <div class="up"><span class="label">Reach</span><h2 id="reachTitle">Working in 100+ countries.</h2></div>
+        <p class="up">Head office in London, with global hubs in Barcelona and Abu Dhabi. <span class="hint-fine">Pick a region, or hover over a country.</span><span class="hint-touch">Pick a region, or tap a country.</span></p>
+      </div>
+      <div class="regions" role="group" aria-label="Zoom the map to a region">
+        <button class="on" aria-pressed="true" data-region="all">All</button><button aria-pressed="false" data-region="Europe">Europe</button><button aria-pressed="false" data-region="North America">North America</button><button aria-pressed="false" data-region="Latin America">Latin America</button><button aria-pressed="false" data-region="Middle East &amp; Africa">Middle East &amp; Africa</button><button aria-pressed="false" data-region="Asia Pacific">Asia Pacific</button>
+      </div>
+      <div class="map-stage" data-cursor="">
+        <canvas id="reachMap" role="img" aria-label="World map. The countries Freak has worked in are highlighted, with the head office in London and hubs in Barcelona and Abu Dhabi."></canvas>
+        <div class="map-tip" id="mapTip" hidden></div>
+      </div>
+      <div class="map-card" id="mapCard" hidden></div>
+      <div class="legend"><span><em class="lg-lime"></em>Countries we've worked in</span><span><em class="lg-white"></em>Our offices</span><span><em class="lg-grey"></em>Other countries</span></div>
+      <div class="reach-stats">
+        <div class="up"><b data-count="100+">100+</b><span>countries</span></div>
+        <div class="up"><b data-count="3">3</b><span>offices: London, Barcelona and Abu Dhabi</span></div>
+        <div class="up"><b data-count="25">25</b><span>markets localised from one master campaign</span></div>
+        <div class="up"><b data-count="6">6</b><span>languages in our social output</span></div>
+      </div>
+      <details class="country-list"><summary>See every country on the map</summary><div id="countryList"></div></details>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="clients" aria-label="Clients and sectors">
+      <span class="label up">Some of the brands we've worked with</span>
+      <div class="marquee big"><div class="track"></div></div>
+      <span class="label up" style="margin-top:28px">Sectors</span>
+      <div class="marquee small reverse"><div class="track"></div></div>
+    </section>
+    <div class="cap-foot up">
+      <h3>See it in action.</h3>
+      <button class="link-btn" data-open="work">See the work<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+    </div>
+  </div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap">
+    <div class="page-head"><span class="label">About</span><h1 id="aboutTitle">A <em>multidisciplinary</em> agency for <em>bold</em> brands with stories worth telling.</h1></div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="label">Who we are</span>
+        <p>A creative agency that doesn't do average. We're a small international team with a big appetite for ideas, brought together to make brands louder, sharper and harder to ignore.</p>
+        <p>From copy to campaigns, digital to print, we handle the full mix. No fluff, no filler, just work that gets noticed and gets results. We've helped brands like LUSH and Dr. Scholl's say what they mean and mean what they say.</p>
+        <p>Different clients, different challenges, same energy every time.</p>
+      </div>
+      <div>
+        <span class="label">Our capabilities go far beyond this list</span>
+        <ul class="services">
+          <li>Design</li><li>Brand Marketing</li><li>Social Media</li><li>Art Direction</li><li>Motion Design</li><li>Brand Strategy</li><li>Visual Identity</li><li>Copywriting</li><li>Sound Design</li><li>E-commerce</li><li>Illustration</li>
+        </ul>
+        <a class="link-btn" href="/capabilities" data-open="capabilities" style="margin-top:18px">All capabilities<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </div>
+    <div class="photo" style="margin-top:40px"><img src="img/team.webp" alt="The Freak team in the studio" loading="lazy" width="1600" height="1197"></div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap">
+    <div class="page-head"><span class="label">Contact</span><h1 id="contactTitle">Drop us a line.</h1></div>
+    <div class="contact-grid">
+      <div class="contacts">
+        <div><span class="label">New business</span><div class="mail lead"><code>sales@wearefreak.com</code><button class="copy" data-copy="sales@wearefreak.com">Copy</button></div></div>
+        <div><span class="label">General</span><div class="mail"><code>studio@wearefreak.com</code><button class="copy" data-copy="studio@wearefreak.com">Copy</button></div></div>
+        <div><span class="label">Careers</span><div class="mail"><code>jobs@wearefreak.com</code><button class="copy" data-copy="jobs@wearefreak.com">Copy</button></div></div>
+        <div><span class="label">Find us</span><div>22 Ash Ave, London SE17 1HS, United Kingdom</div></div>
+        <div><span class="label">Social</span><div>Instagram · LinkedIn</div></div>
+      </div>
+      <div class="photo"><img src="img/office.webp" alt="The Freak studio in London" loading="lazy" width="1600" height="1135"></div>
+    </div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap">
+<div class="page-head"><span class="label">Policies</span><h1 id="termsTitle">Terms of use</h1></div>
+<div class="legal">
+<p class="updated">Last updated 13th Oct 2026</p>
+<p>These terms apply to your use of wearefreak.com. The site is run by WeAreFreak Ltd, a company registered in England and Wales (company number 09308352), with its registered office at 22 Ash Avenue, London SE17 1HS. By using the site you accept these terms.</p>
+
+<h2>Using the site</h2>
+<p>You’re welcome to browse the site and share links to it. Please don’t misuse it, for example by trying to get unauthorised access, introducing malicious code or copying it in bulk by automated means.</p>
+
+<h2>Our content</h2>
+<p>The site’s design, text, images, films, music and 3D worlds belong to Freak or to the people we licensed them from. Work we made for clients is shown with their permission, and their names, logos and trade marks belong to them. You may not reuse any of this content without our written permission, except as the law allows.</p>
+
+<h2>Accuracy</h2>
+<p>We work to keep the site accurate and up to date, but it is provided as it is, for general information. Results described in our case studies are specific to those projects and aren’t a promise of the same results for anyone else.</p>
+
+<h2>Other websites</h2>
+<p>Where we link to other websites, we do so for convenience. We aren’t responsible for their content or how they handle your information.</p>
+
+<h2>Our liability</h2>
+<p>We don’t exclude or limit our liability where the law doesn’t allow it, including for death or personal injury caused by negligence or for fraud. Otherwise we aren’t liable for any loss arising from your use of the site, including indirect loss or loss of profit, data or business.</p>
+
+<h2>Changes and law</h2>
+<p>We may update these terms from time to time, and the date at the top shows when they last changed. They are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction.</p>
+<p>Questions? Email <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a>.</p>
+</div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-privacy" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap">
+<div class="page-head"><span class="label">Policies</span><h1 id="privacyTitle">Privacy policy</h1></div>
+<div class="legal">
+<p class="updated">Last updated 13th Oct 2026</p>
+<p>This policy explains what personal information WeAreFreak Ltd (“Freak”, “we”, “us”) collects through wearefreak.com and when you contact us, how we use it and the choices you have.</p>
+
+<h2>Who we are</h2>
+<p>WeAreFreak Ltd is a company registered in England and Wales (company number 09308352). Our registered office is 22 Ash Avenue, London SE17 1HS. We are the controller of the personal information described here. You can reach us about privacy at <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a>.</p>
+
+<h2>What we collect</h2>
+<ul>
+<li><strong>When you email us.</strong> Your name, email address and anything you choose to include, so we can reply and, if we work together, run the project.</li>
+<li><strong>When you visit the site.</strong> Our hosting provider records standard technical information such as your IP address, browser type, the pages you request and the time of the request. This keeps the site secure and working.</li>
+<li><strong>Fonts.</strong> The site loads its typefaces from Google Fonts, which means your browser sends your IP address to Google when the page loads.</li>
+</ul>
+<p>We don’t use analytics, advertising or tracking cookies on this site, and we don’t sell personal information.</p>
+
+<h2>Why we use it</h2>
+<p>We use your information to answer enquiries, to provide and improve our services and to keep the site secure. Our legal basis is our legitimate interest in running and protecting our business and in replying to people who contact us. Where we work together, it is also necessary for our contract with you or your organisation.</p>
+
+<h2>Who we share it with</h2>
+<p>We share information only with the providers who help us run the site and our business, such as our website host and email provider, and only as far as they need it to provide their service. Some of these providers are based outside the UK. Where information leaves the UK we rely on the safeguards UK law requires, such as adequacy regulations or the UK’s approved data transfer agreements.</p>
+
+<h2>How long we keep it</h2>
+<p>We keep emails and project records for as long as we need them to deal with your enquiry or our work together, and to meet our legal and accounting obligations. Our host keeps its technical logs for a short period before deleting them.</p>
+
+<h2>Your rights</h2>
+<p>You can ask us for a copy of the information we hold about you, and ask us to correct it, delete it, restrict how we use it or object to our using it. Where it applies you can also ask us to pass it to you or another organisation. Email <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a> and we’ll reply within one month.</p>
+<p>If you’re unhappy with how we’ve handled your information, you can complain to the Information Commissioner’s Office at ico.org.uk. We’d appreciate the chance to put things right first.</p>
+
+<h2>Changes</h2>
+<p>We’ll update this policy if the way we use personal information changes, for example if we add a contact form or analytics. The date at the top shows when it last changed.</p>
+</div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<section class="sheet" id="sheet-cookies" role="dialog" aria-modal="true" aria-labelledby="cookiesTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <div class="wrap">
+<div class="page-head"><span class="label">Policies</span><h1 id="cookiesTitle">Cookie policy</h1></div>
+<div class="legal">
+<p class="updated">Last updated 13th Oct 2026</p>
+<p>This policy explains how wearefreak.com uses cookies and similar technologies.</p>
+
+<h2>Cookies</h2>
+<p>The site doesn’t set any cookies. We don’t use analytics, advertising or social media tracking.</p>
+
+<h2>What we store on your device</h2>
+<p>If you turn on the sound, the site remembers the music you picked so it can play it again on your next visit. This choice is saved in your browser’s local storage, stays on your device and is never sent to us. You can clear it at any time from your browser settings.</p>
+
+<h2>Other services</h2>
+<p>The site loads its typefaces from Google Fonts. Google receives your IP address when the page loads, as described in Google’s own privacy policy. Google Fonts doesn’t set cookies on this site.</p>
+
+<h2>Changes</h2>
+<p>If we add anything that uses cookies, such as analytics, we’ll update this policy and ask for your consent before setting any cookie that isn’t essential.</p>
+<p>Questions? Email <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a>.</p>
+</div>
+  </div>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<script type="importmap">
+{ "imports": {
+  "three": "/vendor/three/build/three.module.min.js",
+  "three/addons/": "/vendor/three/examples/jsm/"
+} }
+</script>
+<script type="module" src="/assets/app.e8b3d97dcd.js"></script>
+</body>
+</html>
