@@ -1,0 +1,62 @@
+<!--meta
+{
+ "kind": "article", "order": 4, "date": "2026-10-14", "category": "Interactive",
+ "title": "The making of Mapping Glastonbury for the V&A | Freak",
+ "desc": "How Freak built Mapping Glastonbury for the V&A, five 3D maps of the festival that link to more than 500 archive items, running in the browser on any phone.",
+ "label": "Behind the work", "crumb": "The making of Mapping Glastonbury",
+ "h1": "The making of Mapping Glastonbury for the V&A.",
+ "lede": "The V&A asked us to open up its Glastonbury Festival archive to everyone. We built five 3D maps of the festival site across five decades, linked to more than 500 objects, sounds and memories, and made them run in a phone's browser.",
+ "summary": "How we turned the V&A's Glastonbury archive into five 3D maps that run in the browser, from the first brief to launch.",
+ "card": "img/p/r-glastonbury.webp", "card_alt": "A 3D map of the Glastonbury Festival site from Mapping Glastonbury",
+ "hero": {"img": "vid/va.webp", "video": "vid/va.mp4", "alt": "Mapping Glastonbury, the V&A interactive built by Freak"},
+ "videos": [{"src": "vid/va.mp4", "poster": "vid/va.webp", "name": "Mapping Glastonbury for the V&A", "desc": "A walkthrough of Mapping Glastonbury, five 3D maps of the Glastonbury Festival site Freak built for the V&A."}],
+ "author": {"name": "The Freak team", "type": "Organization"},
+ "keywords": ["Mapping Glastonbury", "V&A", "Three.js", "interactive map", "digital archive", "web app"],
+ "sources": [
+  ["Mapping Glastonbury", "https://www.vam.ac.uk/articles/mapping-glastonbury", "V&A"],
+  ["The making of the Mapping Glastonbury interactive", "https://www.vam.ac.uk/blog/projects/the-making-of-the-mapping-glastonbury-interactive", "V&A Blog"],
+  ["V&A to host three-day Glastonbury Weekender", "https://www.creativeboom.com/news/va-to-host-three-day-glastonbury-weekender/", "Creative Boom"],
+  ["Glastonbury at 50", "https://www.vam.ac.uk/research/projects/glastonbury-50", "V&A"]
+ ],
+ "aside": {"label": "Case study", "title": "Mapping Glastonbury", "text": "Five 3D maps, more than 500 archive items, still live on the V&A website.", "href": "/work/va", "link": "Read the case study"},
+ "faq": [
+  ["What is Mapping Glastonbury?", "Mapping Glastonbury is an interactive web app on the V&A website. It has five 3D maps of the Glastonbury Festival site across the decades, which visitors fly over to open memories, sounds, images and objects from the V&A's Glastonbury archive."],
+  ["Who built Mapping Glastonbury?", "Freak designed and built it with the V&A's digital team. We created the 3D maps, the interface and the front end, and wrote about the project for the V&A's blog."],
+  ["What technology does Mapping Glastonbury use?", "It's a progressive web app built with Three.js and the Nuxt framework. It runs in the browser rather than as a download, and it's optimised for mobile."],
+  ["Can a museum archive work as an interactive experience?", "Yes, if it serves both kinds of visitor. We designed for people who want to wander and for researchers who need a reliable tool, and built it to grow as the archive does."]
+ ],
+ "reading": ["resources/ecommerce-product-shoot-planning", "resources/amazon-image-visual-engagement-framework", "resources/ai-brand-value-risk"],
+ "related": ["work-va", "capabilities", "ai", "about"],
+ "cta": ["Got an archive or a story to bring to life?", "Tell us what you have, and we'll show you how people could explore it."]
+}
+-->
+<h2>The brief</h2>
+<p>The V&A holds a growing Glastonbury Festival archive. Posters, photographs, programmes, interviews and recordings, plus memories sent in by festival goers through an open call. The museum wanted all of it to be explored by anyone, anywhere, and to feel as alive as the festival itself.</p>
+<p>It also had to work for two very different audiences. Casual visitors who want to browse and stumble across things, and researchers, from academics to journalists and historians, who need a tool they can rely on.</p>
+
+<h2>Five maps, five decades</h2>
+<p>We designed <a href="https://www.vam.ac.uk/articles/mapping-glastonbury">Mapping Glastonbury</a> around the place. Five 3D maps show the festival site at each major stage of its history, from the 1970s to today, each built from satellite and mapping data and from historical maps and photographs of the site.</p>
+<figure class="pg-fig"><img src="img/cs/va_1.webp" alt="A 3D map of the Glastonbury Festival site in Mapping Glastonbury, with a timeline from the 1970s to the 2010s" loading="lazy" width="1280" height="720"><figcaption>The festival site in 3D, with a timeline to move between the decades.</figcaption></figure>
+<p>Visitors fly over the fields, move through the years and open what's pinned to the landscape. Memories, visions, sounds, spaces, experiences and locations, each linked to items in the archive. The maps are the interface for more than 500 pieces of content, and more are being added.</p>
+<figure class="pg-fig"><img src="img/cs/va_3.webp" alt="A festival goer's memory from 2017 open over the 3D map in Mapping Glastonbury" loading="lazy" width="1280" height="720"><figcaption>Memories sent in by festival goers sit on the map where they happened.</figcaption></figure>
+
+<h2>Built for the browser, and for phones</h2>
+<p>The biggest decision was where it would run. An app download would have made the 3D easier and the audience smaller. We built a progressive web app instead, with Three.js and the Nuxt framework, so it opens in any modern browser.</p>
+<p>That pushed the limits of what was possible at the time, particularly on mobile, where every model, texture and sound had to load quickly and run smoothly on ordinary phones. It was, as we wrote for the V&A, relatively uncharted territory.</p>
+<ul>
+<li><b>Three.js</b> for the 3D maps and the camera that flies between them</li>
+<li><b>Nuxt</b> for the app, the routing and the content</li>
+<li><b>A content model built to scale</b>, so the V&A can keep adding to the archive</li>
+<li><b>Mobile first optimisation</b>, so it runs on the phones people actually carry</li>
+</ul>
+
+<h2>Respecting a cultural institution</h2>
+<p>Glastonbury means a lot to a lot of people. The design had to be playful enough to explore and serious enough to trust, balancing entertainment and information without letting either win.</p>
+<figure class="pg-fig"><img src="img/cs/va_2.webp" alt="A close up of the 1990s festival map with stages, tents and flags in Mapping Glastonbury" loading="lazy" width="1280" height="720"></figure>
+
+<h2>Launch and after</h2>
+<p>Mapping Glastonbury launched in June 2021, alongside the V&A's three day Glastonbury Weekender, and <a href="https://www.creativeboom.com/news/va-to-host-three-day-glastonbury-weekender/">Creative Boom</a> covered the launch. Later that year we wrote up the project for the <a href="https://www.vam.ac.uk/blog/projects/the-making-of-the-mapping-glastonbury-interactive">V&A's own blog</a>. The app is still live on the V&A website, and it sits within the museum's wider <a href="https://www.vam.ac.uk/research/projects/glastonbury-50">Glastonbury research</a>.</p>
+<div class="key"><b>In short</b><ul><li>Five 3D maps of the festival site, 1970s to today</li><li>More than 500 archive items, with more being added</li><li>A progressive web app built with Three.js and Nuxt</li><li>Designed for casual visitors and researchers alike</li></ul></div>
+
+<h2>What we took from it</h2>
+<p>Interactive work lives or dies on performance and on knowing who it's for. The same thinking runs through our web apps today, from product finders to the 3D world on this site. You can see the full project in our <a href="/work/va">V&A case study</a>, or read more about our <a href="/capabilities">capabilities</a>.</p>

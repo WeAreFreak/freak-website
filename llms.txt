@@ -31,17 +31,45 @@ Freak (WeAreFreak Ltd, company 09308352) is an independent creative, data and AI
   - Web apps and microsites, from product finders to 3D maps
   - Amazon catalogue management and listing fixes
   - Product content at scale for Amazon and retailer sites
+- AI. Freak Lab, the AI tools we build in house for copy, content and reviews.
+  - Image analysis with our neural marketing framework
+  - Amazon copy from search and market data
+  - Review moderation built on 20 years of Amazon knowledge
+  - AI production with quality and compliance checks
 
 ## Pages
 
 - [Home](https://www.wearefreak.com/): Freak is an independent creative, data and AI agency. Head office in London, with global hubs in Barcelona and Abu Dhabi.
 - [Work](https://www.wearefreak.com/work): Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech, from Freak.
-- [Capabilities](https://www.wearefreak.com/capabilities): Creative and data under one roof. Strategy, brand, content, e-commerce, social and interactive work from Freak in London, Barcelona and Abu Dhabi.
+- [Capabilities](https://www.wearefreak.com/capabilities): Creative, data and AI under one roof. Amazon, content and live production, influencer campaigns and our own AI tools, from Freak in London, Barcelona and Abu Dhabi.
 - [Contact](https://www.wearefreak.com/contact): Talk to Freak about a new project. Email sales@wearefreak.com or visit the studio at 22 Ash Ave, London SE17 1HS.
 - [About](https://www.wearefreak.com/about): A multidisciplinary agency for bold brands with stories worth telling. Meet Freak, with a head office in London and hubs in Barcelona and Abu Dhabi.
 - [Terms of use](https://www.wearefreak.com/terms): The terms that apply to using wearefreak.com.
 - [Privacy policy](https://www.wearefreak.com/privacy): How Freak collects and uses personal information, and your rights.
 - [Cookie policy](https://www.wearefreak.com/cookies): How wearefreak.com uses cookies and what it stores on your device.
+
+## Specialisms
+
+- [Amazon agency](https://www.wearefreak.com/capabilities/amazon-agency): Freak is a full service Amazon agency. Account setup, terms negotiation, catalogue management, A+ content, Brand Stores and advertising including Amazon DSP.
+- [Content production](https://www.wearefreak.com/capabilities/content-production): Freak is a content production agency for UGC, social content and video. Creator casting, scripts, shoots, editing and usage rights, made in house.
+- [Live production](https://www.wearefreak.com/capabilities/live-production): Videography and photography for campaigns, social and ecommerce. Casting, locations, crews, our own London studio and post production, all in house.
+- [AI](https://www.wearefreak.com/ai): Freak Lab is our everytool AI kit for marketing. Image analysis from our neural marketing framework, Amazon copy and review moderation, built on paid data.
+- [Influencer campaigns, seeding and gifting](https://www.wearefreak.com/capabilities/influencer-marketing): Influencer campaigns, creator seeding and gifting across Europe, North America and Australia. Vetted creators, clear contracts and #ad compliance.
+- [Abu Dhabi](https://www.wearefreak.com/capabilities/abu-dhabi): Freak's Abu Dhabi hub brings campaigns, content, ecommerce and AI tools to brands in the UAE and the Gulf, backed by our London studio and team.
+
+## Resource Centre
+
+- [Resource Centre](https://www.wearefreak.com/resources): Guides, white papers and behind the scenes stories from Freak on Amazon, AI tools, ecommerce content, creators and the advertising rules brands work within.
+- [AI shopping assistants like Amazon Rufus are changing which brands get found](https://www.wearefreak.com/resources/amazon-rufus-ai-shopping-assistants): AI shopping assistants like Amazon Rufus answer with a handful of picks, not pages of results. What that means for brands, and how to adapt your listings now.
+- [HFSS advertising rules in 2026, and what food brands can still do](https://www.wearefreak.com/resources/hfss-advertising-rules-2026): The UK's less healthy food ad rules have applied since 5th Jan 2026. What's banned on TV and online, what's exempt and how food brands are adapting.
+- [Brand value, not compliance, is the biggest AI risk](https://www.wearefreak.com/resources/ai-brand-value-risk): Brands count AI's cost savings and miss its effect on revenue. What Freak's impact assessments found, the rules now in force and six steps to use AI safely.
+- [How we score Amazon images before shoppers ever see them](https://www.wearefreak.com/resources/amazon-image-visual-engagement-framework): Shoppers decide in seconds. Freak's neural marketing framework scores Amazon images on five measures, from visual saliency to colour, and shows how to fix them.
+- [Amazon review moderation, and how to protect your star rating](https://www.wearefreak.com/resources/amazon-review-moderation): Four star ratings drive Amazon sales and one early review can sink a launch. How Freak finds and reports reviews that break Amazon's guidelines.
+- [Creator seeding that gets posts, not just parcels](https://www.wearefreak.com/resources/creator-seeding-process): Sending product to creators is easy. Getting posts back is the job. The nine stages, vetting checks and two tiers we use to run seeding and gifting.
+- [The making of Mapping Glastonbury for the V&A](https://www.wearefreak.com/resources/making-mapping-glastonbury): How Freak built Mapping Glastonbury for the V&A, five 3D maps of the festival that link to more than 500 archive items, running in the browser on any phone.
+- [Amazon A+ content that sells, and what we changed for Feliway](https://www.wearefreak.com/resources/amazon-a-plus-content-guide): How to plan Amazon A+ content and the image stack above it, from information hierarchy to testing, with the changes that doubled Feliway's sales.
+- [From one shoot to every listing, planning an ecommerce product shoot](https://www.wearefreak.com/resources/ecommerce-product-shoot-planning): How to plan one product shoot for Amazon, retailers and social. The shot matrix, location, casting and product tests behind Freak's Hoover shoot.
+- [UGC that works on Amazon and social, from brief to final cut](https://www.wearefreak.com/resources/ugc-for-amazon-and-social): How to brief, cast and cut UGC that works on TikTok, Reels and Amazon product pages, with usage rights agreed first and versions for organic and paid.
 
 ## Case studies
 

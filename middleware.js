@@ -6,7 +6,7 @@ export const config = {
     '/cbto9su/:path*', '/wp-admin/:path*', '/wp-content/:path*', '/wp-includes/:path*', '/wp-json/:path*',
     '/xmlrpc.php', '/wp-login.php', '/feed/:path*', '/author/:path*', '/category/:path*', '/tag/:path*',
     '/2018/:path*', '/2019/:path*', '/2020/:path*', '/2021/:path*', '/2022/:path*',
-    '/12k', '/20k', '/6k', '/8k', '/audio-2', '/3475-2', '/home/:path*',
+    '/12k', '/20k', '/6k', '/8k', '/audio-2', '/3475-2', 
     '/12-touchdowns-follow-matthews-on-man-returned-limited-jatavis-brown-womens-jersey',
     '/another-lucky-his-fourth-start-home-sides-only-try-chad-williams-jersey',
   ],

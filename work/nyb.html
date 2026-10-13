@@ -91,6 +91,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .top .nav a:nth-child(2) { transition-delay: 0s, .08s, .08s; }
 .top .nav a:nth-child(3) { transition-delay: 0s, .16s, .16s; }
 .top .nav a:nth-child(4) { transition-delay: 0s, .24s, .24s; }
+.top .nav a:nth-child(5) { transition-delay: 0s, .32s, .32s; }
 html.intro .top .brand img { clip-path: inset(0 100% 0 0); }
 html.intro .top .nav a { opacity: 0; transform: translateY(-8px); }
 html.intro .top::before { opacity: 0; }
@@ -543,6 +544,222 @@ a.cta svg { width: 16px; height: 16px; }
 .legal ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .legal .updated { color: var(--quiet); font-size: 14px; }
 .legal a { color: inherit; }
+
+/* ---------- content pages: capability specialisms, AI, Resource Centre ----------
+   Every top-level block lines up with .wrap; a band (.pg-band) runs the full width with its own inner column */
+.pg { display: block; }
+.pg > :not(.pg-band) { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); }
+.pgw { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); }
+.pg.swap { animation: csIn .5s var(--ease) both; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 13px; color: var(--quiet); padding-top: 10px; }
+.crumbs a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); transition: color .2s, border-color .2s; }
+.crumbs a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.crumbs i { font-style: normal; opacity: .5; }
+.crumbs [aria-current] { color: var(--ink); }
+.pg-head { display: grid; gap: 14px; padding-block: 22px 34px; }
+.pg-head h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 5.4vw, 70px); line-height: 1.03; letter-spacing: -.015em; text-wrap: balance; max-width: 18ch; }
+.pg-head.long h1 { max-width: 24ch; font-size: clamp(34px, 4.6vw, 58px); }
+.pg-lede { margin: 0; font-size: clamp(18px, 1.8vw, 21px); line-height: 1.55; font-weight: 300; max-width: 58ch; text-wrap: pretty; }
+.pg-byline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 14px; color: var(--quiet); }
+.pg-byline b { color: var(--ink); font-weight: 600; }
+.pg-byline i { font-style: normal; opacity: .5; }
+.pg-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 4px; }
+.pg-actions .ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--ink); border-radius: 999px; padding: 11px 18px; font-size: 15px; color: var(--ink); text-decoration: none; }
+.pg-hero { margin: 0 auto 8px; display: grid; gap: 10px; }
+.pg-hero .frame { border-radius: 16px; overflow: hidden; aspect-ratio: 2.1 / 1; background: #f1efeb; max-width: 100%; }
+.pg-hero img, .pg-hero video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pg-hero figcaption, .pg-fig figcaption { font-size: 13px; color: var(--quiet); }
+.pg-sec { padding-block: clamp(40px, 6vw, 72px) 8px; display: grid; gap: 26px; }
+.pg-sec + .pg-sec { margin-top: clamp(32px, 4vw, 56px); background: linear-gradient(var(--rule), var(--rule)) center top / calc(100% - 2 * clamp(16px, 4vw, 48px)) 1px no-repeat; }
+.tool .pg-split { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+.tool .pg-split.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
+.pg-sec > header { display: grid; gap: 10px; max-width: 760px; }
+.pg-sec h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.06; letter-spacing: -.01em; text-wrap: balance; }
+.pg-sec > header p { margin: 0; color: var(--quiet); max-width: 60ch; font-size: 17px; text-wrap: pretty; }
+.pg-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 22px clamp(18px, 3vw, 36px); padding-block: 26px; border-block: 1px solid var(--rule); }
+.pg-stats div { display: grid; gap: 4px; align-content: start; }
+.pg-stats b { font-family: var(--display); font-weight: 400; font-size: clamp(38px, 4.4vw, 58px); line-height: 1; font-variant-numeric: tabular-nums; }
+.pg-stats span { color: var(--quiet); font-size: 14px; max-width: 30ch; }
+.pg-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(20px, 3vw, 40px); }
+.pg-cards.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pg-cards li { display: grid; gap: 8px; align-content: start; padding-block: 22px 26px; border-top: 1px solid var(--rule); min-width: 0; }
+.pg-cards h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 23px; line-height: 1.2; }
+.pg-cards p { margin: 0; color: var(--quiet); font-size: 15px; line-height: 1.6; }
+.pg-cards .n { font-size: 12px; letter-spacing: .14em; color: var(--quiet); font-variant-numeric: tabular-nums; }
+.pg-cards li::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: var(--lime); }
+.pg-cards.plain li::before, .pg-cards.numbered li::before { display: none; }
+.pg-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 22px; counter-reset: st; }
+.pg-steps li { display: grid; gap: 6px; align-content: start; padding-top: 18px; border-top: 2px solid var(--ink); counter-increment: st; }
+.pg-steps li::before { content: counter(st, decimal-leading-zero); font-size: 12px; letter-spacing: .14em; color: var(--quiet); }
+.pg-steps b { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.2; }
+.pg-steps p { margin: 0; color: var(--quiet); font-size: 14px; line-height: 1.55; }
+.pg-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.pg-split.start { align-items: start; }
+.pg-split > * { min-width: 0; }
+.pg-split.flip > :first-child { order: 2; }
+.pg-copy { display: grid; gap: 14px; }
+.pg-copy h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
+.pg-copy p { margin: 0; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
+.pg-copy .label + h3 { margin-top: -4px; }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.ticks li { padding-left: 20px; position: relative; font-size: 15px; line-height: 1.55; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 2px; background: var(--lime); }
+.pg-fig { margin: 0; display: grid; gap: 10px; }
+.pg-fig img, .pg-fig video { width: 100%; max-width: 100%; height: auto; display: block; border-radius: 14px; background: #f1efeb; }
+.pg-fig.portrait video { width: auto; max-height: min(74vh, 720px); margin-inline: auto; }
+.pg-fig.shadow img { box-shadow: 0 24px 60px -24px rgba(20, 20, 20, .35); }
+.pg-quote { margin: 0; display: grid; gap: 12px; max-width: 48ch; }
+.pg-quote q { font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.3; }
+.pg-quote cite { font-style: normal; color: var(--quiet); font-size: 14px; }
+.pg-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 2vw, 22px); }
+.pg-cases .tile-meta { flex-direction: column; align-items: flex-start; gap: 2px; }
+.pg-cases .tile-meta span { text-align: left; }
+.pg-cases .res { font-family: var(--display); font-size: 30px; line-height: 1.05; }
+.pg-cases .res small { display: block; font-family: var(--body); font-size: 13px; color: var(--quiet); margin-top: 2px; }
+.pg-faq { display: grid; max-width: 860px; }
+.pg-faq details { border-top: 1px solid var(--rule); }
+.pg-faq details:last-child { border-bottom: 1px solid var(--rule); }
+.pg-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-block: 20px; font-family: var(--display); font-size: clamp(19px, 2vw, 23px); line-height: 1.3; }
+.pg-faq summary::-webkit-details-marker { display: none; }
+.pg-faq summary::after { content: ""; flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--rule);
+  background: linear-gradient(var(--ink), var(--ink)) center / 11px 1.5px no-repeat, linear-gradient(var(--ink), var(--ink)) center / 1.5px 11px no-repeat; transition: transform .3s var(--ease); }
+.pg-faq details[open] summary::after { transform: rotate(45deg); }
+.pg-faq details p { margin: 0 0 22px; max-width: 70ch; font-size: 16px; line-height: 1.65; color: #3a3936; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; color: var(--ink); text-decoration: none; transition: border-color .2s, background .2s; }
+.chips a:hover { border-color: var(--ink); }
+.chips a svg { width: 14px; height: 14px; }
+.pg-band { background: var(--grit); color: #f7f5f1; padding-block: clamp(56px, 7vw, 92px); margin-top: clamp(48px, 6vw, 80px); }
+.pg-band .label { color: var(--lime); }
+.pg-band h2 { margin: 8px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.01em; text-wrap: balance; max-width: 20ch; }
+.pg-band p { color: rgba(247, 245, 241, .76); }
+.pg-band .pg-cards li { border-top-color: rgba(255, 255, 255, .14); }
+.pg-band .pg-cards p { color: rgba(247, 245, 241, .7); }
+.pg-band .pg-stats { border-color: rgba(255, 255, 255, .14); }
+.pg-band .pg-stats span { color: rgba(247, 245, 241, .66); }
+.pg-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 28px; }
+.pg-cta h2 { margin: 0; }
+.pg-cta p { margin: 10px 0 0; max-width: 52ch; }
+.pg-band + .pg-band { margin-top: 0; }
+/* tables: light grey header and lines */
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 12px; max-width: 100%; }
+.tbl table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 520px; }
+.tbl th { background: #f2f1ee; text-align: left; font-weight: 600; font-size: 13px; letter-spacing: .02em; }
+.tbl th, .tbl td { padding: 11px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* articles */
+.pg-article { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); gap: clamp(28px, 5vw, 80px); align-items: start; padding-top: 8px; }
+.pg-aside { position: sticky; top: 96px; display: grid; gap: 22px; font-size: 14px; }
+.pg-aside nav { display: grid; gap: 8px; }
+.pg-aside nav a { color: var(--quiet); text-decoration: none; line-height: 1.4; }
+.pg-aside nav a:hover { color: var(--ink); }
+.pg-aside .box { border: 1px solid var(--rule); border-radius: 14px; padding: 18px; display: grid; gap: 10px; }
+.pg-aside .box b { font-family: var(--display); font-weight: 400; font-size: 20px; line-height: 1.2; }
+.pg-aside .box p { margin: 0; color: var(--quiet); }
+.prose { max-width: 68ch; font-size: 17.5px; line-height: 1.72; font-weight: 300; min-width: 0; }
+.prose > * + * { margin-top: 18px; }
+.prose > :first-child { margin-top: 0; }
+.prose h2 { margin-top: 46px; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.15; letter-spacing: -.005em; scroll-margin-top: 90px; }
+.prose h3 { margin-top: 30px; font-weight: 600; font-size: 18px; line-height: 1.4; }
+.prose p, .prose li { text-wrap: pretty; }
+.prose b, .prose strong { font-weight: 600; }
+.prose ul, .prose ol { padding-left: 22px; display: grid; gap: 8px; }
+.prose li::marker { color: var(--quiet); }
+.prose a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.prose a:hover { text-decoration-color: var(--ink); }
+.prose blockquote { margin-inline: 0; padding-left: 20px; border-left: 3px solid var(--lime); font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.4; font-weight: 400; }
+.prose .pg-fig, .prose .tbl { margin-top: 28px; margin-bottom: 10px; }
+.prose .key { border-radius: 14px; background: #f5f4f1; padding: 20px 22px; font-size: 16px; line-height: 1.6; }
+.prose .key > b { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--quiet); font-weight: 500; margin-bottom: 8px; }
+.prose .key ul { margin: 0; }
+.sources { font-size: 14px; line-height: 1.6; color: var(--quiet); display: grid; gap: 6px; padding-left: 20px; margin: 0; }
+.sources a { color: var(--ink); }
+/* Resource Centre */
+.res-feature { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 56px); align-items: center; text-decoration: none; color: inherit; }
+.res-feature .frame { border-radius: 16px; overflow: hidden; aspect-ratio: 1.6 / 1; background: #f1efeb; max-width: 100%; }
+.res-feature img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+.res-feature:hover img, .res-card:hover img { transform: scale(1.03); }
+.res-feature h2 { margin: 6px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; }
+.res-feature p { margin: 12px 0 0; color: var(--quiet); font-size: 17px; }
+.res-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px clamp(16px, 2.4vw, 28px); }
+.res-card { display: grid; gap: 12px; align-content: start; text-decoration: none; color: inherit; min-width: 0; }
+.res-card .frame { border-radius: 12px; overflow: hidden; aspect-ratio: 1.6 / 1; background: #f1efeb; max-width: 100%; }
+.res-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+.res-card h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 23px; line-height: 1.2; text-wrap: balance; }
+.res-card p { margin: 0; color: var(--quiet); font-size: 15px; line-height: 1.55; }
+.res-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--quiet); }
+.res-meta b { color: var(--ink); font-weight: 600; }
+.res-filter { display: flex; flex-wrap: wrap; gap: 8px; }
+.res-filter button { font-size: 14px; border: 1px solid var(--rule); border-radius: 999px; padding: 7px 14px; background: none; color: var(--ink); }
+.res-filter button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.press { list-style: none; margin: 0; padding: 0; display: grid; }
+.press li { border-top: 1px solid var(--rule); }
+.press li:last-child { border-bottom: 1px solid var(--rule); }
+.press a { display: grid; grid-template-columns: minmax(120px, 200px) minmax(0, 1fr) auto; gap: 6px 24px; align-items: baseline; padding-block: 18px; color: inherit; text-decoration: none; }
+.press a:hover h3 { text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.press .outlet { font-weight: 600; font-size: 14px; }
+.press h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 1.3; }
+.press p { margin: 4px 0 0; color: var(--quiet); font-size: 14px; }
+.press time { color: var(--quiet); font-size: 13px; white-space: nowrap; }
+/* AI: the two halves of the philosophy, and the tools */
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin-top: 36px; border-top: 1px solid rgba(255, 255, 255, .14); }
+.duo > div { padding: 28px clamp(0px, 2vw, 28px) 4px 0; display: grid; gap: 10px; align-content: start; }
+.duo > div + div { border-left: 1px solid rgba(255, 255, 255, .14); padding-left: clamp(18px, 3vw, 40px); }
+.duo .big { font-family: var(--display); font-size: clamp(30px, 3.4vw, 44px); line-height: 1.05; color: #fff; }
+.duo p { margin: 0; font-size: 16px; line-height: 1.65; }
+.duo .ticks li { color: rgba(247, 245, 241, .82); }
+.tool { padding-block: clamp(34px, 5vw, 60px) 8px; }
+.tool .tag { justify-self: start; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; background: #eef9d8; color: var(--ink); border-radius: 999px; padding: 4px 10px; }
+.tool-index { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.tool-index a { display: grid; gap: 4px; padding: 16px 18px; border: 1px solid var(--rule); border-radius: 14px; color: inherit; text-decoration: none; transition: border-color .2s; }
+.tool-index a:hover { border-color: var(--ink); }
+.tool-index b { font-weight: 600; font-size: 15px; }
+.tool-index span { color: var(--quiet); font-size: 14px; line-height: 1.45; }
+@media (max-width: 900px) {
+  .pg-article { grid-template-columns: minmax(0, 1fr); }
+  .pg-aside { position: static; order: 2; }
+  .pg-aside nav { display: none; }
+  .pg-cards, .pg-cases, .res-grid, .tool-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .pg-cards, .pg-cards.two, .pg-cases, .res-grid, .tool-index, .pg-split, .tool .pg-split, .tool .pg-split.flip, .res-feature, .duo { grid-template-columns: minmax(0, 1fr); }
+  .pg-split.flip > :first-child { order: 0; }
+  .duo > div + div { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255, 255, 255, .14); }
+  .press a { grid-template-columns: minmax(0, 1fr); }
+  .pg-hero .frame { aspect-ratio: 1.45 / 1; }
+  .pg-head h1 { max-width: none; }
+}
+/* capabilities: specialisms grid and links into each specialism */
+.spec { padding-block: 56px 8px; display: grid; gap: 28px; }
+.spec-head { display: grid; gap: 8px; max-width: 760px; }
+.spec-head h2 { margin: 6px 0 0; font-family: var(--display); font-weight: 400; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; }
+.spec-head p { margin: 0; color: var(--quiet); max-width: 58ch; }
+.spec-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.spec-card { display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 10px; padding: 24px; border: 1px solid var(--rule); border-radius: 18px; color: var(--ink); text-decoration: none; min-width: 0;
+  transition: border-color .25s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease); }
+.spec-card:hover { border-color: var(--ink); transform: translateY(-3px); box-shadow: 0 24px 50px -30px rgba(20, 20, 20, .35); }
+.spec-card .n { font-size: 12px; letter-spacing: .14em; color: var(--quiet); font-variant-numeric: tabular-nums; }
+.spec-card h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 27px; line-height: 1.12; text-wrap: balance; }
+.spec-card p { margin: 0; color: var(--quiet); font-size: 15px; line-height: 1.55; }
+.spec-proof { display: grid; gap: 2px; padding-top: 14px; border-top: 1px solid var(--rule); margin-top: 6px; }
+.spec-proof b { font-family: var(--display); font-weight: 400; font-size: 34px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.spec-proof span { color: var(--quiet); font-size: 13px; }
+.spec-card .go { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-top: 4px; }
+.spec-card .go svg { width: 15px; height: 15px; transition: transform .3s var(--ease); }
+.spec-card:hover .go svg { transform: translateX(3px); }
+.deeper { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.deeper a { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; border: 1px solid var(--ink); border-radius: 999px; padding: 7px 14px; color: var(--ink); text-decoration: none; }
+.deeper a svg { width: 14px; height: 14px; transition: transform .3s var(--ease); }
+.deeper a:hover svg { transform: translateX(3px); }
+.cap-faq, .cap-reading { border-top: 0 !important; margin-top: 0 !important; }
+.cap-reading .stage-link { margin-top: 6px; }
+/* links inside page copy */
+.pg-faq a, .pg-cards a, .pg-copy p a, .pg-band p a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+@media (max-width: 900px) { .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .spec-grid { grid-template-columns: minmax(0, 1fr); } }
+/* the narrowest phones keep four links up top; AI is on the card and in Capabilities */
+@media (max-width: 419px) { .top .nav a[data-open="ai"] { display: none; } }
 </style>
 </head>
 <body>
@@ -559,6 +776,7 @@ a.cta svg { width: 16px; height: 16px; }
   <nav class="nav" aria-label="Main">
     <a href="/work" data-open="work">Work</a>
     <a href="/capabilities" data-open="capabilities">Capabilities</a>
+    <a href="/ai" data-open="ai">AI</a>
     <a href="/contact" data-open="contact">Contact</a>
     <a href="/about" data-open="about">About</a>
   </nav>
@@ -566,12 +784,12 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="card" id="card" aria-live="polite">
   <div class="card-swap" id="cardSwap">
-    <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 4</span></div>
-    <!-- One line per card stop, matched by data-stop. When the AI stop is added, its line is
-         "AI tools we build in house for copy, content and reviews" -->
+    <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 5</span></div>
+    <!-- One line per card stop, matched by data-stop -->
     <p class="card-line" id="cardLine">
       <span data-stop="work" class="on">Campaigns, content and commerce for global brands</span>
       <span data-stop="capabilities" aria-hidden="true">Brand, film, content, commerce and data</span>
+      <span data-stop="ai" aria-hidden="true">AI tools we build in house for copy, content and reviews</span>
       <span data-stop="contact" aria-hidden="true">Start a project with our teams in London, Barcelona or Abu Dhabi</span>
       <span data-stop="about" aria-hidden="true">An independent team working in over 100&nbsp;countries</span>
     </p>
@@ -580,7 +798,7 @@ a.cta svg { width: 16px; height: 16px; }
   <div class="card-foot">
     <div class="steps">
       <button class="round magnet" id="prevStop" aria-label="Previous card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
-      <div class="dots" id="dots"><span></span><span></span><span></span><span></span></div>
+      <div class="dots" id="dots"><span></span><span></span><span></span><span></span><span></span></div>
       <button class="round magnet" id="nextStop" aria-label="Next card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
     </div>
     <span class="hint" id="dragHint">Drag the desert to turn</span>
@@ -595,7 +813,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet open" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle">
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap" id="workGrid" hidden>
@@ -658,20 +876,20 @@ a.cta svg { width: 16px; height: 16px; }
         <div class="cs-next-frame rv"><img src="img/yutaka.webp" alt="" loading="lazy">
           <div class="cs-next-meta"><span class="label" style="color:#fff;opacity:.85">Next project</span><h2>Yutaka</h2><p>Make Mealtimes Blossom</p></div></div>
         <div class="cs-next-bar" aria-hidden="true"><i></i><span>Keep scrolling, or click</span></div></a></article>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="cap" id="capPage">
   <div class="wrap">
-    <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative and data, under one roof.</h1></div>
+    <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative, data and AI, under one roof.</h1></div>
     <div class="cap-intro up">
-      <p>Freak is an independent, full-service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue.</p>
+      <p>Freak is an independent, full-service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
       <p>Everything is made in-house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
     </div>
     <div class="proof">
@@ -680,25 +898,40 @@ a.cta svg { width: 16px; height: 16px; }
       <div class="up"><b data-count="Up to 25">Up to 25</b><span>markets localised from one master campaign</span></div>
     </div>
 
+    <!-- Specialisms: one page each, with services, proof and FAQs (src/content/pages) -->
+    <section class="spec" aria-labelledby="specTitle">
+      <div class="spec-head up"><span class="label">Specialisms</span><h2 id="specTitle">Go straight to what you need.</h2><p>Each specialism has its own page, with the services, the work that proves it and the questions clients ask.</p></div>
+      <div class="spec-grid">
+        <a class="spec-card up" href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency"><span class="n">01</span><h3>Amazon agency</h3><p>Account setup to DSP, with the catalogue, content and reviews in between.</p><div class="spec-proof"><b>$9m+</b><span>extra Amazon.com revenue for Dr Scholl's in a year</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/content-production" data-open="capabilities/content-production"><span class="n">02</span><h3>Content production</h3><p>UGC, always on social and product video, made in our own studio.</p><div class="spec-proof"><b>20,000+</b><span>assets a year for a single global brand</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/live-production" data-open="capabilities/live-production"><span class="n">03</span><h3>Live production</h3><p>Videography and photography for campaigns, social and ecommerce.</p><div class="spec-proof"><b>120+</b><span>lifestyle images for Hoover from one five day shoot</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/ai" data-open="ai"><span class="n">04</span><h3>AI and Freak Lab</h3><p>AI tools we build in house for copy, content and reviews.</p><div class="spec-proof"><b>6</b><span>tools in Freak Lab, our everytool kit</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing"><span class="n">05</span><h3>Influencer campaigns, seeding and gifting</h3><p>Vetted creators, clear rights and posts that come back.</p><div class="spec-proof"><b>120m</b><span>impressions for Dr Scholl's across Europe</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi"><span class="n">06</span><h3>Abu Dhabi</h3><p>Brand, content and commerce for the UAE and the Gulf.</p><div class="spec-proof"><b>3</b><span>hubs, in London, Barcelona and Abu Dhabi</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+      </div>
+    </section>
+
     <!-- What we do: the stage on the left stays pinned and shows proof for the section being read -->
     <div class="pillars-wrap">
       <aside class="pillar-stage" aria-label="Proof for the section in view">
         <div class="stage-frame"><video class="sv on" muted loop playsinline preload="none" aria-hidden="true"></video><video class="sv" muted loop playsinline preload="none" aria-hidden="true"></video></div>
         <div class="stage-proof"><b id="stageStat">2x</b><span id="stageLabel">monthly Amazon sales for Feliway</span></div>
         <button class="stage-link" id="stageLink" data-open="work-feliway">See it in <span>Feliway</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
-        <ol class="stage-steps" aria-hidden="true"><li class="on">01</li><li>02</li><li>03</li><li>04</li><li>05</li></ol>
+        <ol class="stage-steps" aria-hidden="true"><li class="on">01</li><li>02</li><li>03</li><li>04</li><li>05</li><li>06</li></ol>
       </aside>
       <ol class="pillars">
         <li class="pillar" data-proof="0"><span class="num">01</span><div class="pillar-body"><h2>Strategy</h2><p>Research, data and planning that show where the growth is, then prove it worked.</p>
-          <ul><li>Brand development and positioning</li><li>Market, competitor and SEO keyword research</li><li>Content optimisation and A/B testing</li><li>Multi-channel data analytics and reporting</li></ul></div></li>
+          <ul><li>Brand development and positioning</li><li>Market, competitor and SEO keyword research</li><li>Content optimisation and A/B testing</li><li>Multi-channel data analytics and reporting</li></ul><div class="deeper"><a href="/resources" data-open="resources">Read our thinking<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="1"><span class="num">02</span><div class="pillar-body"><h2>Creative</h2><p>Ideas built to travel, from a global master to every format and channel it needs.</p>
-          <ul><li>Brand campaigns and key visuals</li><li>Social media content, always-on and reactive</li><li>Product advertising for Amazon, Meta and retail media</li><li>Copywriting, art direction and illustration</li></ul></div></li>
+          <ul><li>Brand campaigns and key visuals</li><li>Social media content, always-on and reactive</li><li>Product advertising for Amazon, Meta and retail media</li><li>Copywriting, art direction and illustration</li></ul><div class="deeper"><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="2"><span class="num">03</span><div class="pillar-body"><h2>Production Studio</h2><p>Our own studio, so ideas go from storyboard to finished asset without a handoff.</p>
-          <ul><li>Photography and videography, on location or in our studio</li><li>Green screen, podcast and editing suites</li><li>3D, CGI, motion graphics and animation</li><li>AI production, trained on rights-cleared shoots</li></ul></div></li>
+          <ul><li>Photography and videography, on location or in our studio</li><li>Green screen, podcast and editing suites</li><li>3D, CGI, motion graphics and animation</li><li>AI production, trained on rights-cleared shoots</li></ul><div class="deeper"><a href="/capabilities/live-production" data-open="capabilities/live-production">Live production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="3"><span class="num">04</span><div class="pillar-body"><h2>Activation</h2><p>Getting the work in front of the right people, in every market and language.</p>
-          <ul><li>Global transcreation, from 5 to 25 markets</li><li>Influencer campaigns, seeding and gifting</li><li>Community management and social reporting</li><li>Amazon Brand Stores and sales-event content</li></ul></div></li>
+          <ul><li>Global transcreation, from 5 to 25 markets</li><li>Influencer campaigns, seeding and gifting</li><li>Community management and social reporting</li><li>Amazon Brand Stores and sales-event content</li></ul><div class="deeper"><a href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing">Influencer campaigns, seeding and gifting<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi">Abu Dhabi<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="4"><span class="num">05</span><div class="pillar-body"><h2>Technical</h2><p>The platforms that keep a brand selling, built and looked after in-house.</p>
-          <ul><li>Website build, maintenance and SEO</li><li>Web apps and microsites, from product finders to 3D maps</li><li>Amazon catalogue management and listing fixes</li><li>Product content at scale for Amazon and retailer sites</li></ul></div></li>
+          <ul><li>Website build, maintenance and SEO</li><li>Web apps and microsites, from product finders to 3D maps</li><li>Amazon catalogue management and listing fixes</li><li>Product content at scale for Amazon and retailer sites</li></ul><div class="deeper"><a href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency">Amazon agency<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
+        <li class="pillar" data-proof="5"><span class="num">06</span><div class="pillar-body"><h2>AI</h2><p>Freak Lab, the AI tools we build in house for copy, content and reviews.</p>
+          <ul><li>Image analysis with our neural marketing framework</li><li>Amazon copy from search and market data</li><li>Review moderation built on 20 years of Amazon knowledge</li><li>AI production with quality and compliance checks</li></ul><div class="deeper"><a href="/ai" data-open="ai">AI and Freak Lab<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
       </ol>
     </div>
 
@@ -733,7 +966,7 @@ a.cta svg { width: 16px; height: 16px; }
       <div class="legend"><span><em class="lg-lime"></em>Countries we've worked in</span><span><em class="lg-white"></em>Our offices</span><span><em class="lg-grey"></em>Other countries</span></div>
       <div class="reach-stats">
         <div class="up"><b data-count="100+">100+</b><span>countries</span></div>
-        <div class="up"><b data-count="3">3</b><span>offices: London, Barcelona and Abu Dhabi</span></div>
+        <div class="up"><b data-count="3">3</b><span>offices, in London, Barcelona and Abu Dhabi</span></div>
         <div class="up"><b data-count="25">25</b><span>markets localised from one master campaign</span></div>
         <div class="up"><b data-count="6">6</b><span>languages in our social output</span></div>
       </div>
@@ -748,19 +981,26 @@ a.cta svg { width: 16px; height: 16px; }
       <span class="label up" style="margin-top:28px">Sectors</span>
       <div class="marquee small reverse"><div class="track"></div></div>
     </section>
+    <section class="pg-sec cap-faq" aria-labelledby="capFaqTitle"><header class="up"><span class="label">FAQs</span><h2 id="capFaqTitle">What clients ask us.</h2></header>
+      <div class="pg-faq" id="capFaq"><details><summary>What does Freak do?</summary><p>Freak is an independent creative, data and AI agency. We make campaigns, content and commerce for global brands, run Amazon accounts end to end and build our own AI tools, then measure what the work does for sales.</p></details><details><summary>Where is Freak based?</summary><p>Our head office and studio are in London, with hubs in Barcelona and Abu Dhabi. We work for clients in more than 100 countries.</p></details><details><summary>Is Freak an Amazon agency?</summary><p>Yes. We run Amazon end to end, from account setup and vendor terms to catalogue management, A+ content, Brand Stores, advertising including Amazon DSP and review moderation. See our <a href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency">Amazon agency</a> page.</p></details><details><summary>Does Freak have its own production studio?</summary><p>Yes. Photography, video, green screen, podcast and editing suites are all in house, along with 3D, CGI, motion graphics and animation. Our live production team handles location shoots.</p></details><details><summary>How does Freak use AI?</summary><p>We build our own tools in <a href="/ai" data-open="ai">Freak Lab</a>, from image analysis on our neural marketing framework to Amazon copy and review moderation. We use AI freely behind the scenes and carefully in front of shoppers.</p></details><details><summary>Do you work with brands outside the UK?</summary><p>Yes. We transcreate one master campaign into 5 - 25 markets and run Amazon, social and creator programmes across Europe, North America, the Middle East and Australia.</p></details><details><summary>How do I start a project?</summary><p>Tell us about your brief through our <a href="/contact" data-open="contact">contact page</a>, or email sales@wearefreak.com.</p></details></div>
+    </section>
+    <section class="pg-sec cap-reading" aria-labelledby="capReadTitle"><header class="up"><span class="label">Resource Centre</span><h2 id="capReadTitle">What we've learned, written down.</h2></header>
+      <div class="res-grid"><a class="res-card" href="/resources/amazon-rufus-ai-shopping-assistants" data-cat="Amazon" data-open="resources/amazon-rufus-ai-shopping-assistants"><div class="frame"><img src="img/p/r-rufus.webp" alt="A page of search results where one brand holds eight of the top ten, next to an AI assistant answer where it holds one of five picks" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Amazon</b><span>14th Oct 2026</span><span>3 min read</span></div><h3>AI shopping assistants like Amazon Rufus are changing which brands get found.</h3><p>AI assistants now answer shopping questions with a few picks. What that means for brands on Amazon, and what to change in your listings now.</p></a><a class="res-card" href="/resources/hfss-advertising-rules-2026" data-cat="Advertising rules" data-open="resources/hfss-advertising-rules-2026"><div class="frame"><img src="img/p/r-hfss.webp" alt="A chart of when less healthy food ads are restricted on TV, on demand and online, and the channels still open" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Advertising rules</b><span>14th Oct 2026</span><span>4 min read</span></div><h3>HFSS advertising rules in 2026, and what food brands can still do.</h3><p>What's banned on TV and online since 5th Jan 2026, what's still open and how food and drink brands are adapting their media and creative.</p></a><a class="res-card" href="/resources/ai-brand-value-risk" data-cat="AI" data-open="resources/ai-brand-value-risk"><div class="frame"><img src="img/p/r-ai-brand.webp" alt="A chart showing falls in social engagement and ecommerce conversion when content carries a made with AI label" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>AI</b><span>14th Oct 2026</span><span>3 min read</span></div><h3>Brand value, not compliance, is the biggest AI risk.</h3><p>What our impact assessments found when real content carried a made with AI label, the rules now in force and six steps to use AI without hurting the brand.</p></a></div>
+      <a class="stage-link" href="/resources" data-open="resources">All guides and articles<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+    </section>
     <div class="cap-foot up">
       <h3>See it in action.</h3>
       <button class="link-btn" data-open="work">See the work<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
     </div>
   </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -782,13 +1022,13 @@ a.cta svg { width: 16px; height: 16px; }
     </div>
     <div class="photo" style="margin-top:40px"><img src="img/team.webp" alt="The Freak team in the studio" loading="lazy" width="1600" height="1197"></div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -804,13 +1044,25 @@ a.cta svg { width: 16px; height: 16px; }
       <div class="photo"><img src="img/office.webp" alt="The Freak studio in London" loading="lazy" width="1600" height="1135"></div>
     </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+</section>
+
+<!-- Content pages: capability specialisms, AI and the Resource Centre. Each has its own address and
+     prerendered HTML; moving between them inside the app loads just the page body from /f/<address> -->
+<section class="sheet" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden>
+  <div class="sheet-bar">
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+      <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
+  </div>
+  <article class="pg" id="pageBody"></article>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -839,13 +1091,13 @@ a.cta svg { width: 16px; height: 16px; }
 <p>Questions? Email <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a>.</p>
 </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-privacy" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -882,13 +1134,13 @@ a.cta svg { width: 16px; height: 16px; }
 <p>We’ll update this policy if the way we use personal information changes, for example if we add a contact form or analytics. The date at the top shows when it last changed.</p>
 </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <section class="sheet" id="sheet-cookies" role="dialog" aria-modal="true" aria-labelledby="cookiesTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -911,7 +1163,7 @@ a.cta svg { width: 16px; height: 16px; }
 <p>Questions? Email <a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a>.</p>
 </div>
   </div>
-  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
+  <footer class="foot"><div class="wrap"><div><div class="label">Say hello</div><a href="mailto:studio@wearefreak.com">studio@wearefreak.com</a></div><div><div class="label">Find us</div>22 Ash Ave, London SE17 1HS</div><div><div class="label">Read</div><a href="/resources" data-open="resources">Resource Centre</a></div><div><div class="label">Policies</div><div class="policies"><a href="/terms" data-open="terms">Terms</a><span>·</span><a href="/privacy" data-open="privacy">Privacy</a><span>·</span><a href="/cookies" data-open="cookies">Cookies</a></div></div></div></footer>
 </section>
 
 <script type="importmap">
@@ -920,6 +1172,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.6d9073cf9c.js"></script>
+<script type="module" src="/assets/app.b0d6f91e1f.js"></script>
 </body>
 </html>

@@ -4,10 +4,11 @@ const SoundKit = (() => {
   const pick = arr => arr[Math.floor(Math.random() * arr.length)];
   const curve = f => { const c = new Float32Array(64); for (let i = 0; i < 64; i++) c[i] = f(i / 63); return c; };
   const RISE = curve(x => Math.sin(x * Math.PI / 2)), FALL = curve(x => Math.cos(x * Math.PI / 2));   // equal-power crossfades
-  // Work, Capabilities, Contact, About. Melody notes ("top") stay inside D major pentatonic plus colour tones.
+  // Work, Capabilities, AI, Contact, About. Melody notes ("top") stay inside D major pentatonic plus colour tones.
   const CHORDS = [
     { bass: 38, notes: [50, 54, 57, 61, 64], top: [69, 73, 76, 78, 81] },   // Dmaj9
     { bass: 35, notes: [47, 54, 57, 62, 64], top: [66, 69, 71, 74, 76] },   // Bm11
+    { bass: 33, notes: [45, 52, 57, 59, 64], top: [69, 71, 73, 76, 78] },   // Aadd9, for AI
     { bass: 31, notes: [50, 54, 57, 59, 61], top: [66, 69, 71, 73, 74, 78] },   // Gmaj9#11
     { bass: 40, notes: [47, 54, 55, 59, 62], top: [66, 67, 71, 74, 78] },   // Em9
   ];

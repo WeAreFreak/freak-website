@@ -1,0 +1,63 @@
+<!--meta
+{
+ "kind": "article", "order": 7, "date": "2026-10-14", "category": "Amazon",
+ "title": "Scoring Amazon images with eye tracking AI | Freak",
+ "desc": "Shoppers decide in seconds. Freak's neural marketing framework scores Amazon images on five measures, from visual saliency to colour, and shows how to fix them.",
+ "label": "How we work", "crumb": "Scoring Amazon images",
+ "h1": "How we score Amazon images before shoppers ever see them.",
+ "lede": "Shoppers are more scroll fatigued than ever, and the first few seconds of looking decide whether an image converts. Our neural marketing framework predicts where the eye lands, and scores every image on the five things that matter.",
+ "summary": "The five measures behind our neural marketing framework, what each one tests and how we use them to fix Amazon images before they go live.",
+ "card": "img/p/r-framework.webp", "card_alt": "An attention heatmap over a Feliway Amazon image with the eye path numbered, beside the framework's five measures",
+ "author": {"name": "Stuart Willison", "role": "Co-founder and CEO"},
+ "keywords": ["Amazon images", "eye tracking", "attention heatmap", "neural marketing", "Amazon main image", "visual saliency"],
+ "sources": [
+  ["F-shaped pattern for reading web content", "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/", "Nielsen Norman Group"],
+  ["A+ Content", "https://sell.amazon.com/tools/a-content", "Amazon"]
+ ],
+ "aside": {"label": "Freak Lab", "title": "Run your images through it", "text": "Our Image Analyser gives every image a heatmap, a score out of 100 and the fixes.", "href": "/ai", "link": "See the Image Analyser"},
+ "faq": [
+  ["What is visual saliency?", "Visual saliency is what stands out in an image before the viewer starts thinking. High contrast, bright colour and sharp edges draw the eye first, so the most important message needs to sit there."],
+  ["What is the three second rule for Amazon images?", "An image should communicate its main benefit within three seconds. If a shopper has to work to understand it, because of small type or cluttered icons, attention drops and they move on. Most Amazon traffic is on mobile, so this matters even more."],
+  ["Why do numbers work so well in product images?", "Bold figures and percentages act as trust anchors. In every image we've analysed where a figure like 92% or 96% appears, attention spikes on it, which makes numbers some of the strongest scroll stoppers there are."],
+  ["Can AI predict where shoppers will look?", "Yes, with the right data. Our Image Analyser uses a saliency model trained on eye tracking data to draw the heatmap and eye path, and a language model writes the analysis against our framework, so the same image always gives the same result."]
+ ],
+ "reading": ["resources/amazon-a-plus-content-guide", "resources/amazon-rufus-ai-shopping-assistants", "resources/ecommerce-product-shoot-planning"],
+ "related": ["ai", "capabilities/amazon-agency", "work-feliway", "capabilities/live-production"]
+}
+-->
+<h2>Why the first three seconds decide the sale</h2>
+<p>A shopper scanning search results or swiping through a gallery doesn't read. They glance, and in that glance the brain decides what to look at and whether to stay. People have studied this for over a century, from the first eye trackers in the early 1900s to webcam eye tracking today, and the patterns are remarkably consistent.</p>
+<p>We built those patterns into a framework, then into a tool. Our neural marketing framework was devised from decades of eye tracking and consumer behaviour data, and every Amazon image we make is scored against it before it goes live. It's part of how Feliway's new content lifted conversion by 24% and ordered revenue by 48% across 64 products.</p>
+<figure class="pg-fig"><img src="img/p/r-framework.webp" alt="An attention heatmap over a Feliway Amazon image with the eye path numbered, beside the framework's five measures" loading="lazy" width="1600" height="1000"><figcaption>A predicted attention heatmap and eye path for a Feliway main image Freak designed.</figcaption></figure>
+
+<h2>1. Visual saliency, the instant grab</h2>
+<p>This is the pre attentive moment, when the brain picks out what stands out before the viewer has even thought about it. High contrast areas, bright colours and sharp edges win. On Amazon, the most salient element is the one a shopper locks onto first, so the headline benefit or the product itself needs to be there, not a background detail.</p>
+
+<h2>2. The three second rule and cognitive load</h2>
+<p>Does the image land its main benefit within three seconds? We look at the balance of text and image and how legible the type is on a phone. If the shopper has to work, because the font is small or the icons are crowded, attention fades and the bounce rate rises. Mobile shoppers make up most of Amazon's traffic, and they reward images they can scan.</p>
+
+<h2>3. Trust anchors and gaze bias</h2>
+<p>People are drawn to faces, hands and feet, and to symbols of trust. Bold percentages, certification badges and diagrams that show the solution all pull the gaze. Claims like clinically proven and named technologies act as anchors that draw the eye down the image.</p>
+<p>Numbers matter most. In every image we've analysed where a figure like 92% or 96% appears, the heatmap spikes on it.</p>
+
+<h2>4. Reading patterns</h2>
+<p>The eye follows predictable paths across a screen, the F and Z patterns <a href="https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/">documented by Nielsen Norman Group</a>. It usually starts top left at the headline, moves across, drops to the visual in the centre or on the right and finishes bottom left or right on the proof or the call to action. We design images to follow that path, so the story reads in the right order.</p>
+
+<h2>5. Colour psychology and intensity</h2>
+<p>Colour drives emotional and physical responses. Contrast between a calm, trustworthy blue or teal and a high energy yellow creates a natural heat corridor for the eye to follow, separating attention from reassurance. We check that the corridor leads to the message, not away from it.</p>
+
+<h2>How we use the scores</h2>
+<p>Each measure gets a score out of 100, and the overall score is weighted for where the image will be used. A main image in search is judged differently from an A+ module below the fold. The write up explains why an image scored 64 and not 80, and lists the fixes that would close the gap.</p>
+<div class="tbl"><table>
+<thead><tr><th>Overall score</th><th>Rating</th><th>What it means</th></tr></thead>
+<tbody>
+<tr><td>80 - 100</td><td>Excellent</td><td>Ready to publish</td></tr>
+<tr><td>60 - 79</td><td>Good</td><td>Small fixes</td></tr>
+<tr><td>40 - 59</td><td>Needs work</td><td>Clear problems</td></tr>
+<tr><td>0 - 39</td><td>Weak</td><td>Rethink the image</td></tr>
+</tbody></table></div>
+<p>The fixes are often small. On one insole image, moving a single claim to sit beside the hotspot under the foot joined two separate points of attention into one, and lifted the score. On a main image, raising the contrast of one line under a big number can make the whole claim read.</p>
+<div class="key"><b>In short</b><ul><li>Shoppers glance before they read</li><li>Five measures predict what gets seen and understood</li><li>Numbers, faces and trust symbols pull the eye</li><li>Design to the F and Z path, and test on mobile</li></ul></div>
+
+<h2>From framework to tool</h2>
+<p>We now run the framework through the Image Analyser in <a href="/ai">Freak Lab</a>. A saliency model trained on eye tracking data draws the heatmap, and a language model writes the analysis against our five measures. Our <a href="/capabilities/amazon-agency">Amazon team</a> uses it on every listing, and it's how we decide which version to <a href="/resources/amazon-a-plus-content-guide">A/B test next</a>.</p>

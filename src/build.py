@@ -10,7 +10,13 @@ share image and readable content straight away. The app code lives in one shared
 Writes, next to img/, vid/, w/ and vendor/:
   index.html, work.html, work/<case>.html, capabilities.html, contact.html, about.html,
   terms.html, privacy.html, cookies.html, 404.html, assets/app.<hash>.js,
-  sitemap.xml, robots.txt, llms.txt, the IndexNow key file
+  ai.html, capabilities/<specialism>.html, resources.html, resources/<article>.html,
+  f/<address>.html (just the page body, which the app fetches when you move between pages),
+  img/share/p/<page>.jpg, sitemap.xml, robots.txt, llms.txt, the IndexNow key file
+Content pages (the capability specialisms, AI and the Resource Centre) are HTML files in
+src/content/pages, each starting with a JSON block of its details: title, description, FAQs,
+related pages, and for articles the date, author and sources. The page furniture (breadcrumbs,
+header, FAQs, related links, the call to action) and its structured data are built from those.
 Every page also carries structured data (schema.org JSON-LD) describing Freak, its offices, its
 services and, on case studies, the work. All of it is generated from src/content, so a new case
 study or capability appears everywhere it should on the next build.
@@ -18,7 +24,7 @@ Settings that aren't content (verification codes, the IndexNow key, profile link
 src/content/site.json. src/content/lastmod.json records when each page last changed, for the sitemap.
 Nothing under src/ is published (see .vercelignore).
 """
-import datetime, hashlib, html, json, os, re, shutil
+import datetime, hashlib, html, json, os, re, shutil, sys
 
 S = os.path.dirname(os.path.abspath(__file__))
 R = os.path.dirname(S)
@@ -34,6 +40,7 @@ LEGAL = [('terms', 'Terms of use'), ('privacy', 'Privacy policy'), ('cookies', '
 WORK = json.load(open(os.path.join(C, 'work.json'), encoding='utf-8'))
 SET = json.load(open(os.path.join(C, 'site.json'), encoding='utf-8'))   # verification codes, IndexNow key, profiles
 TODAY = datetime.date.today().isoformat()
+PG = os.path.join(C, 'pages')
 # Crawlers named in robots.txt so it's explicit that search and AI tools may read the site
 CRAWLERS = ['Googlebot', 'Bingbot', 'GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
             'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot', 'Applebot-Extended', 'DuckAssistBot', 'CCBot']
@@ -41,6 +48,29 @@ CRAWLERS = ['Googlebot', 'Bingbot', 'GPTBot', 'OAI-SearchBot', 'ChatGPT-User', '
 esc = lambda s: str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
 ARROW_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>'
 ARROW_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>'
+
+
+# ---------------------------------------------------------------- content pages
+def load_content():
+    """src/content/pages/<address>.html: a <!--meta {json} --> block, then the page body."""
+    out = {}
+    for root, _, files in os.walk(PG):
+        for f in sorted(files):
+            if not f.endswith('.html'):
+                continue
+            route = os.path.relpath(os.path.join(root, f), PG)[:-5].replace(os.sep, '/')
+            raw = rd(os.path.join(root, f))
+            m = re.match(r'\s*<!--meta\s*(\{.*?\})\s*-->\s*', raw, re.S)
+            assert m, f'{route}: missing the <!--meta {{...}} --> block'
+            meta = json.loads(m.group(1))
+            meta['route'], meta['body'] = route, raw[m.end():].strip()
+            out[route] = meta
+    return out
+
+
+CONTENT = load_content()
+ARTICLES = sorted((m for r, m in CONTENT.items() if m.get('kind') == 'article'), key=lambda m: (m['date'], m.get('order', 0)), reverse=True)
+SPOKES = sorted((m for r, m in CONTENT.items() if m.get('kind') in ('spoke', 'ai')), key=lambda m: m.get('order', 99))
 
 
 # ---------------------------------------------------------------- page details
@@ -60,7 +90,7 @@ def pages():
     p = {
         '': {'title': 'Freak | Independent creative, data and AI agency', 'desc': DESC},
         'work': {'title': 'Work | Freak', 'desc': 'Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech, from Freak.'},
-        'capabilities': {'title': 'Capabilities | Freak', 'desc': 'Creative and data under one roof. Strategy, brand, content, e-commerce, social and interactive work from Freak in London, Barcelona and Abu Dhabi.'},
+        'capabilities': {'title': 'Capabilities | Freak', 'desc': 'Creative, data and AI under one roof. Amazon, content and live production, influencer campaigns and our own AI tools, from Freak in London, Barcelona and Abu Dhabi.'},
         'about': {'title': 'About | Freak', 'desc': 'A multidisciplinary agency for bold brands with stories worth telling. Meet Freak, with a head office in London and hubs in Barcelona and Abu Dhabi.'},
         'contact': {'title': 'Contact | Freak', 'desc': 'Talk to Freak about a new project. Email sales@wearefreak.com or visit the studio at 22 Ash Ave, London SE17 1HS.'},
         'terms': {'title': 'Terms of use | Freak', 'desc': 'The terms that apply to using wearefreak.com.'},
@@ -70,6 +100,8 @@ def pages():
     for w in WORK:
         first = w.get('challenge') or (w.get('text') or [''])[0]
         p['work-' + w['id']] = {'title': f"{w['title']} | {w['client']} case study | Freak", 'desc': summary(first)}
+    for r, m in CONTENT.items():
+        p[r] = {'title': m['title'], 'desc': m['desc'], 'page': 1}
     return p
 
 
@@ -81,10 +113,32 @@ def file_of(name):
     return 'index.html' if not name else f'work/{name[5:]}.html' if name.startswith('work-') else f'{name}.html'
 
 
+def share_slug(name):
+    return name.replace('/', '-')
+
+
 def share_image(name):
     if name.startswith('work-') and os.path.exists(os.path.join(R, 'img', 'share', name[5:] + '.jpg')):
         return f'{SITE}/img/share/{name[5:]}.jpg'
+    if name in CONTENT:
+        return f'{SITE}/img/share/p/{share_slug(name)}.jpg'
     return f'{SITE}/img/share/freak.jpg'
+
+
+def make_share(name):
+    """A 1200 x 630 share card cropped from the page's hero image."""
+    from PIL import Image
+    src = CONTENT[name].get('share') or (CONTENT[name].get('hero') or {}).get('img') or CONTENT[name].get('card')
+    out = os.path.join(R, 'img', 'share', 'p', share_slug(name) + '.jpg')
+    if not src:
+        shutil.copy(os.path.join(R, 'img', 'share', 'freak.jpg'), out); return
+    im = Image.open(os.path.join(R, src)).convert('RGB')
+    w, h = im.size; r = 1200 / 630
+    if w / h > r:
+        nw = int(h * r); im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+    else:
+        nh = int(w / r); im = im.crop((0, (h - nh) // 2, w, (h - nh) // 2 + nh))
+    im.resize((1200, 630), Image.LANCZOS).save(out, quality=84, optimize=True, progressive=True)
 
 
 # ---------------------------------------------------------------- the app
@@ -113,6 +167,8 @@ def assemble():
                        f'{bar}  <div class="wrap">\n{rd(os.path.join(C, n + ".html")).strip()}\n  </div>\n  {foot}\n</section>\n'
                        for n, _ in LEGAL)
     t = t.replace('<!--@@LEGAL@@-->', sheets)
+    # the Capabilities page shows the three newest Resource Centre articles
+    t = t.replace('<!--@@CAP_READING@@-->', wire(''.join(res_card(a) for a in ARTICLES[:3])))
     t = t.replace('"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"', '"three": "/vendor/three/build/three.module.min.js"')
     t = t.replace('"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"', '"three/addons/": "/vendor/three/examples/jsm/"')
     return t
@@ -172,6 +228,216 @@ def case_html(w):
     return ''.join(m)
 
 
+# ---------------------------------------------------------------- content pages: the furniture around each body
+MONTHS = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split()
+BROKEN = set()   # links to pages that don't exist; the build stops on these unless run with --draft
+
+
+def nice_date(iso):
+    """2026-10-14 -> 14th Oct 2026, the house style for dates."""
+    y, mo, d = (int(x) for x in iso.split('-'))
+    suf = 'th' if 11 <= d <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(d % 10, 'th')
+    return f'{d}{suf} {MONTHS[mo - 1]} {y}'
+
+
+def text_of(h):
+    return html.unescape(re.sub(r'<[^>]+>', '', h)).strip()
+
+
+def read_minutes(m):
+    return max(2, round(len(text_of(m['body']).split()) / 230))
+
+
+def route_of_href(href):
+    path = href.split('#')[0].split('?')[0].rstrip('/') or '/'
+    if path == '/':
+        return ''
+    w = re.fullmatch(r'/work/([\w-]+)', path)
+    return 'work-' + w.group(1) if w else path[1:]
+
+
+def wire(h):
+    """Links to our own pages open inside the app; links to other sites open in a new tab."""
+    known = set(pages())
+    def fix(mt):
+        tag, href = mt.group(0), mt.group(1)
+        if 'data-open' in tag or 'data-close' in tag or 'target=' in tag:
+            return tag
+        if href.startswith('/') and not href.startswith('//'):
+            r = route_of_href(href)
+            if r not in known:
+                BROKEN.add(href); return tag
+            return tag[:-1] + (' data-close>' if r == '' else f' data-open="{r}">')
+        if href.startswith('http'):
+            return tag[:-1] + ' target="_blank" rel="noopener">'
+        return tag
+    return re.sub(r'<a\s[^>]*?href="([^"]+)"[^>]*>', fix, h)
+
+
+def name_of(r):
+    if r.startswith('work-'):
+        w = next(x for x in WORK if x['id'] == r[5:])
+        return w['client']
+    if r in CONTENT:
+        return CONTENT[r].get('crumb') or text_of(CONTENT[r]['h1'])
+    return {'capabilities': 'All capabilities', 'work': 'All work', 'contact': 'Contact', 'about': 'About'}.get(r, r)
+
+
+def crumbs(m):
+    parts = m['route'].split('/')
+    out = [('Freak', '/')]
+    if parts[0] == 'capabilities':
+        out.append(('Capabilities', '/capabilities'))
+    if parts[0] == 'resources' and len(parts) > 1:
+        out.append(('Resource Centre', '/resources'))
+    out.append((m.get('crumb') or text_of(m['h1']), '/' + m['route']))
+    return out
+
+
+def page_head(m):
+    c = crumbs(m)
+    trail = ' <i>/</i> '.join(f'<a href="{u}">{esc(n)}</a>' for n, u in c[:-1]) + f' <i>/</i> <span aria-current="page">{esc(c[-1][0])}</span>'
+    h = [f'<nav class="crumbs" aria-label="Breadcrumb">{trail}</nav>', f'<header class="pg-head{" long" if m["kind"] == "article" else ""}">',
+         f'<span class="label">{esc(m["label"])}</span>', f'<h1 id="pageTitle">{m["h1"]}</h1>']
+    if m.get('lede'):
+        h.append(f'<p class="pg-lede">{m["lede"]}</p>')
+    if m['kind'] == 'article':
+        a = m['author']
+        h.append(f'<div class="pg-byline"><span>By <b>{esc(a["name"])}</b>{", " + esc(a["role"]) if a.get("role") else ""}</span><i>·</i>'
+                 f'<time datetime="{m["date"]}">{nice_date(m["date"])}</time><i>·</i><span>{read_minutes(m)} min read</span></div>')
+    if m.get('actions'):
+        btns = []
+        for k, (label, href) in enumerate(m['actions']):
+            btns.append(f'<a class="{"cta" if k == 0 else "ghost"}" href="{href}">{esc(label)}{ARROW_R if k == 0 else ""}</a>')
+        h.append('<div class="pg-actions">' + ''.join(btns) + '</div>')
+    h.append('</header>')
+    return '\n'.join(h)
+
+
+def hero_html(m):
+    hd = m.get('hero')
+    if not hd:
+        return ''
+    if hd.get('video'):
+        media = f'<video src="{hd["video"]}" poster="{hd["img"]}" controls playsinline preload="none" aria-label="{esc(hd["alt"])}"></video>'
+    else:
+        media = f'<img src="{hd["img"]}" alt="{esc(hd["alt"])}" width="{hd.get("w", 1600)}" height="{hd.get("h", 760)}" fetchpriority="high">'
+    cap = f'<figcaption>{hd["caption"]}</figcaption>' if hd.get('caption') else ''
+    return f'<figure class="pg-hero"><div class="frame">{media}</div>{cap}</figure>'
+
+
+def case_card(cid, stat, label):
+    w = next(x for x in WORK if x['id'] == cid)
+    return (f'<a class="tile" href="/work/{cid}" data-cursor="View"><div class="tile-img"><img src="{w["img"]}" alt="{esc(w["client"])}: {esc(w["title"])}" loading="lazy" width="960" height="503"></div>'
+            f'<div class="tile-meta"><strong>{esc(w["client"])}</strong><span>{esc(w["title"])}</span>'
+            f'<div class="res">{esc(stat)}<small>{esc(label)}</small></div></div></a>')
+
+
+def cases_html(m):
+    if not m.get('cases'):
+        return ''
+    title, sub = m.get('cases_title') or ['The work', 'Case studies that show it working.']
+    return (f'<section class="pg-sec" id="work"><header><span class="label">{esc(title)}</span><h2>{sub}</h2></header>'
+            f'<div class="pg-cases">{"".join(case_card(*c) for c in m["cases"])}</div></section>')
+
+
+def res_card(a, eager=False):
+    return (f'<a class="res-card" href="/resources/{a["route"].split("/", 1)[1]}" data-cat="{esc(a["category"])}">'
+            f'<div class="frame"><img src="{a["card"]}" alt="{esc(a.get("card_alt", text_of(a["h1"])))}"{"" if eager else " loading=\"lazy\""} width="960" height="600"></div>'
+            f'<div class="res-meta"><b>{esc(a["category"])}</b><span>{nice_date(a["date"])}</span><span>{read_minutes(a)} min read</span></div>'
+            f'<h3>{text_of(a["h1"])}</h3><p>{esc(a["summary"])}</p></a>')
+
+
+def reading_html(m, title='Further reading', sub='From the Resource Centre.'):
+    missing = [r for r in m.get('reading', []) if r not in CONTENT]
+    if missing:
+        print(f"warning: {m['route']} links to articles that don't exist yet: {', '.join(missing)}")
+    rs = [CONTENT[r] for r in m.get('reading', []) if r in CONTENT]
+    if not rs:
+        return ''
+    return (f'<section class="pg-sec" id="reading"><header><span class="label">{esc(title)}</span><h2>{sub}</h2></header>'
+            f'<div class="res-grid">{"".join(res_card(a) for a in rs)}</div></section>')
+
+
+def faq_html(m):
+    if not m.get('faq'):
+        return ''
+    items = ''.join(f'<details><summary>{esc(q)}</summary><p>{a}</p></details>' for q, a in m['faq'])
+    return (f'<section class="pg-sec" id="faq"><header><span class="label">FAQs</span><h2>{m.get("faq_title", "Questions clients ask us.")}</h2></header>'
+            f'<div class="pg-faq">{items}</div></section>')
+
+
+def related_html(m):
+    if not m.get('related'):
+        return ''
+    chips = ''.join(f'<a href="{path_of(r)}">{esc(name_of(r))}{ARROW_R}</a>' for r in m['related'])
+    return f'<section class="pg-sec" id="related"><header><span class="label">Keep exploring</span></header><div class="chips">{chips}</div></section>'
+
+
+def cta_html(m):
+    h2, p = m.get('cta') or ['Got a brief like this?', "Tell us where you want to grow, and we'll show you how we'd get there."]
+    return (f'<section class="pg-band"><div class="pgw pg-cta"><div><span class="label">Start a project</span><h2>{h2}</h2><p>{p}</p></div>'
+            f'<a class="cta" href="/contact">Start a project{ARROW_R}</a></div></section>')
+
+
+def slug(s):
+    return re.sub(r'[^a-z0-9]+', '-', text_of(s).lower()).strip('-')[:60]
+
+
+def article_html(m):
+    toc = []
+    def add_id(mt):
+        attrs, inner = mt.group(1), mt.group(2)
+        hid = re.search(r'id="([^"]+)"', attrs)
+        hid = hid.group(1) if hid else slug(inner)
+        toc.append((hid, text_of(inner)))
+        return f'<h2 id="{hid}">{inner}</h2>' if 'id=' not in attrs else mt.group(0)
+    body = re.sub(r'<h2([^>]*)>(.*?)</h2>', add_id, m['body'], flags=re.S)
+    if m.get('sources'):
+        body += ('<h2 id="sources">Sources</h2><ol class="sources">' +
+                 ''.join(f'<li><a href="{u}">{esc(n)}</a>, {esc(pub)}</li>' for n, u, pub in m['sources']) + '</ol>')
+        toc.append(('sources', 'Sources'))
+    nav = ''.join(f'<a href="#{i}">{esc(n)}</a>' for i, n in toc)
+    box = m.get('aside')
+    boxh = (f'<div class="box"><span class="label">{esc(box["label"])}</span><b>{esc(box["title"])}</b><p>{box["text"]}</p>'
+            f'<a class="stage-link" href="{box["href"]}">{esc(box["link"])}{ARROW_R}</a></div>') if box else ''
+    return (f'<div class="pg-article"><div class="prose">{body}</div>'
+            f'<aside class="pg-aside"><nav aria-label="In this article"><span class="label">In this article</span>{nav}</nav>{boxh}</aside></div>')
+
+
+def resources_html(m):
+    feat, rest = ARTICLES[0], ARTICLES[1:]
+    cats = []
+    for a in ARTICLES:
+        if a['category'] not in cats:
+            cats.append(a['category'])
+    filt = '<div class="res-filter" role="group" aria-label="Filter by topic"><button data-cat="all" aria-pressed="true">All</button>' + ''.join(
+        f'<button data-cat="{esc(c)}" aria-pressed="false">{esc(c)}</button>' for c in cats) + '</div>'
+    f = feat
+    feature = (f'<a class="res-feature" href="/{f["route"]}"><div class="frame"><img src="{f["card"]}" alt="{esc(f.get("card_alt", text_of(f["h1"])))}" width="960" height="600"></div>'
+               f'<div><div class="res-meta"><b>{esc(f["category"])}</b><span>{nice_date(f["date"])}</span><span>{read_minutes(f)} min read</span></div>'
+               f'<h2>{text_of(f["h1"])}</h2><p>{esc(f["summary"])}</p></div></a>')
+    press = ''.join(f'<li><a href="{u}"><span class="outlet">{esc(o)}</span><div><h3>{esc(ti)}</h3><p>{esc(note)}</p></div><time datetime="{d}">{nice_date(d)}</time></a></li>'
+                    for o, ti, u, d, note in m.get('press', []))
+    return (f'<section class="pg-sec" id="latest" style="padding-top:8px">{feature}</section>'
+            f'<section class="pg-sec" id="articles"><header><span class="label">Articles and guides</span><h2>Everything we have published.</h2></header>{filt}'
+            f'<div class="res-grid">{"".join(res_card(a) for a in rest)}</div></section>'
+            f'{m["body"]}'
+            + (f'<section class="pg-sec" id="press"><header><span class="label">In the press</span><h2>Freak in the trade press.</h2>'
+               f'<p>Interviews, features and the stories other people have written about our work.</p></header><ul class="press">{press}</ul></section>' if press else ''))
+
+
+def render(name):
+    m = CONTENT[name]
+    if m['kind'] == 'article':
+        parts = [page_head(m), hero_html(m), article_html(m), faq_html(m), reading_html(m, 'Keep reading', 'More from the Resource Centre.'), related_html(m), cta_html(m)]
+    elif m['kind'] == 'resources':
+        parts = [page_head(m), resources_html(m), faq_html(m), cta_html(m)]
+    else:
+        parts = [page_head(m), hero_html(m), m['body'], cases_html(m), reading_html(m), faq_html(m), related_html(m), cta_html(m)]
+    return wire('\n'.join(x for x in parts if x))
+
+
 def open_sheet(body, sid):
     a = f'<section class="sheet" id="sheet-{sid}"'
     i = body.index(a); j = body.index('>', i)
@@ -183,6 +449,13 @@ def open_sheet(body, sid):
 def body_for(body, name):
     b = body.replace('<div class="grid" id="tiles"></div>', '<div class="grid" id="tiles">' + ''.join(tile(w) for w in WORK) + '\n</div>')
     if not name:
+        return b
+    if name in CONTENT:
+        b = open_sheet(b, 'page')
+        b = b.replace('<article class="pg" id="pageBody"></article>', f'<article class="pg" id="pageBody" data-route="{name}">\n{render(name)}\n</article>')
+        i = b.index('id="sheet-page"'); j = b.index('</nav>', i)
+        top = name.split('/')[0]
+        b = b[:i] + b[i:j].replace(f'data-open="{top}">', f'data-open="{top}" aria-current="true">', 1) + b[j:]
         return b
     if name == 'work' or name.startswith('work-'):
         b = open_sheet(b, 'work')
@@ -234,8 +507,76 @@ def org(full=True):
     }
 
 
+def faq_node(url, faq):
+    return {'@type': 'FAQPage', '@id': url + '#faq', 'mainEntity': [
+        {'@type': 'Question', 'name': text_of(q), 'acceptedAnswer': {'@type': 'Answer', 'text': text_of(a)}} for q, a in faq]}
+
+
+def hub_faq():
+    """The questions on the Capabilities page, read from its markup."""
+    t = rd(os.path.join(S, 'template.html'))
+    box = re.search(r'<div class="pg-faq" id="capFaq">(.*?)</div>\s*</section>', t, re.S)
+    return re.findall(r'<summary>(.*?)</summary><p>(.*?)</p>', box.group(1), re.S) if box else []
+
+
+def content_graph(name, page):
+    """Structured data for a content page: the page, its breadcrumb, and what it is about."""
+    m, url = CONTENT[name], SITE + path_of(name)
+    img = share_image(name)
+    kind = {'resources': 'CollectionPage'}.get(m['kind'], 'WebPage')
+    crumb = crumbs(m)
+    pg = {'@type': kind, '@id': url + '#page', 'url': url, 'name': page['title'], 'description': page['desc'], 'inLanguage': 'en-GB',
+          'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}, 'primaryImageOfPage': img, 'breadcrumb': {'@id': url + '#crumbs'}}
+    if m.get('date'):
+        pg['datePublished'] = m['date']; pg['dateModified'] = m.get('updated', m['date'])
+    graph = [org(full=False),
+             {'@type': 'WebSite', '@id': SITE + '/#website', 'url': SITE + '/', 'name': 'Freak', 'inLanguage': 'en-GB', 'publisher': {'@id': SITE + '/#org'}},
+             pg,
+             {'@type': 'BreadcrumbList', '@id': url + '#crumbs', 'itemListElement': [
+                 {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE + u.rstrip('/') if u != '/' else SITE + '/'} for i, (n, u) in enumerate(crumb)]}]
+    vids = []
+    for k, v in enumerate(m.get('videos', [])):
+        vids.append({'@type': 'VideoObject', '@id': f'{url}#video{k + 1}', 'name': v['name'], 'description': v['desc'],
+                     'thumbnailUrl': SITE + '/' + v['poster'], 'contentUrl': SITE + '/' + v['src'], 'uploadDate': m.get('date', '2026-10-14'),
+                     'inLanguage': 'en-GB', 'publisher': {'@id': SITE + '/#org'}})
+    if m['kind'] in ('spoke', 'ai'):
+        s = m['service']
+        graph.append({'@type': 'Service', '@id': url + '#service', 'name': s['name'], 'serviceType': s.get('type', s['name']),
+                      'description': page['desc'], 'url': url, 'provider': {'@id': SITE + '/#org'}, 'areaServed': s.get('area', 'Worldwide'),
+                      'image': img, **({'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': s['name'], 'itemListElement': [
+                          {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': i}} for i in s['offers']]}} if s.get('offers') else {})})
+        pg['mainEntity'] = {'@id': url + '#service'}
+    if m['kind'] == 'article':
+        a = m['author']
+        author = ({'@type': 'Person', 'name': a['name'], 'jobTitle': a.get('role'), 'worksFor': {'@id': SITE + '/#org'}}
+                  if a.get('type', 'Person') == 'Person' else {'@id': SITE + '/#org'})
+        art = {'@type': 'Article', '@id': url + '#article', 'headline': text_of(m['h1']).rstrip('.')[:110], 'description': page['desc'], 'image': [img],
+               'datePublished': m['date'], 'dateModified': m.get('updated', m['date']), 'author': author, 'publisher': {'@id': SITE + '/#org'},
+               'mainEntityOfPage': {'@id': url + '#page'}, 'inLanguage': 'en-GB', 'articleSection': m['category'],
+               'wordCount': len(text_of(m['body']).split()), 'isPartOf': {'@id': SITE + '/resources#page'}}
+        if m.get('keywords'):
+            art['keywords'] = ', '.join(m['keywords'])
+        if m.get('sources'):
+            art['citation'] = [{'@type': 'CreativeWork', 'name': n, 'url': u, 'publisher': {'@type': 'Organization', 'name': pub}} for n, u, pub in m['sources']]
+        if vids:
+            art['video'] = [{'@id': v['@id']} for v in vids]
+        graph.append(art)
+        pg['mainEntity'] = {'@id': url + '#article'}
+    if m['kind'] == 'resources':
+        graph.append({'@type': 'ItemList', '@id': url + '#list', 'name': 'Freak Resource Centre', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i + 1, 'url': SITE + '/' + a['route'], 'name': text_of(a['h1']).rstrip('.')} for i, a in enumerate(ARTICLES)]})
+        pg['mainEntity'] = {'@id': url + '#list'}
+    graph += vids
+    if m.get('faq'):
+        graph.append(faq_node(url, m['faq']))
+    return graph
+
+
 def jsonld(name, page):
     url = SITE + path_of(name)
+    if name in CONTENT:
+        data = json.dumps({'@context': 'https://schema.org', '@graph': content_graph(name, page)}, ensure_ascii=False, separators=(',', ':'))
+        return '<script type="application/ld+json">' + data.replace('</', '<\\/') + '</script>'
     kind = {'': 'WebPage', 'work': 'CollectionPage', 'about': 'AboutPage', 'contact': 'ContactPage'}.get(name, 'WebPage')
     crumbs = [('Freak', SITE + '/')]
     if name == 'work' or name.startswith('work-'):
@@ -261,6 +602,8 @@ def jsonld(name, page):
                       'description': page['desc'], 'url': url, 'image': share_image(name), 'inLanguage': 'en-GB',
                       'creator': {'@id': SITE + '/#org'}, 'sourceOrganization': {'@id': SITE + '/#org'},
                       'about': {'@type': 'Brand', 'name': w['client']}, 'keywords': ', '.join(w.get('tags', []))})
+    if name == 'capabilities' and hub_faq():
+        graph.append(faq_node(url, hub_faq()))
     if name == 'work':
         graph.append({'@type': 'ItemList', 'name': 'Freak case studies', 'itemListElement': [
             {'@type': 'ListItem', 'position': i + 1, 'url': SITE + '/work/' + x['id'], 'name': f"{x['client']}, {x['title']}"} for i, x in enumerate(WORK)]})
@@ -285,7 +628,7 @@ def head_for(name, page, fonts_and_style, noindex=False):
         '<link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">',
         '<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">',
         '<meta property="og:site_name" content="Freak">',
-        f'<meta property="og:type" content="{"article" if name.startswith("work-") else "website"}">',
+        f'<meta property="og:type" content="{"article" if name.startswith("work-") or CONTENT.get(name, {}).get("kind") == "article" else "website"}">',
         f'<meta property="og:title" content="{t}">',
         f'<meta property="og:description" content="{dsc}">',
         f'<meta property="og:url" content="{url}">',
@@ -320,7 +663,21 @@ def build():
     for old in os.listdir(os.path.join(R, 'work')):
         if old.endswith('.html'):
             os.remove(os.path.join(R, 'work', old))
-    names = [''] + ['work'] + ['work-' + w['id'] for w in WORK] + SHEETS
+    for d in ('capabilities', 'resources', 'f', os.path.join('img', 'share', 'p')):   # rebuilt from src/content/pages every time
+        if os.path.isdir(os.path.join(R, d)):
+            shutil.rmtree(os.path.join(R, d))
+    caps = [m['route'] for m in SPOKES if m['route'].startswith('capabilities/')]
+    extra = [m['route'] for m in SPOKES if not m['route'].startswith('capabilities/')]
+    names = ([''] + ['work'] + ['work-' + w['id'] for w in WORK] + ['capabilities'] + caps + extra +
+             (['resources'] if 'resources' in CONTENT else []) + [a['route'] for a in ARTICLES] + [s for s in SHEETS if s != 'capabilities'])
+    assert set(names) >= set(CONTENT), set(CONTENT) - set(names)
+    for n in CONTENT:
+        for d in (os.path.dirname(file_of(n)), os.path.join('f', os.path.dirname(file_of(n)))):
+            os.makedirs(os.path.join(R, d), exist_ok=True)
+        open(os.path.join(R, 'f', file_of(n)), 'w', encoding='utf-8').write(render(n) + '\n')
+    os.makedirs(os.path.join(R, 'img', 'share', 'p'), exist_ok=True)
+    for n in CONTENT:
+        make_share(n)
     sizes = {}
     for n in names:
         doc = head_for(n, P[n], head) + '</head>\n<body>\n' + body_for(body, n) + '\n\n' + tail
@@ -353,6 +710,10 @@ def build():
                 os.remove(os.path.join(R, old))
         open(os.path.join(R, k + '.txt'), 'w').write(k)
     print(f'{len(names)} pages, app {len(js) // 1024} KB ({js_name}), largest page {max(sizes.values()) // 1024} KB')
+    if BROKEN:
+        print('links to pages that do not exist: ' + ', '.join(sorted(BROKEN)))
+        if '--draft' not in sys.argv:
+            sys.exit(1)
 
 
 def llms(P, names):
@@ -365,7 +726,12 @@ def llms(P, names):
     for c in caps:
         out += [f"- {c['name']}. {c['desc']}"] + [f"  - {i}" for i in c['items']]
     out += ['', '## Pages', '']
-    out += [f"- [{P[n]['title'].split(' | ')[0] if n else 'Home'}]({SITE}{path_of(n)}): {P[n]['desc']}" for n in names if not n.startswith('work-')]
+    out += [f"- [{P[n]['title'].split(' | ')[0] if n else 'Home'}]({SITE}{path_of(n)}): {P[n]['desc']}" for n in names if not n.startswith('work-') and n not in CONTENT]
+    out += ['', '## Specialisms', '']
+    out += [f"- [{name_of(m['route'])}]({SITE}/{m['route']}): {m['desc']}" for m in SPOKES]
+    if ARTICLES:
+        out += ['', '## Resource Centre', '', f"- [Resource Centre]({SITE}/resources): {CONTENT['resources']['desc']}"]
+        out += [f"- [{text_of(a['h1']).rstrip('.')}]({SITE}/{a['route']}): {a['desc']}" for a in ARTICLES]
     out += ['', '## Case studies', '']
     out += [f"- [{w['client']}, {w['title']}]({SITE}/work/{w['id']}): {P['work-' + w['id']]['desc']}" for w in WORK]
     return '\n'.join(out) + '\n'
