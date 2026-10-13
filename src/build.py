@@ -26,7 +26,7 @@ W = os.path.join(S, 'worlds')
 C = os.path.join(S, 'content')
 rd = lambda p: open(p, encoding='utf-8').read()
 
-SITE = 'https://wearefreak.com'
+SITE = 'https://www.wearefreak.com'   # the address Vercel serves; the plain domain redirects here
 DESC = ('Freak is an independent creative, data and AI agency. '
         'Head office in London, with global hubs in Barcelona and Abu Dhabi.')
 SHEETS = ['capabilities', 'contact', 'about', 'terms', 'privacy', 'cookies']

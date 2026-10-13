@@ -24,7 +24,7 @@ const F_SHAPE = {"stem":[[0.7622,2.0],[-0.8026,2.0],[-0.8026,1.9885],[-0.7565,1.
 /* ---------------- addresses ----------------
    Every page has a real address (/work, /work/hoover, /capabilities ...). Moving between them never
    reloads: the address bar changes and the app opens the page in place. Links shared before used #work-hoover. */
-const SITE_URL = 'https://wearefreak.com';
+const SITE_URL = 'https://www.wearefreak.com';
 const SHEETS = ['capabilities', 'contact', 'about', 'terms', 'privacy', 'cookies'];
 function pathOf(name) { return !name ? '/' : name.startsWith('work-') ? '/work/' + name.slice(5) : '/' + name; }
 function routeOfPath(p) {

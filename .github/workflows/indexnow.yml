@@ -24,22 +24,24 @@ jobs:
           except Exception:
               before = {}
           locs = re.findall(r'<loc>(.*?)</loc>', open('sitemap.xml').read())
+          site = locs[0].rstrip('/'); host = site.split('//')[1]
           names = list(now)
           changed = [locs[i] for i, n in enumerate(names) if i < len(locs) and before.get(n, {}).get('hash') != now[n]['hash']]
           if not changed:
               print('::notice title=IndexNow::No page content changed, nothing to submit'); raise SystemExit
-          body = json.dumps({'host': 'wearefreak.com', 'key': key, 'keyLocation': f'https://wearefreak.com/{key}.txt', 'urlList': changed}).encode()
+          body = json.dumps({'host': host, 'key': key, 'keyLocation': f'{site}/{key}.txt', 'urlList': changed}).encode()
           req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body, headers={'Content-Type': 'application/json; charset=utf-8'})
           with urllib.request.urlopen(req) as r:
-              print(f'::notice title=IndexNow::{r.status}, submitted {len(changed)} pages: ' + ' '.join(u.replace('https://wearefreak.com', '') or '/' for u in changed))
+              print(f'::notice title=IndexNow::{r.status}, submitted {len(changed)} pages: ' + ' '.join(u.replace(site, '') or '/' for u in changed))
           PY
       - name: Check the live site
         run: |
           KEY=$(python3 -c "import json;print(json.load(open('src/content/site.json'))['indexnow_key'])")
-          out=""; bad=0
+          SITE=$(python3 -c "import re;print(re.findall(r'<loc>(.*?)</loc>',open('sitemap.xml').read())[0].rstrip('/'))")
+          out="plain domain=$(curl -s -o /dev/null -w '%{http_code}>%{redirect_url}' https://wearefreak.com/)"; bad=0
           for u in / /work /work/hoover /capabilities /sitemap.xml /robots.txt /llms.txt /$KEY.txt "/cbto9su/x.php" /budweiser; do
-            c=$(curl -s -o /dev/null -w '%{http_code}' "https://wearefreak.com$u")
-            if [ "${c#3}" != "$c" ]; then c="$c>$(curl -s -o /dev/null -w '%{redirect_url}' "https://wearefreak.com$u")>$(curl -sL -o /dev/null -w '%{http_code}' "https://wearefreak.com$u")"; fi
+            c=$(curl -s -o /dev/null -w '%{http_code}' "$SITE$u")
+            if [ "${c#3}" != "$c" ]; then c="$c>$(curl -s -o /dev/null -w '%{redirect_url}' "$SITE$u")>$(curl -sL -o /dev/null -w '%{http_code}' "$SITE$u")"; fi
             out="$out $u=$c"
           done
           echo "::notice title=Live check::$out"

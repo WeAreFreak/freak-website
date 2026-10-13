@@ -19,4 +19,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://wearefreak.com/sitemap.xml
+Sitemap: https://www.wearefreak.com/sitemap.xml
