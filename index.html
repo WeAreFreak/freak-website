@@ -512,7 +512,7 @@ html.intro .moods { display: none; }
   .marquee .track { animation: none; flex-wrap: wrap; width: auto; }
   .marquee { -webkit-mask-image: none; mask-image: none; }
 }
-@media (prefers-reduced-motion: reduce) { .marquee .dup { display: none; } }
+@media (prefers-reduced-motion: reduce) { .marquee .dup { display: none !important; } }
 
 /* links that used to be buttons keep their look */
 a.brand, .nav a, .sheet-bar nav a, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { text-decoration: none; }

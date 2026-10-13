@@ -1,150 +1,150 @@
 {
  "": {
-  "hash": "107cb530602ad0ba",
+  "hash": "0aee03e0e08518ac",
   "date": "2026-10-14"
  },
  "work": {
-  "hash": "1363694473879dfe",
+  "hash": "5e9dc7ef7ab4d3b4",
   "date": "2026-10-14"
  },
  "work-hoover": {
-  "hash": "745c2f87c9bb1d85",
+  "hash": "1d5ce5dd514e539b",
   "date": "2026-10-14"
  },
  "work-rnib": {
-  "hash": "ffdda96815813e36",
+  "hash": "5704a952aa32793f",
   "date": "2026-10-14"
  },
  "work-hovis": {
-  "hash": "cab9b1d3fc203fad",
+  "hash": "784762da2fe2f91e",
   "date": "2026-10-14"
  },
  "work-va": {
-  "hash": "8cd425ecf03191b4",
+  "hash": "ab283550aff97aed",
   "date": "2026-10-14"
  },
  "work-drscholls": {
-  "hash": "43262994ee2aea67",
+  "hash": "f1506e97fdf82c02",
   "date": "2026-10-14"
  },
  "work-feliway": {
-  "hash": "fcc8f4115d81ad28",
+  "hash": "57450570a323e497",
   "date": "2026-10-14"
  },
  "work-macmillan": {
-  "hash": "6c72989d2753dc34",
+  "hash": "cf31ccdea09b8010",
   "date": "2026-10-14"
  },
  "work-evermix": {
-  "hash": "4b44835beef9831c",
+  "hash": "76cddcf4c1d787df",
   "date": "2026-10-14"
  },
  "work-astus": {
-  "hash": "2b7b9fa466f95424",
+  "hash": "a1a147d7128cc4b7",
   "date": "2026-10-14"
  },
  "work-gnetwork": {
-  "hash": "3c9ee98188dcf5af",
+  "hash": "13b09dfd5344d194",
   "date": "2026-10-14"
  },
  "work-nyb": {
-  "hash": "8d2e6c8b09ab3e98",
+  "hash": "64184153eeb4c2b7",
   "date": "2026-10-14"
  },
  "work-yutaka": {
-  "hash": "b07d08d3dc476f22",
+  "hash": "c470f4aee0d7824d",
   "date": "2026-10-14"
  },
  "capabilities": {
-  "hash": "60035dc96600d04f",
+  "hash": "eded874dd56c60b2",
   "date": "2026-10-14"
  },
  "capabilities/amazon-agency": {
-  "hash": "2019fb109ab9165b",
+  "hash": "dfd00fbfcb12bd5d",
   "date": "2026-10-14"
  },
  "capabilities/content-production": {
-  "hash": "18d2c5858f049adf",
+  "hash": "06b88ff7e1e4f6e2",
   "date": "2026-10-14"
  },
  "capabilities/live-production": {
-  "hash": "978e593fdf1529b6",
+  "hash": "f48006acb4ac5371",
   "date": "2026-10-14"
  },
  "capabilities/influencer-marketing": {
-  "hash": "b92ec427a2a929f1",
+  "hash": "a009e85c6412712c",
   "date": "2026-10-14"
  },
  "capabilities/abu-dhabi": {
-  "hash": "b0893c86abda2662",
+  "hash": "014e6b2bd1a56c8b",
   "date": "2026-10-14"
  },
  "ai": {
-  "hash": "69440a5cceb5be5f",
+  "hash": "9b91a0cd97bf2636",
   "date": "2026-10-14"
  },
  "resources": {
-  "hash": "a68a7a32d28763b3",
+  "hash": "2ac2090942630b02",
   "date": "2026-10-14"
  },
  "resources/amazon-rufus-ai-shopping-assistants": {
-  "hash": "830dcda0a4c67fa2",
+  "hash": "ad9a9deb29475993",
   "date": "2026-10-14"
  },
  "resources/hfss-advertising-rules-2026": {
-  "hash": "876e2a5f7d47f164",
+  "hash": "c484ccb46dc6c004",
   "date": "2026-10-14"
  },
  "resources/ai-brand-value-risk": {
-  "hash": "fd110e0ab3cf1500",
+  "hash": "51a1f904e6b12253",
   "date": "2026-10-14"
  },
  "resources/amazon-image-visual-engagement-framework": {
-  "hash": "b8c6c58165299aad",
+  "hash": "450bcfaee21f5ec7",
   "date": "2026-10-14"
  },
  "resources/amazon-review-moderation": {
-  "hash": "88acde3b160c5a3a",
+  "hash": "edcc31f8fe259476",
   "date": "2026-10-14"
  },
  "resources/creator-seeding-process": {
-  "hash": "c417dc23f70bd098",
+  "hash": "92e68aff4d83d8e4",
   "date": "2026-10-14"
  },
  "resources/making-mapping-glastonbury": {
-  "hash": "e5daef2fc12f2e00",
+  "hash": "7a056adf7cbac77f",
   "date": "2026-10-14"
  },
  "resources/amazon-a-plus-content-guide": {
-  "hash": "f8d3771ca1f390c8",
+  "hash": "c9f8e22dd27cb4ef",
   "date": "2026-10-14"
  },
  "resources/ecommerce-product-shoot-planning": {
-  "hash": "a075f4b1d7084345",
+  "hash": "5d11a029cadb6cf7",
   "date": "2026-10-14"
  },
  "resources/ugc-for-amazon-and-social": {
-  "hash": "61d30016ca1098d6",
+  "hash": "cd2b778406b7989b",
   "date": "2026-10-14"
  },
  "contact": {
-  "hash": "750e9a63f792f3dd",
+  "hash": "bf5ad2c1c904beba",
   "date": "2026-10-14"
  },
  "about": {
-  "hash": "e0fd911296708b6d",
+  "hash": "6cfaef5939dff7d3",
   "date": "2026-10-14"
  },
  "terms": {
-  "hash": "b456679a219f6135",
+  "hash": "d47bbfd036b1cdc0",
   "date": "2026-10-14"
  },
  "privacy": {
-  "hash": "7193e012340c72bb",
+  "hash": "76f2e5ed59db9da3",
   "date": "2026-10-14"
  },
  "cookies": {
-  "hash": "788f9eb6f321d9a1",
+  "hash": "475c1c5ee3000364",
   "date": "2026-10-14"
  }
 }
