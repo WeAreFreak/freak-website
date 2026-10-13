@@ -27,9 +27,19 @@ jobs:
           names = list(now)
           changed = [locs[i] for i, n in enumerate(names) if i < len(locs) and before.get(n, {}).get('hash') != now[n]['hash']]
           if not changed:
-              print('No page content changed, nothing to submit'); raise SystemExit
+              print('::notice title=IndexNow::No page content changed, nothing to submit'); raise SystemExit
           body = json.dumps({'host': 'wearefreak.com', 'key': key, 'keyLocation': f'https://wearefreak.com/{key}.txt', 'urlList': changed}).encode()
           req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body, headers={'Content-Type': 'application/json; charset=utf-8'})
           with urllib.request.urlopen(req) as r:
-              print(r.status, 'submitted', len(changed), 'pages'); print('\n'.join(changed))
+              print(f'::notice title=IndexNow::{r.status}, submitted {len(changed)} pages: ' + ' '.join(u.replace('https://wearefreak.com', '') or '/' for u in changed))
           PY
+      - name: Check the live site
+        run: |
+          KEY=$(python3 -c "import json;print(json.load(open('src/content/site.json'))['indexnow_key'])")
+          out=""; bad=0
+          for u in / /work /work/hoover /capabilities /sitemap.xml /robots.txt /llms.txt /$KEY.txt "/cbto9su/x.php" /budweiser; do
+            c=$(curl -s -o /dev/null -w '%{http_code}' "https://wearefreak.com$u"); out="$out $u=$c"
+          done
+          echo "::notice title=Live check::$out"
+          case "$out" in *" /="200*) ;; *) bad=1 ;; esac
+          exit $bad
