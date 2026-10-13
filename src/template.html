@@ -77,6 +77,13 @@ html.revealing .card { transition-duration: .9s; transition-delay: .45s; }
 html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-events: none; }
 .top::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: calc(100% + 56px); z-index: -1; pointer-events: none;
   background: linear-gradient(rgba(28, 16, 10, .5), rgba(28, 16, 10, .22) 55%, rgba(28, 16, 10, 0)); }
+/* The one fixed line, beside the wordmark behind a thin rule (under it on phones) */
+.brand-wrap { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.tagline { margin: 0; padding: 3px 0 3px 18px; border-left: 1px solid rgba(247, 245, 241, .45);
+  font-family: var(--body); font-weight: 500; font-size: 11.5px; line-height: 1.3; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--on-glass); text-shadow: 0 1px 12px rgba(0,0,0,.35); white-space: nowrap; }
+.top .tagline { transition: opacity .9s var(--ease) .35s, transform .9s var(--ease) .35s; }
+html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .brand { display: block; width: clamp(92px, 9vw, 124px); background: none; border: 0; padding: 0; }
 .brand img { display: block; width: 100%; height: auto; filter: invert(1); }
 .nav { display: flex; gap: clamp(14px, 2.4vw, 32px); }
@@ -92,11 +99,11 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 .card {
   position: fixed; z-index: 4;
   left: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px));
-  width: min(400px, calc(100% - 32px));
+  width: min(380px, calc(100% - 32px));
   background: var(--glass); color: var(--on-glass);
   -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
   border: 1px solid var(--glass-line); border-radius: 18px;
-  padding: 22px 22px 16px; display: grid; gap: 14px;
+  padding: 26px 24px 16px; display: grid; gap: 14px;
   transition: opacity .35s var(--ease), transform .35s var(--ease);
 }
 .card.moving { opacity: .7; transform: translateY(4px); }
@@ -105,7 +112,7 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 .card h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 4.4vw, 52px); line-height: 1; letter-spacing: -.01em; }
 .card-swap { display: grid; gap: 16px; }
 /* The stop's line: every line sits in the same grid cell so the card never jumps; the current one fades up */
-.card-line { display: grid; margin: -6px 0 0; font-size: 15px; line-height: 1.45; color: var(--on-glass); max-width: 34ch; }
+.card-line { display: grid; margin: -6px 0 0; font-size: 15px; line-height: 1.45; color: var(--on-glass); }
 .card-line span { grid-area: 1 / 1; text-wrap: pretty; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .45s var(--ease); }
 .card-line span.on { opacity: .86; transform: none; transition-delay: .12s; }
 /* Card changes: title letters rise into place one after another; the old title lifts away first */
@@ -261,10 +268,13 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
   .proof { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .sheet-bar nav a[data-open] { display: none; }
   .card { left: 16px; right: 16px; width: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); padding: 18px 18px 14px; }
-  .card .card-eyebrow { font-size: 11px; letter-spacing: .07em; }
   .nav a { font-size: 14px; }
   .nav { gap: 12px; }
   .top .brand { width: 84px; }
+  .top { align-items: flex-start; }
+  .top .nav { padding-top: 4px; }
+  .brand-wrap { flex-direction: column; align-items: flex-start; gap: 9px; }
+  .tagline { border-left: 0; padding: 0; font-size: 10px; letter-spacing: .1em; white-space: normal; max-width: 16ch; }
   .hint { display: none; }
   .cs-nav { grid-template-columns: 1fr 1fr; }
   .cs-nav .back { grid-column: 1 / -1; grid-row: 1; }
@@ -490,7 +500,6 @@ a.link-btn { color: var(--paper); }
 .foot .policies span { opacity: .5; }
 
 /* 'what we do', on the card */
-.card-eyebrow { margin: 0 0 14px; font-family: var(--body); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--on-glass-quiet); }
 
 /* case study story: label on the left, words on the right */
 .mod-story, .mod-results { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 40px); align-items: start; }
@@ -519,7 +528,10 @@ a.cta svg { width: 16px; height: 16px; }
 <div class="loading-note" id="loadingNote">Entering Freak, Welcome</div>
 
 <header class="top">
-  <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+  <div class="brand-wrap">
+    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+    <h1 class="tagline">Independent creative, data and AI agency</h1>
+  </div>
   <nav class="nav" aria-label="Main">
     <a href="/work" data-open="work">Work</a>
     <a href="/capabilities" data-open="capabilities">Capabilities</a>
@@ -529,7 +541,6 @@ a.cta svg { width: 16px; height: 16px; }
 </header>
 
 <section class="card" id="card" aria-live="polite">
-  <h1 class="card-eyebrow">Independent creative, data and AI agency</h1>
   <div class="card-swap" id="cardSwap">
     <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 4</span></div>
     <!-- One line per card stop, matched by data-stop. When the AI stop is added, its line is
