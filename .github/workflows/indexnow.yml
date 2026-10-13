@@ -44,6 +44,7 @@ jobs:
             if [ "${c#3}" != "$c" ]; then c="$c>$(curl -s -o /dev/null -w '%{redirect_url}' "$SITE$u")>$(curl -sL -o /dev/null -w '%{http_code}' "$SITE$u")"; fi
             out="$out $u=$c"
           done
+          out="$out verification tags=$(curl -s "$SITE/" | grep -o -E 'name="(google-site-verification|msvalidate.01)"' | tr '\n' ' ')"
           echo "::notice title=Live check::$out"
           case "$out" in *" /="200*|*" /="30*">200"*) ;; *) bad=1 ;; esac
           exit $bad
