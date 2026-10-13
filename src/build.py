@@ -10,10 +10,15 @@ share image and readable content straight away. The app code lives in one shared
 Writes, next to img/, vid/, w/ and vendor/:
   index.html, work.html, work/<case>.html, capabilities.html, contact.html, about.html,
   terms.html, privacy.html, cookies.html, 404.html, assets/app.<hash>.js,
-  sitemap.xml, robots.txt
+  sitemap.xml, robots.txt, llms.txt, the IndexNow key file
+Every page also carries structured data (schema.org JSON-LD) describing Freak, its offices, its
+services and, on case studies, the work. All of it is generated from src/content, so a new case
+study or capability appears everywhere it should on the next build.
+Settings that aren't content (verification codes, the IndexNow key, profile links) live in
+src/content/site.json. src/content/lastmod.json records when each page last changed, for the sitemap.
 Nothing under src/ is published (see .vercelignore).
 """
-import hashlib, html, json, os, re, shutil
+import datetime, hashlib, html, json, os, re, shutil
 
 S = os.path.dirname(os.path.abspath(__file__))
 R = os.path.dirname(S)
@@ -27,6 +32,11 @@ DESC = ('Freak is an independent creative, data and AI agency. '
 SHEETS = ['capabilities', 'contact', 'about', 'terms', 'privacy', 'cookies']
 LEGAL = [('terms', 'Terms of use'), ('privacy', 'Privacy policy'), ('cookies', 'Cookie policy')]
 WORK = json.load(open(os.path.join(C, 'work.json'), encoding='utf-8'))
+SET = json.load(open(os.path.join(C, 'site.json'), encoding='utf-8'))   # verification codes, IndexNow key, profiles
+TODAY = datetime.date.today().isoformat()
+# Crawlers named in robots.txt so it's explicit that search and AI tools may read the site
+CRAWLERS = ['Googlebot', 'Bingbot', 'GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
+            'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot', 'Applebot-Extended', 'DuckAssistBot', 'CCBot']
 
 esc = lambda s: str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
 ARROW_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>'
@@ -185,6 +195,79 @@ def body_for(body, name):
     return open_sheet(b, name)
 
 
+# ---------- structured data ----------
+def services():
+    """The capability pillars and their services, read from the Capabilities page itself."""
+    t = rd(os.path.join(S, 'template.html'))
+    out = []
+    for m in re.finditer(r'<li class="pillar"[^>]*>.*?<h2>(.*?)</h2><p>(.*?)</p>\s*<ul>(.*?)</ul>', t, re.S):
+        items = [html.unescape(re.sub(r'<[^>]+>', '', i)).strip() for i in re.findall(r'<li>(.*?)</li>', m.group(3), re.S)]
+        out.append({'name': html.unescape(m.group(1)), 'desc': html.unescape(m.group(2)), 'items': items})
+    return out
+
+
+ADDRESS = {'@type': 'PostalAddress', 'streetAddress': '22 Ash Avenue', 'addressLocality': 'London', 'postalCode': 'SE17 1HS', 'addressCountry': 'GB'}
+
+
+def org(full=True):
+    if not full:   # the other pages point at the full description by @id, which keeps them small
+        return {'@type': ['Organization', 'ProfessionalService'], '@id': SITE + '/#org', 'name': 'Freak', 'legalName': 'WeAreFreak Ltd',
+                'url': SITE + '/', 'logo': SITE + '/img/icons/icon-512.png', 'description': DESC, 'address': ADDRESS,
+                **({'sameAs': SET['same_as']} if SET.get('same_as') else {})}
+    caps = services()
+    return {
+        '@type': ['Organization', 'ProfessionalService'], '@id': SITE + '/#org',
+        'name': 'Freak', 'alternateName': ['WeAreFreak', 'We Are Freak'], 'legalName': 'WeAreFreak Ltd',
+        'url': SITE + '/', 'logo': SITE + '/img/icons/icon-512.png', 'image': SITE + '/img/share/freak.jpg',
+        'description': DESC, 'slogan': 'Independent creative, data and AI agency', 'email': 'studio@wearefreak.com',
+        'identifier': {'@type': 'PropertyValue', 'propertyID': 'UK Companies House number', 'value': '09308352'},
+        'address': ADDRESS,
+        'location': [{'@type': 'Place', 'name': f'Freak {c}', 'address': {'@type': 'PostalAddress', 'addressLocality': c, 'addressCountry': cc}}
+                     for c, cc in (('London', 'GB'), ('Barcelona', 'ES'), ('Abu Dhabi', 'AE'))],
+        'areaServed': 'Worldwide',
+        'knowsAbout': [c['name'] for c in caps] + [i for c in caps for i in c['items']],
+        'hasOfferCatalog': {'@type': 'OfferCatalog', 'name': 'Capabilities', 'itemListElement': [
+            {'@type': 'OfferCatalog', 'name': c['name'], 'description': c['desc'], 'itemListElement': [
+                {'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': i, 'provider': {'@id': SITE + '/#org'}}} for i in c['items']]}
+            for c in caps]},
+        **({'sameAs': SET['same_as']} if SET.get('same_as') else {}),
+    }
+
+
+def jsonld(name, page):
+    url = SITE + path_of(name)
+    kind = {'': 'WebPage', 'work': 'CollectionPage', 'about': 'AboutPage', 'contact': 'ContactPage'}.get(name, 'WebPage')
+    crumbs = [('Freak', SITE + '/')]
+    if name == 'work' or name.startswith('work-'):
+        crumbs.append(('Work', SITE + '/work'))
+    elif name:
+        crumbs.append((page['title'].split(' | ')[0], url))
+    w = next((x for x in WORK if 'work-' + x['id'] == name), None)
+    if w:
+        crumbs.append((w['client'], url))
+    graph = [
+        org(full=name in ('', 'capabilities', 'about', 'contact')),
+        {'@type': 'WebSite', '@id': SITE + '/#website', 'url': SITE + '/', 'name': 'Freak', 'inLanguage': 'en-GB', 'publisher': {'@id': SITE + '/#org'}},
+        {'@type': kind, '@id': url + '#page', 'url': url, 'name': page['title'], 'description': page['desc'], 'inLanguage': 'en-GB',
+         'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}, 'primaryImageOfPage': share_image(name),
+         **({'breadcrumb': {'@id': url + '#crumbs'}} if len(crumbs) > 1 else {}),
+         **({'mainEntity': {'@id': url + '#work'}} if w else {})},
+    ]
+    if len(crumbs) > 1:
+        graph.append({'@type': 'BreadcrumbList', '@id': url + '#crumbs', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u} for i, (n, u) in enumerate(crumbs)]})
+    if w:
+        graph.append({'@type': 'CreativeWork', '@id': url + '#work', 'name': w['title'], 'headline': f"{w['title']}, {w['client']}",
+                      'description': page['desc'], 'url': url, 'image': share_image(name), 'inLanguage': 'en-GB',
+                      'creator': {'@id': SITE + '/#org'}, 'sourceOrganization': {'@id': SITE + '/#org'},
+                      'about': {'@type': 'Brand', 'name': w['client']}, 'keywords': ', '.join(w.get('tags', []))})
+    if name == 'work':
+        graph.append({'@type': 'ItemList', 'name': 'Freak case studies', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i + 1, 'url': SITE + '/work/' + x['id'], 'name': f"{x['client']}, {x['title']}"} for i, x in enumerate(WORK)]})
+    data = json.dumps({'@context': 'https://schema.org', '@graph': graph}, ensure_ascii=False, separators=(',', ':'))
+    return '<script type="application/ld+json">' + data.replace('</', '<\\/') + '</script>'
+
+
 def head_for(name, page, fonts_and_style, noindex=False):
     url = SITE + path_of(name)
     img = share_image(name)
@@ -211,6 +294,13 @@ def head_for(name, page, fonts_and_style, noindex=False):
         '<meta property="og:locale" content="en_GB">',
         '<meta name="twitter:card" content="summary_large_image">',
     ]
+    if not name and not noindex:   # site ownership checks for Google Search Console and Bing Webmaster Tools
+        if SET.get('google_site_verification'):
+            lines.append(f'<meta name="google-site-verification" content="{esc(SET["google_site_verification"])}">')
+        if SET.get('bing_site_verification'):
+            lines.append(f'<meta name="msvalidate.01" content="{esc(SET["bing_site_verification"])}">')
+    if not noindex:
+        lines.append(jsonld(name, page))
     return '\n'.join(lines) + '\n' + fonts_and_style
 
 
@@ -239,11 +329,46 @@ def build():
     # unknown addresses land on the home page (the app tidies the address), and are never indexed
     open(os.path.join(R, '404.html'), 'w', encoding='utf-8').write(
         head_for('', P[''], head, noindex=True) + '</head>\n<body>\n' + body_for(body, '') + '\n\n' + tail)
-    urls = ''.join(f'  <url><loc>{SITE}{path_of(n)}</loc></url>\n' for n in names)
+    # the sitemap's last-changed date moves only when a page's own content changes, not on every build
+    lm_path = os.path.join(C, 'lastmod.json')
+    lm = json.load(open(lm_path)) if os.path.exists(lm_path) else {}
+    for n in names:
+        page_text = re.sub(r'app\.[0-9a-f]{10}\.js', 'app.js', open(os.path.join(R, file_of(n)), encoding='utf-8').read())
+        h = hashlib.sha256(page_text.encode()).hexdigest()[:16]
+        if lm.get(n, {}).get('hash') != h:
+            lm[n] = {'hash': h, 'date': TODAY}
+    open(lm_path, 'w').write(json.dumps({n: lm[n] for n in names}, indent=1) + '\n')
+    urls = ''.join(f'  <url><loc>{SITE}{path_of(n)}</loc><lastmod>{lm[n]["date"]}</lastmod></url>\n' for n in names)
     open(os.path.join(R, 'sitemap.xml'), 'w').write(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
-    open(os.path.join(R, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
+    bots = ''.join(f'User-agent: {b}\n' for b in CRAWLERS)
+    open(os.path.join(R, 'robots.txt'), 'w').write(
+        '# Search engines and AI assistants are welcome to read and cite this site.\n'
+        f'{bots}Allow: /\n\nUser-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
+    open(os.path.join(R, 'llms.txt'), 'w', encoding='utf-8').write(llms(P, names))
+    if SET.get('indexnow_key'):   # proves to Bing and other IndexNow engines that pings for this site are ours
+        k = SET['indexnow_key']
+        for old in os.listdir(R):
+            if re.fullmatch(r'[0-9a-f]{32}\.txt', old) and old != k + '.txt':
+                os.remove(os.path.join(R, old))
+        open(os.path.join(R, k + '.txt'), 'w').write(k)
     print(f'{len(names)} pages, app {len(js) // 1024} KB ({js_name}), largest page {max(sizes.values()) // 1024} KB')
+
+
+def llms(P, names):
+    """A plain summary of Freak for AI assistants, with a link to every page (llmstxt.org)."""
+    caps = services()
+    out = ['# Freak', '', f'> {DESC}', '',
+           'Freak (WeAreFreak Ltd, company 09308352) is an independent creative, data and AI agency. '
+           'Head office at 22 Ash Avenue, London SE17 1HS, with hubs in Barcelona and Abu Dhabi, working for clients in over 100 countries. '
+           'Contact studio@wearefreak.com.', '', '## Capabilities', '']
+    for c in caps:
+        out += [f"- {c['name']}. {c['desc']}"] + [f"  - {i}" for i in c['items']]
+    out += ['', '## Pages', '']
+    out += [f"- [{P[n]['title'].split(' | ')[0] if n else 'Home'}]({SITE}{path_of(n)}): {P[n]['desc']}" for n in names if not n.startswith('work-')]
+    out += ['', '## Case studies', '']
+    out += [f"- [{w['client']}, {w['title']}]({SITE}/work/{w['id']}): {P['work-' + w['id']]['desc']}" for w in WORK]
+    return '\n'.join(out) + '\n'
 
 
 if __name__ == '__main__':

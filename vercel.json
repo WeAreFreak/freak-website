@@ -2,8 +2,79 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
-    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/vendor/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/(img|vid|w)/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }] }
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/vendor/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(img|vid|w)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/all-projects",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/freakmusiccreds",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/budweiser/:path*",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/climate-coalition/:path*",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/climate-coalition-the-mountains-are-calling/:path*",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/alba-adventure",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/bright-lights-big-city",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/careers/:path*",
+      "destination": "/about",
+      "permanent": true
+    }
   ]
 }

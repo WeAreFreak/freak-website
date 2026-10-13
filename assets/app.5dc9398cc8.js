@@ -465,7 +465,8 @@ function showStop(i, instant, live) {
   const titleEl = document.getElementById('cardTitle');
   const fill = () => {
     document.getElementById('cardCount').textContent = (stopIndex + 1) + ' / ' + STOPS.length;
-    setTitle(titleEl, s.title);
+    if (titleEl.dataset.title !== s.title) setTitle(titleEl, s.title);   // releasing on the card already shown must not replay the letters
+    else titleEl.classList.remove('out');
     document.getElementById('cardCta').textContent = s.cta;
     lineEls.forEach(l => { const on = l.dataset.stop === s.id; l.classList.toggle('on', on); l.toggleAttribute('aria-hidden', !on); });
     card.classList.remove('swapping');
