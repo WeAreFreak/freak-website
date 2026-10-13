@@ -22,7 +22,7 @@ C = os.path.join(S, 'content')
 rd = lambda p: open(p, encoding='utf-8').read()
 
 SITE = 'https://wearefreak.com'
-DESC = ('Freak is an independent, full-service creative and data agency. '
+DESC = ('Freak is an independent creative, data and AI agency. '
         'Head office in London, with global hubs in Barcelona and Abu Dhabi.')
 SHEETS = ['capabilities', 'contact', 'about', 'terms', 'privacy', 'cookies']
 LEGAL = [('terms', 'Terms of use'), ('privacy', 'Privacy policy'), ('cookies', 'Cookie policy')]
@@ -48,7 +48,7 @@ def summary(text, limit=158):
 
 def pages():
     p = {
-        '': {'title': 'Freak | Independent creative and data agency', 'desc': DESC},
+        '': {'title': 'Freak | Independent creative, data and AI agency', 'desc': DESC},
         'work': {'title': 'Work | Freak', 'desc': 'Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech, from Freak.'},
         'capabilities': {'title': 'Capabilities | Freak', 'desc': 'Creative and data under one roof. Strategy, brand, content, e-commerce, social and interactive work from Freak in London, Barcelona and Abu Dhabi.'},
         'about': {'title': 'About | Freak', 'desc': 'A multidisciplinary agency for bold brands with stories worth telling. Meet Freak, with a head office in London and hubs in Barcelona and Abu Dhabi.'},

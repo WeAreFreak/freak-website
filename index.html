@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <base href="/">
-<title>Freak | Independent creative and data agency</title>
-<meta name="description" content="Freak is an independent, full-service creative and data agency. Head office in London, with global hubs in Barcelona and Abu Dhabi.">
+<title>Freak | Independent creative, data and AI agency</title>
+<meta name="description" content="Freak is an independent creative, data and AI agency. Head office in London, with global hubs in Barcelona and Abu Dhabi.">
 <link rel="canonical" href="https://wearefreak.com/">
 <meta name="theme-color" content="#232323">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -13,8 +13,8 @@
 <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
 <meta property="og:site_name" content="Freak">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Freak | Independent creative and data agency">
-<meta property="og:description" content="Freak is an independent, full-service creative and data agency. Head office in London, with global hubs in Barcelona and Abu Dhabi.">
+<meta property="og:title" content="Freak | Independent creative, data and AI agency">
+<meta property="og:description" content="Freak is an independent creative, data and AI agency. Head office in London, with global hubs in Barcelona and Abu Dhabi.">
 <meta property="og:url" content="https://wearefreak.com/">
 <meta property="og:image" content="https://wearefreak.com/img/share/freak.jpg">
 <meta property="og:image:width" content="1200">
@@ -126,6 +126,10 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
 .card-count { font-size: 12px; letter-spacing: .14em; color: var(--on-glass-quiet); font-variant-numeric: tabular-nums; }
 .card h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 4.4vw, 52px); line-height: 1; letter-spacing: -.01em; }
 .card-swap { display: grid; gap: 16px; }
+/* The stop's line: every line sits in the same grid cell so the card never jumps; the current one fades up */
+.card-line { display: grid; margin: -6px 0 0; font-size: 15px; line-height: 1.45; color: var(--on-glass); max-width: 34ch; }
+.card-line span { grid-area: 1 / 1; text-wrap: pretty; opacity: 0; transform: translateY(6px); transition: opacity .3s var(--ease), transform .45s var(--ease); }
+.card-line span.on { opacity: .86; transform: none; transition-delay: .12s; }
 /* Card changes: title letters rise into place one after another; the old title lifts away first */
 .card h2 { display: flex; flex-wrap: wrap; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
 .card h2 .ltr { display: inline-block; white-space: pre; animation: ltrIn .7s var(--ease) both; animation-delay: calc(var(--i) * 28ms); }
@@ -279,6 +283,7 @@ html.diving .card { opacity: 0; transform: translateY(18px) scale(.98); pointer-
   .proof { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .sheet-bar nav a[data-open] { display: none; }
   .card { left: 16px; right: 16px; width: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); padding: 18px 18px 14px; }
+  .card .card-eyebrow { font-size: 11px; letter-spacing: .07em; }
   .nav a { font-size: 14px; }
   .nav { gap: 12px; }
   .top .brand { width: 84px; }
@@ -497,7 +502,8 @@ html.intro .moods { display: none; }
 @media (prefers-reduced-motion: reduce) { .marquee .dup { display: none; } }
 
 /* links that used to be buttons keep their look */
-a.brand, .nav a, .sheet-bar nav a, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { color: inherit; text-decoration: none; }
+a.brand, .nav a, .sheet-bar nav a, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { text-decoration: none; }
+a.brand, a.tile, .cs-nav a, a.cs-next, a.link-btn, a.stage-link, .foot a, a.cta { color: inherit; }
 .sheet-bar nav a { color: var(--ink); }
 a.link-btn { color: var(--paper); }
 .foot a { border-bottom: 1px solid rgba(236, 234, 229, .35); transition: border-color .2s; }
@@ -507,7 +513,6 @@ a.link-btn { color: var(--paper); }
 
 /* 'what we do', on the card */
 .card-eyebrow { margin: 0 0 14px; font-family: var(--body); font-weight: 500; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--on-glass-quiet); }
-.card-eyebrow b { color: var(--lime); font-weight: 500; }
 
 /* case study story: label on the left, words on the right */
 .mod-story, .mod-results { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr); gap: 12px clamp(18px, 3vw, 40px); align-items: start; }
@@ -547,9 +552,17 @@ a.cta svg { width: 16px; height: 16px; }
 </header>
 
 <section class="card" id="card" aria-live="polite">
-  <h1 class="card-eyebrow">Independent creative <b>and</b> data agency</h1>
+  <h1 class="card-eyebrow">Independent creative, data and AI agency</h1>
   <div class="card-swap" id="cardSwap">
     <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 4</span></div>
+    <!-- One line per card stop, matched by data-stop. When the AI stop is added, its line is
+         "AI tools we build in house for copy, content and reviews" -->
+    <p class="card-line" id="cardLine">
+      <span data-stop="work" class="on">Campaigns, content and commerce for global brands</span>
+      <span data-stop="capabilities" aria-hidden="true">Brand, film, content, commerce and data</span>
+      <span data-stop="contact" aria-hidden="true">Start a project with our teams in London, Barcelona or Abu Dhabi</span>
+      <span data-stop="about" aria-hidden="true">An independent team working in over 100&nbsp;countries</span>
+    </p>
     <button class="open-btn magnet" id="cardOpen"><span class="cta-label" id="cardCta">See the work</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
   </div>
   <div class="card-foot">
@@ -889,6 +902,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.1d25b8a8a0.js"></script>
+<script type="module" src="/assets/app.dd6457fab2.js"></script>
 </body>
 </html>
