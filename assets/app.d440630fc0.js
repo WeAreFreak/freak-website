@@ -571,6 +571,30 @@ function endDrag() {
 }
 canvas.addEventListener('pointerup', endDrag);
 canvas.addEventListener('pointercancel', endDrag);
+// Desktop: the scroll wheel or a two finger swipe turns the world like a drag, then settles on a card.
+// One notch moves at least one card, a longer scroll keeps turning, and the release lands on the nearest card.
+let wheeling = false, wheelGoal = 0, wheelTimer = 0;
+addEventListener('wheel', e => {
+  if (openSheet || !gl || dragging || e.ctrlKey) return;   // sheets scroll themselves, and ctrl + wheel is the browser's zoom
+  if (e.target.closest && e.target.closest('.moods')) return;
+  e.preventDefault();
+  if (introP < 1) { introSpeed = 4; return; }
+  const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  const px = d * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? innerHeight : 1);
+  if (!wheeling) { wheeling = true; wheelGoal = angle; startAngle = angle; startStop = stopIndex; dragTouch = false; card.classList.add('moving'); }
+  wheelGoal -= Math.max(-160, Math.min(160, px)) * 0.1;      // scroll down, next card
+  wheelGoal = Math.max(MIN - 8, Math.min(MAX + 8, wheelGoal)); // a little give at the ends
+  const live = landing(wheelGoal, 0);
+  if (live !== stopIndex) showStop(live, false, true);
+  target = wheelGoal;                                        // the world eases towards the wheel, not the card, until it settles
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => {
+    wheeling = false; card.classList.remove('moving');
+    const best = landing(wheelGoal, 0), shown = stopIndex;
+    showStop(best);
+    if (best === shown && best !== startStop) glint(best > startStop ? -1 : 1);
+  }, 180);
+}, { passive: false });
 addEventListener('keydown', e => {
   if (openSheet) { if (e.key === 'Escape') closeAll(); return; }
   if (e.key === 'ArrowLeft') showStop(stopIndex - 1);
@@ -582,7 +606,7 @@ let openSheet = null, lastFocus = null;
 const tiles = document.getElementById('tiles');
 tiles.innerHTML = WORK.map(w => `
   <a class="tile" href="/work/${w.id}" data-case="${w.id}" data-cursor="View" data-preview="${w.preview || `vid/${w.id}-preview.mp4`}">
-    <div class="tile-img"><img src="${w.img}" alt="${esc(w.client)}: ${esc(w.title)}" loading="lazy" width="960" height="503"></div>
+    <div class="tile-img"><img src="${w.img}" alt="${esc(w.client)}, ${esc(w.title)}" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>${esc(w.client)}</strong><span>${esc(w.title)}</span></div>
   </a>`).join('');
 tiles.addEventListener('click', e => { const b = e.target.closest('[data-case]'); if (b && plainClick(e)) { e.preventDefault(); go('work-' + b.dataset.case); } });
@@ -599,7 +623,7 @@ function renderCase(id) {
   const fx = w.fx !== false, rv = fx ? ' rv' : '', up = fx ? ' up' : '';   // page effects on every case study (set fx: false to opt one out)
   const delay = ms => fx ? ` style="transition-delay:${ms}ms"` : '';
   const mods = [];
-  mods.push(`<div class="cs-hero${rv}"><img src="${w.img}" alt="${esc(w.client)}: ${esc(w.title)}" width="960" height="503"></div>`);
+  mods.push(`<div class="cs-hero${rv}"><img src="${w.img}" alt="${esc(w.client)}, ${esc(w.title)}" width="960" height="503"></div>`);
   mods.push(`<header class="cs-head${up}"${delay(150)}><span class="client">${esc(w.client)}</span><h1 id="csTitle">${esc(w.title)}</h1><div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div></header>`);
   if (w.video) mods.push(`<section class="mod mod-video${w.video.portrait ? ' portrait' : ''}${rv}"><video src="${w.video.src}" poster="${w.video.poster}" controls playsinline preload="none" aria-label="${esc(w.client)} film"></video></section>`);
   // challenge, idea, results, quote, gallery, next step: the same order on every case study
