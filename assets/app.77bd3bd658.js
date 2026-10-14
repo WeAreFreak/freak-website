@@ -380,6 +380,23 @@ function loadTexture(url) {
   }, undefined, rej));
 }
 
+/* Desktop: once the intro has landed, the desert sky swaps to its 8k version, so clouds stay sharp on large and
+   retina screens. Everyone sees the 4k sky first, and phones keep it. */
+let sharpened = false;
+function sharpenSky() {
+  if (sharpened || !skybox || !renderer) return;
+  sharpened = true;
+  const desk = matchMedia('(min-width: 900px) and (pointer: fine)').matches;
+  const room = renderer.capabilities.maxTextureSize >= 8192 && (navigator.deviceMemory || 8) >= 4;
+  if (!desk || !room) return;
+  loadTexture('img/pano-8k.webp').then(t => {
+    const old = skybox.material.uniforms.map.value;
+    skybox.material.uniforms.map.value = t;
+    if (old && old !== t) old.dispose();   // the reflections were made from it already
+    document.documentElement.dataset.sky = '8k';
+  }).catch(() => {});
+}
+
 async function initWorld() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 400);
@@ -387,7 +404,7 @@ async function initWorld() {
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   fit();
-  try { panoTex = await loadTexture('img/pano.jpg'); }   // Ken's render with the F's shadow baked in
+  try { panoTex = await loadTexture('img/pano.webp'); }   // Ken's render with the F's shadow baked in, sky cleaned (Oct 2026, original in backup/)
   catch (e) { note.textContent = 'The desert image did not load. Refresh to try again.'; revealUI(); return; }
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromEquirectangular(panoTex).texture;
@@ -408,7 +425,7 @@ async function initWorld() {
   renderer.render(scene, camera);
   requestAnimationFrame(() => { still.classList.add('gone'); if (introP >= 1) note.classList.add('gone'); });
   desertUp();
-  if (introP >= 1) setTimeout(prefetchWorlds, 2500);
+  if (introP >= 1) { setTimeout(prefetchWorlds, 2500); setTimeout(sharpenSky, 1500); }
   loop();
 }
 
@@ -421,7 +438,7 @@ function loop() {
     introP = Math.min(1, introP + dt * introSpeed / INTRO.dur);
     if (introP > 0.62 && performance.now() > 1800) note.classList.add('gone');   // the welcome holds over the opening of the shot
     if (introP > 0.62) revealUI();
-    if (introP >= 1) { glint(1); setTimeout(prefetchWorlds, 1200); }   // the intro has landed: fetch the other worlds quietly
+    if (introP >= 1) { glint(1); setTimeout(prefetchWorlds, 1200); setTimeout(sharpenSky, 600); }   // the intro has landed: fetch the other worlds quietly
   }
   if (!dragging) {
     const k = reduced ? 1 : 1 - Math.exp(-dt * 4.5);
