@@ -69,6 +69,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .top .nav a:nth-child(3) { transition-delay: 0s, .16s, .16s; }
 .top .nav a:nth-child(4) { transition-delay: 0s, .24s, .24s; }
 .top .nav a:nth-child(5) { transition-delay: 0s, .32s, .32s; }
+.top .nav a:nth-child(6) { transition-delay: 0s, .40s, .40s; }
 html.intro .top .brand img { clip-path: inset(0 100% 0 0); }
 html.intro .top .nav a { opacity: 0; transform: translateY(-8px); }
 html.intro .top::before { opacity: 0; }
@@ -148,6 +149,34 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--on-glass-quiet); opacity: .4; transition: opacity .3s, transform .3s; }
 .dots span.on { opacity: 1; transform: scale(1.3); background: var(--lime); }
 .hint { font-size: 12px; color: var(--on-glass-quiet); }
+
+/* ---------- latest from the Resource Centre (desktop only, above the card) ---------- */
+.latest {
+  position: fixed; z-index: 4; display: none;
+  left: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px) + var(--card-h, 272px) + 12px);
+  width: min(316px, calc(100% - 32px));
+  background: var(--glass); color: var(--on-glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid var(--glass-line); border-radius: 18px;
+  padding: 16px 24px 12px; gap: 10px;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.latest a { color: inherit; text-decoration: none; }
+.latest-item { display: grid; gap: 8px; }
+.latest-kicker { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-glass-quiet); }
+.latest-kicker b { color: var(--lime); font-weight: 600; }
+.latest-title { font-family: var(--display); font-weight: 400; font-size: 19px; line-height: 1.22; text-wrap: pretty;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.latest-item:hover .latest-title, .latest-item:focus-visible .latest-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.latest-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--glass-line); padding-top: 10px; font-size: 12.5px; color: var(--on-glass-quiet); }
+.latest-all { display: inline-flex; align-items: center; gap: 6px; color: var(--on-glass) !important; font-weight: 500; }
+.latest-all svg { width: 14px; height: 14px; transition: transform .35s var(--ease); }
+.latest-all:hover svg { transform: translateX(3px); }
+html.intro .latest { opacity: 0; transform: translateY(28px); pointer-events: none; }
+html.revealing .latest { transition-duration: .9s; transition-delay: .6s; }
+html.diving .latest { opacity: 0; transform: translateY(18px) scale(.98); pointer-events: none; }
+@media (min-width: 1100px) and (min-height: 640px) { .latest { display: grid; } }
+@media (max-width: 1099px) { .nav-res { display: none !important; } }
 
 /* ---------- sheets ---------- */
 .sheet {
@@ -753,6 +782,7 @@ a.cta svg { width: 16px; height: 16px; }
     <a href="/work" data-open="work">Work</a>
     <a href="/capabilities" data-open="capabilities">Capabilities</a>
     <a href="/ai" data-open="ai">AI</a>
+    <a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
     <a href="/contact" data-open="contact">Contact</a>
     <a href="/about" data-open="about">About</a>
   </nav>
@@ -781,6 +811,8 @@ a.cta svg { width: 16px; height: 16px; }
   </div>
 </section>
 
+<!-- Desktop only: the newest Resource Centre article, stacked above the card -->
+<aside class="latest" id="latest" aria-label="Latest from the Resource Centre"><!--@@LATEST@@--></aside>
 
 <button class="sound" id="soundBtn" aria-pressed="false" aria-label="Sound off. Turn on ambient sound"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sound-label">Sound off</span></button>
 <div class="moods" id="moods" role="radiogroup" aria-label="Sound options" hidden></div>
@@ -789,11 +821,11 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap" id="workGrid">
-    <div class="page-head"><span class="label">Work</span><h1 id="workTitle">Brands we've made braver</h1><p>Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech.</p></div>
+    <div class="page-head"><span class="label">Work</span><h1 id="workTitle">Brands we've made braver</h1><p>Campaigns, ecommerce, film and interactive work for clients across food, health, culture and tech.</p></div>
     <div class="grid" id="tiles"></div>
   </div>
   <article class="wrap" id="caseStudy" hidden></article>
@@ -803,15 +835,15 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="cap" id="capPage">
   <div class="wrap">
     <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative, data and AI, under one roof.</h1></div>
     <div class="cap-intro up">
-      <p>Freak is an independent, full-service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
-      <p>Everything is made in-house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
+      <p>Freak is an independent, full service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
+      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
     </div>
     <div class="proof">
       <div class="up"><b data-count="100+">100+</b><span>countries served</span></div>
@@ -824,11 +856,11 @@ a.cta svg { width: 16px; height: 16px; }
       <div class="spec-head up"><span class="label">Specialisms</span><h2 id="specTitle">Go straight to what you need.</h2><p>Each specialism has its own page, with the services, the work that proves it and the questions clients ask.</p></div>
       <div class="spec-grid">
         <a class="spec-card up" href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency"><span class="n">01</span><h3>Amazon agency</h3><p>Account setup to DSP, with the catalogue, content and reviews in between.</p><div class="spec-proof"><b>$9m+</b><span>extra Amazon.com revenue for Dr Scholl's in a year</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
-        <a class="spec-card up" href="/capabilities/content-production" data-open="capabilities/content-production"><span class="n">02</span><h3>Content production</h3><p>UGC, always on social and product video, made in our own studio.</p><div class="spec-proof"><b>20,000+</b><span>assets a year for a single global brand</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/content-production" data-open="capabilities/content-production"><span class="n">02</span><h3>Content production</h3><p>Your global transcreation partner. UGC, social and video localised for over 100 countries a year by our in house native speaking creatives.</p><div class="spec-proof"><b>100+</b><span>countries we serve every year with localised content</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         <a class="spec-card up" href="/capabilities/live-production" data-open="capabilities/live-production"><span class="n">03</span><h3>Live production</h3><p>Videography and photography for campaigns, social and ecommerce.</p><div class="spec-proof"><b>120+</b><span>lifestyle images for Hoover from one five day shoot</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         <a class="spec-card up" href="/ai" data-open="ai"><span class="n">04</span><h3>AI and Freak Lab</h3><p>AI tools we build in house for copy, content and reviews.</p><div class="spec-proof"><b>6</b><span>tools in Freak Lab, our everytool kit</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
         <a class="spec-card up" href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing"><span class="n">05</span><h3>Influencer campaigns, seeding and gifting</h3><p>Vetted creators, clear rights and posts that come back.</p><div class="spec-proof"><b>120m</b><span>impressions for Dr Scholl's across Europe</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
-        <a class="spec-card up" href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi"><span class="n">06</span><h3>Abu Dhabi</h3><p>Brand, content and commerce for the UAE and the Gulf.</p><div class="spec-proof"><b>3</b><span>hubs, in London, Barcelona and Abu Dhabi</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
+        <a class="spec-card up" href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi"><span class="n">06</span><h3>Abu Dhabi</h3><p>Brand, content and commerce for the MENA and APAC regions.</p><div class="spec-proof"><b>3</b><span>hubs, in London, Barcelona and Abu Dhabi</span></div><span class="go">Explore<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span></a>
       </div>
     </section>
 
@@ -842,14 +874,14 @@ a.cta svg { width: 16px; height: 16px; }
       </aside>
       <ol class="pillars">
         <li class="pillar" data-proof="0"><span class="num">01</span><div class="pillar-body"><h2>Strategy</h2><p>Research, data and planning that show where the growth is, then prove it worked.</p>
-          <ul><li>Brand development and positioning</li><li>Market, competitor and SEO keyword research</li><li>Content optimisation and A/B testing</li><li>Multi-channel data analytics and reporting</li></ul><div class="deeper"><a href="/resources" data-open="resources">Read our thinking<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
+          <ul><li>Brand development and positioning</li><li>Market, competitor and SEO keyword research</li><li>Content optimisation and A/B testing</li><li>Multichannel data analytics and reporting</li></ul><div class="deeper"><a href="/resources" data-open="resources">Read our thinking<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="1"><span class="num">02</span><div class="pillar-body"><h2>Creative</h2><p>Ideas built to travel, from a global master to every format and channel it needs.</p>
-          <ul><li>Brand campaigns and key visuals</li><li>Social media content, always-on and reactive</li><li>Product advertising for Amazon, Meta and retail media</li><li>Copywriting, art direction and illustration</li></ul><div class="deeper"><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
+          <ul><li>Brand campaigns and key visuals</li><li>Social media content, always on and reactive</li><li>Product advertising for Amazon, Meta and retail media</li><li>Copywriting, art direction and illustration</li></ul><div class="deeper"><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="2"><span class="num">03</span><div class="pillar-body"><h2>Production Studio</h2><p>Our own studio, so ideas go from storyboard to finished asset without a handoff.</p>
-          <ul><li>Photography and videography, on location or in our studio</li><li>Green screen, podcast and editing suites</li><li>3D, CGI, motion graphics and animation</li><li>AI production, trained on rights-cleared shoots</li></ul><div class="deeper"><a href="/capabilities/live-production" data-open="capabilities/live-production">Live production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
+          <ul><li>Photography and videography, on location or in our studio</li><li>Green screen, podcast and editing suites</li><li>3D, CGI, motion graphics and animation</li><li>AI production, trained on rights cleared shoots</li></ul><div class="deeper"><a href="/capabilities/live-production" data-open="capabilities/live-production">Live production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="3"><span class="num">04</span><div class="pillar-body"><h2>Activation</h2><p>Getting the work in front of the right people, in every market and language.</p>
-          <ul><li>Global transcreation, from 5 to 25 markets</li><li>Influencer campaigns, seeding and gifting</li><li>Community management and social reporting</li><li>Amazon Brand Stores and sales-event content</li></ul><div class="deeper"><a href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing">Influencer campaigns, seeding and gifting<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi">Abu Dhabi<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
-        <li class="pillar" data-proof="4"><span class="num">05</span><div class="pillar-body"><h2>Technical</h2><p>The platforms that keep a brand selling, built and looked after in-house.</p>
+          <ul><li>Global transcreation for more than 100 countries a year</li><li>Influencer campaigns, seeding and gifting</li><li>Community management and social reporting</li><li>Amazon Brand Stores and sales event content</li></ul><div class="deeper"><a href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing">Influencer campaigns, seeding and gifting<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi">Abu Dhabi<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
+        <li class="pillar" data-proof="4"><span class="num">05</span><div class="pillar-body"><h2>Technical</h2><p>The platforms that keep a brand selling, built and looked after in house.</p>
           <ul><li>Website build, maintenance and SEO</li><li>Web apps and microsites, from product finders to 3D maps</li><li>Amazon catalogue management and listing fixes</li><li>Product content at scale for Amazon and retailer sites</li></ul><div class="deeper"><a href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency">Amazon agency<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
         <li class="pillar" data-proof="5"><span class="num">06</span><div class="pillar-body"><h2>AI</h2><p>Freak Lab, the AI tools we build in house for copy, content and reviews.</p>
           <ul><li>Image analysis with our neural marketing framework</li><li>Amazon copy from search and market data</li><li>Review moderation built on 20 years of Amazon knowledge</li><li>AI production with quality and compliance checks</li></ul><div class="deeper"><a href="/ai" data-open="ai">AI and Freak Lab<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></div></li>
@@ -921,7 +953,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -936,7 +968,7 @@ a.cta svg { width: 16px; height: 16px; }
       <div>
         <span class="label">Our capabilities go far beyond this list</span>
         <ul class="services">
-          <li>Design</li><li>Brand Marketing</li><li>Social Media</li><li>Art Direction</li><li>Motion Design</li><li>Brand Strategy</li><li>Visual Identity</li><li>Copywriting</li><li>Sound Design</li><li>E-commerce</li><li>Illustration</li>
+          <li>Design</li><li>Brand Marketing</li><li>Social Media</li><li>Art Direction</li><li>Motion Design</li><li>Brand Strategy</li><li>Visual Identity</li><li>Copywriting</li><li>Sound Design</li><li>Ecommerce</li><li>Illustration</li>
         </ul>
         <a class="link-btn" href="/capabilities" data-open="capabilities" style="margin-top:18px">All capabilities<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
@@ -949,7 +981,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -973,7 +1005,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <article class="pg" id="pageBody"></article>
@@ -1443,6 +1475,8 @@ function loop() {
 
 /* ---------------- interaction ---------------- */
 const card = document.getElementById('card');
+// the Resource Centre panel sits on top of the card, so it follows the card's height
+try { new ResizeObserver(() => document.documentElement.style.setProperty('--card-h', card.offsetHeight + 'px')).observe(card); } catch (e) {}
 const swap = document.getElementById('cardSwap');
 const dots = [...document.querySelectorAll('#dots span')];
 const prevBtn = document.getElementById('prevStop');

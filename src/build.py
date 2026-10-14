@@ -89,12 +89,12 @@ def summary(text, limit=158):
 def pages():
     p = {
         '': {'title': 'Freak | Independent creative, data and AI agency', 'desc': DESC},
-        'work': {'title': 'Work | Freak', 'desc': 'Campaigns, e-commerce, film and interactive work for clients across food, health, culture and tech, from Freak.'},
+        'work': {'title': 'Work | Freak', 'desc': 'Campaigns, ecommerce, film and interactive work for clients across food, health, culture and tech, from Freak.'},
         'capabilities': {'title': 'Capabilities | Freak', 'desc': 'Creative, data and AI under one roof. Amazon, content and live production, influencer campaigns and our own AI tools, from Freak in London, Barcelona and Abu Dhabi.'},
         'about': {'title': 'About | Freak', 'desc': 'A multidisciplinary agency for bold brands with stories worth telling. Meet Freak, with a head office in London and hubs in Barcelona and Abu Dhabi.'},
         'contact': {'title': 'Contact | Freak', 'desc': 'Talk to Freak about a new project. Email sales@wearefreak.com or visit the studio at 22 Ash Ave, London SE17 1HS.'},
         'terms': {'title': 'Terms of use | Freak', 'desc': 'The terms that apply to using wearefreak.com.'},
-        'privacy': {'title': 'Privacy policy | Freak', 'desc': 'How Freak collects and uses personal information, and your rights.'},
+        'privacy': {'title': 'Privacy policy | Freak', 'desc': 'How Freak collects and uses personal information and what your rights are.'},
         'cookies': {'title': 'Cookie policy | Freak', 'desc': 'How wearefreak.com uses cookies and what it stores on your device.'},
     }
     for w in WORK:
@@ -169,6 +169,8 @@ def assemble():
     t = t.replace('<!--@@LEGAL@@-->', sheets)
     # the Capabilities page shows the three newest Resource Centre articles
     t = t.replace('<!--@@CAP_READING@@-->', wire(''.join(res_card(a) for a in ARTICLES[:3])))
+    # the world view's Resource Centre panel shows the newest article
+    t = t.replace('<!--@@LATEST@@-->', wire(latest_html(ARTICLES[0])))
     t = t.replace('"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"', '"three": "/vendor/three/build/three.module.min.js"')
     t = t.replace('"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"', '"three/addons/": "/vendor/three/examples/jsm/"')
     return t
@@ -188,7 +190,7 @@ def split(app):
 # ---------------------------------------------------------------- readable content for each page
 def tile(w):
     return (f'\n  <a class="tile" href="/work/{w["id"]}" data-case="{w["id"]}" data-cursor="View" data-preview="{w.get("preview") or "vid/" + w["id"] + "-preview.mp4"}">\n'
-            f'    <div class="tile-img"><img src="{w["img"]}" alt="{esc(w["client"])}: {esc(w["title"])}" loading="lazy" width="960" height="503"></div>\n'
+            f'    <div class="tile-img"><img src="{w["img"]}" alt="{esc(w["client"])}, {esc(w["title"])}" loading="lazy" width="960" height="503"></div>\n'
             f'    <div class="tile-meta"><strong>{esc(w["client"])}</strong><span>{esc(w["title"])}</span></div>\n  </a>')
 
 
@@ -196,7 +198,7 @@ def case_html(w):
     """The same markup the app renders for a case study, so the hand-over is invisible."""
     i = WORK.index(w); prev = WORK[i - 1]; nxt = WORK[(i + 1) % len(WORK)]
     d = lambda ms: f' style="transition-delay:{ms}ms"'
-    m = [f'<div class="cs-hero rv"><img src="{w["img"]}" alt="{esc(w["client"])}: {esc(w["title"])}" width="960" height="503"></div>',
+    m = [f'<div class="cs-hero rv"><img src="{w["img"]}" alt="{esc(w["client"])}, {esc(w["title"])}" width="960" height="503"></div>',
          f'<header class="cs-head up"{d(150)}><span class="client">{esc(w["client"])}</span><h1 id="csTitle">{esc(w["title"])}</h1>'
          f'<div class="tags">{"".join(f"<span>{esc(t)}</span>" for t in w["tags"])}</div></header>']
     v = w.get('video')
@@ -221,7 +223,7 @@ def case_html(w):
     m.append(f'<section class="mod mod-cta"><h2 class="up">Got a brief like this?</h2><a class="cta" href="/contact" data-open="contact">Start a project{ARROW_R}</a></section>')
     m.append(f'<nav class="cs-nav slim" aria-label="Case studies">\n        <a class="prev" href="/work/{prev["id"]}" data-case="{prev["id"]}">{ARROW_L}{esc(prev["client"])}</a>\n'
              f'        <a class="back" href="/work" data-back>Back to case studies</a></nav>')
-    m.append(f'<a class="cs-next" href="/work/{nxt["id"]}" data-case="{nxt["id"]}" data-cursor="Next" aria-label="Next project: {esc(nxt["client"])}, {esc(nxt["title"])}">\n'
+    m.append(f'<a class="cs-next" href="/work/{nxt["id"]}" data-case="{nxt["id"]}" data-cursor="Next" aria-label="Next project, {esc(nxt["client"])}, {esc(nxt["title"])}">\n'
              f'        <div class="cs-next-frame rv"><img src="{nxt["img"]}" alt="" loading="lazy">\n'
              f'          <div class="cs-next-meta"><span class="label" style="color:#fff;opacity:.85">Next project</span><h2>{esc(nxt["client"])}</h2><p>{esc(nxt["title"])}</p></div></div>\n'
              f'        <div class="cs-next-bar" aria-hidden="true"><i></i><span>Keep scrolling, or click</span></div></a>')
@@ -328,7 +330,7 @@ def hero_html(m):
 
 def case_card(cid, stat, label):
     w = next(x for x in WORK if x['id'] == cid)
-    return (f'<a class="tile" href="/work/{cid}" data-cursor="View"><div class="tile-img"><img src="{w["img"]}" alt="{esc(w["client"])}: {esc(w["title"])}" loading="lazy" width="960" height="503"></div>'
+    return (f'<a class="tile" href="/work/{cid}" data-cursor="View"><div class="tile-img"><img src="{w["img"]}" alt="{esc(w["client"])}, {esc(w["title"])}" loading="lazy" width="960" height="503"></div>'
             f'<div class="tile-meta"><strong>{esc(w["client"])}</strong><span>{esc(w["title"])}</span>'
             f'<div class="res">{esc(stat)}<small>{esc(label)}</small></div></div></a>')
 
@@ -346,6 +348,15 @@ def res_card(a, eager=False):
             f'<div class="frame"><img src="{a["card"]}" alt="{esc(a.get("card_alt", text_of(a["h1"])))}"{"" if eager else " loading=\"lazy\""} width="960" height="600"></div>'
             f'<div class="res-meta"><b>{esc(a["category"])}</b><span>{nice_date(a["date"])}</span><span>{read_minutes(a)} min read</span></div>'
             f'<h3>{text_of(a["h1"])}</h3><p>{esc(a["summary"])}</p></a>')
+
+
+def latest_html(a):
+    d = nice_date(a['date']).rsplit(' ', 1)[0]
+    return (f'<a class="latest-item" href="/resources/{a["route"].split("/", 1)[1]}" data-cursor="Read">'
+            f'<span class="latest-kicker"><b>Resource Centre</b><span>{esc(a["label"])}</span></span>'
+            f'<span class="latest-title">{text_of(a["h1"]).rstrip(".")}</span></a>'
+            f'<div class="latest-foot"><span>{d}, {read_minutes(a)} min read</span>'
+            f'<a class="latest-all" href="/resources">All guides<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>')
 
 
 def reading_html(m, title='Further reading', sub='From the Resource Centre.'):

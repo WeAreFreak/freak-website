@@ -5,7 +5,7 @@
   "title": "From live shoot to listing",
   "tags": [
    "Live Production",
-   "E-commerce",
+   "Ecommerce",
    "Amazon",
    "Photography",
    "Film"
@@ -16,9 +16,9 @@
    "poster": "vid/hoover.webp"
   },
   "text": [
-   "Hoover needed new photography and film for 15 of its vacuum cleaners, from cordless sticks and uprights to cylinders, a robot and a wet and dry floor washer. Its existing imagery felt dark and sterile, and didn't look like the homes of the 20 to 40-year-olds it wanted to reach. The brief asked for more colour, a lived-in feel and more dynamic angles.",
-   "We produced the shoot end to end: the location, casting, set design, props and wardrobe, a film crew and a stills team, all planned product by product in a shot matrix. Before filming we tested debris on every machine, to find the cereal, coffee and crumbs that picked up cleanly on camera and reset quickly between takes. Over five days in a London family home we shot product films for web and Amazon and more than 120 retouched lifestyle images.",
-   "Then we turned the shoot into e-commerce. For every product we wrote search-led titles and listing copy, and designed the image stack above the fold and the A+ content below it for desktop and mobile, then reformatted it all for Argos and other retailers. We're now taking the work into Amazon DSP advertising and retailer campaigns."
+   "Hoover needed new photography and film for 15 of its vacuum cleaners, from cordless sticks and uprights to cylinders, a robot and a wet and dry floor washer. Its existing imagery felt dark and sterile and didn't look like the homes of the 20 to 40 year olds it wanted to reach. The brief asked for more colour, a lived in feel and more dynamic angles.",
+   "We produced the shoot end to end. The location, casting, set design, props and wardrobe, a film crew and a stills team, all planned product by product in a shot matrix. Before filming we tested debris on every machine, to find the cereal, coffee and crumbs that picked up cleanly on camera and reset quickly between takes. Over five days in a London family home we shot product films for web and Amazon and more than 120 retouched lifestyle images.",
+   "Then we turned the shoot into ecommerce. For every product we wrote search led titles and listing copy, and designed the image stack above the fold and the A+ content below it for desktop and mobile, then reformatted it all for Argos and other retailers. We're now taking the work into Amazon DSP advertising and retailer campaigns."
   ],
   "numbers": [
    [
@@ -56,7 +56,7 @@
   "title": "A learning portal for sight loss awareness",
   "tags": [
    "LMS",
-   "E-learning",
+   "Online learning",
    "UX/UI Design",
    "Accessibility",
    "Gamification",
@@ -64,9 +64,9 @@
   ],
   "img": "img/rnib.webp",
   "text": [
-   "RNIB wanted the public and its corporate partners to understand sight loss, and to know what to do differently. That called for a learning platform anyone could use, with short, practical modules that turn awareness into action and accessibility built in from the first screen. It builds on four years of work together, including the social action quiz that now sits inside the platform.",
-   "We designed and built the RNIB Learning Portal, a learning management system with four modules: living independently, how small everyday actions create or remove barriers, how to offer assistance, and how sight loss is experienced. Each one mixes film, quizzes and hands-on tasks, from a matching game about everyday tools to a sight simulator that compares 20/20 vision with glaucoma, macular degeneration, cataracts and diabetic retinopathy, with an accessibility mode on every activity.",
-   "Points, levels, an anonymised leaderboard and shareable certificates keep people learning, and a digital pledge wall turns what they've learned into commitments. We tested the portal with RNIB's user panels and refined it from their feedback, then built a secure back end on AWS. RNIB's strategy team has signed it off ahead of a pilot launch."
+   "RNIB wanted the public and its corporate partners to understand sight loss and know what to do differently. That called for a learning platform anyone could use, with short, practical modules that turn awareness into action and accessibility built in from the first screen. It builds on four years of work together, including the social action quiz that now sits inside the platform.",
+   "We designed and built the RNIB Learning Portal, a learning management system with four modules. Living independently, how small everyday actions create or remove barriers, how to offer assistance and how sight loss is experienced. Each one mixes film, quizzes and hands on tasks, from a matching game about everyday tools to a sight simulator that compares 20/20 vision with glaucoma, macular degeneration, cataracts and diabetic retinopathy, with an accessibility mode on every activity.",
+   "Points, levels, an anonymised leaderboard and shareable certificates keep people learning. A digital pledge wall turns what they've learned into commitments. We tested the portal with RNIB's user panels and refined it from their feedback, then built a secure back end on AWS. RNIB's strategy team has signed it off ahead of a pilot launch."
   ],
   "numbers": [
    [
@@ -103,8 +103,8 @@
   ],
   "img": "img/hovis.webp",
   "text": [
-   "Hovis is a much-loved British brand with a rich heritage and a loyal following. The job was to connect it with a new generation online, and to keep it connecting as the social algorithms kept shifting underneath it.",
-   "We built a fresh social strategy and content programme around the Strength Baked In platform. Its centrepiece was London's ghost signs: the faded Hovis adverts painted onto brick walls generations ago. We filmed their restoration and used them to tell a story about heritage and the strength of everyday people.",
+   "Hovis is a much loved British brand with a rich heritage and a loyal following. The job was to connect it with a new generation online, and to keep it connecting as the social algorithms kept shifting underneath it.",
+   "We built a fresh social strategy and content programme around the Strength Baked In platform. Its centrepiece was London's ghost signs, the faded Hovis adverts painted onto brick walls generations ago. We filmed their restoration and used them to tell a story about heritage and the strength of everyday people.",
    "It's an ongoing partnership. We've more than doubled Hovis's Instagram following, bringing in thousands of new followers, and since the new website launched in 2024 organic page visits have more than doubled too."
   ],
   "numbers": [
@@ -146,8 +146,8 @@
    "poster": "vid/va.webp"
   },
   "text": [
-   "The V&A wanted to open up its Glastonbury Festival archive to everyone: posters, photographs, interviews and recordings gathered across the festival's history.",
-   "We designed and built Mapping Glastonbury, an interactive web app with five 3D maps of the festival site across the decades. Visitors fly over the fields, move through the years and open memories, sounds, visions and locations pinned to the landscape, including stories sent in by festival-goers themselves.",
+   "The V&A wanted to open up its Glastonbury Festival archive to everyone, from posters and photographs to interviews and recordings gathered across the festival's history.",
+   "We designed and built Mapping Glastonbury, an interactive web app with five 3D maps of the festival site across the decades. Visitors fly over the fields, move through the years and open memories, sounds, visions and locations pinned to the landscape, including stories sent in by festival goers themselves.",
    "Built with Three.js and Nuxt, the maps link to more than 500 archive items, and the app is still live on the V&A website."
   ],
   "numbers": [
@@ -170,10 +170,10 @@
  {
   "id": "drscholls",
   "client": "Dr Scholl's",
-  "title": "Marketing across social and e-commerce",
+  "title": "Marketing across social and ecommerce",
   "tags": [
    "Social Media",
-   "E-commerce",
+   "Ecommerce",
    "Visual Identity",
    "Influencer"
   ],
@@ -184,7 +184,7 @@
    "portrait": true
   },
   "text": [
-   "Part of the job was carrying the brand through its global change of name from Scholl to Dr. Scholl's, refreshing packaging and on-site messaging so customers knew it was the same trusted product. We also built a proper Amazon presence from the ground up: Brand Registry in every EU market, a dedicated Brand Store in each one, and listings optimised for both Amazon search and Google.",
+   "Part of the job was carrying the brand through its global change of name from Scholl to Dr. Scholl's, refreshing packaging and website messaging so customers knew it was the same trusted product. We also built a proper Amazon presence from the ground up, with Brand Registry in every EU market, a dedicated Brand Store in each one and listings optimised for both Amazon search and Google.",
    "On top of that we ran influencer campaigns across six markets. The partnership started in 2022 and its scope has grown every year since."
   ],
   "numbers": [
@@ -210,14 +210,14 @@
    "drscholls_3",
    "drscholls_4"
   ],
-  "challenge": "Dr. Scholl's needed one partner to run its marketing across social, e-commerce and creative strategy, for a range that goes from everyday comfort insoles to specialist pain relief. The creative has to speak to runners, to people on their feet all day at work and to everyone in between, while every piece stays unmistakably Dr. Scholl's."
+  "challenge": "Dr. Scholl's needed one partner to run its marketing across social, ecommerce and creative strategy, for a range that goes from everyday comfort insoles to specialist pain relief. The creative has to speak to runners, to people on their feet all day at work and to everyone in between, while every piece stays unmistakably Dr. Scholl's."
  },
  {
   "id": "feliway",
   "client": "Feliway",
   "title": "Amazon content that doubled sales",
   "tags": [
-   "E-commerce",
+   "Ecommerce",
    "Amazon",
    "Design",
    "Copywriting",
@@ -226,7 +226,7 @@
   "img": "img/feliway.webp",
   "text": [
    "Feliway's diffusers help cats feel calm at home. We were asked to grow the brand's sales on Amazon, where the listings needed to work harder in search and explain the product far more clearly.",
-   "We researched what cat owners actually search for and built a content toolkit around Amazon's search algorithm, then rewrote every product page with clearer headlines and tighter bullet points. New A+ and B+ content, the enhanced modules on an Amazon product page, explains the science simply, compares Feliway with the alternatives and shows set-up in three steps.",
+   "We researched what cat owners actually search for and built a content toolkit around Amazon's search algorithm, then rewrote every product page with clearer headlines and tighter bullet points. New A+ and B+ content, the enhanced modules on an Amazon product page, explains the science simply, compares Feliway with the alternatives and shows set up in three steps.",
    "We localised the content for other markets, including a French Brand Store, and added a new brand story to Amazon UK. Monthly sales doubled."
   ],
   "numbers": [
@@ -258,7 +258,7 @@
   "tags": [
    "Social Media",
    "Copywriting",
-   "Real-time"
+   "Real time"
   ],
   "img": "img/macmillan.webp",
   "video": {
@@ -266,8 +266,8 @@
    "poster": "vid/macmillan.webp"
   },
   "text": [
-   "Macmillan Cancer Support wanted more men talking about testicular cancer, and checking themselves for it. The brief was short: encourage men to check their balls.",
-   "We timed it to Wimbledon. With the tournament as a real-time hook, we made six pieces of light-hearted social content, from tennis balls on court to people on the street holding up the balls they'd checked, and took it from brief to delivery in ten days on a £1,000 promotion budget.",
+   "Macmillan Cancer Support wanted more men talking about testicular cancer and checking themselves for it. The brief was short. Encourage men to check their balls.",
+   "We timed it to Wimbledon. With the tournament as a real time hook, we made six pieces of lighthearted social content, from tennis balls on court to people on the street holding up the balls they'd checked. We took it from brief to delivery in ten days on a £1,000 promotion budget.",
    "The posts averaged a 28% engagement rate, passed 1.2m views and won the Drum Award for Content Marketing."
   ],
   "numbers": [
@@ -312,8 +312,8 @@
   },
   "text": [
    "Evermix makes portable audio kit for artists, DJs and performers. It needed a brand as loud as the scene it sells into.",
-   "We started with a full brand audit, then rebuilt the identity: a new type system, a high-energy palette, and motion and social guidelines built around the feel of nightlife and music, carried by the line Making Sound Resound.",
-   "Since the refresh we've run Evermix's social month to month, from behind-the-scenes studio sessions to creator campaigns, alongside its e-commerce content and website. Reach across its socials is up five times."
+   "We started with a full brand audit, then rebuilt the identity with a new type system, a high energy palette and motion and social guidelines built around the feel of nightlife and music, carried by the line Making Sound Resound.",
+   "Since the refresh we've run Evermix's social month to month, from behind the scenes studio sessions to creator campaigns, alongside its ecommerce content and website. Reach across its socials is up five times."
   ],
   "numbers": [
    [
@@ -358,9 +358,9 @@
    "poster": "vid/astus.webp"
   },
   "text": [
-   "Astus needed a brand that matched its ambition: sharper, bolder and built to stand out in a crowded advertising and media market. We started with one workshop question, who is Astus?, and found a message that needed simplifying.",
-   "We led a full rebrand, from a new logo and colour system to a complete set of brand guidelines, flexible enough to work everywhere from business cards to shipping containers. The result is a bold system built around a punchy palette and a mark with the same energy as the brand's own pitch: advertising, amplified.",
-   "We carried the identity through a full website build, a library of social templates and a 60-second explainer film, so Astus could launch the rebrand on every channel at once."
+   "Astus needed a sharper, bolder brand that matched its ambition and stood out in a crowded advertising and media market. We started with one workshop question. Who is Astus? The answer was a message that needed simplifying.",
+   "We led a full rebrand, from a new logo and colour system to a complete set of brand guidelines, flexible enough to work everywhere from business cards to shipping containers. The result is a bold system built around a punchy palette and a mark with the same energy as the brand's own pitch of advertising, amplified.",
+   "We carried the identity through a full website build, a library of social templates and a 60 second explainer film, so Astus could launch the rebrand on every channel at once."
   ],
   "carousel": [
    "astus_car1",
@@ -381,9 +381,9 @@
   ],
   "img": "img/gnetwork.webp",
   "text": [
-   "G.Network is building full-fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.",
-   "We built the social strategy and creative around those neighbourhoods: championing local businesses on G.Network's channels, running competitions and giveaways, and celebrating milestones such as its place in The Sunday Times 100 Tech. Alongside that we produce monthly campaigns across paid social, out-of-home and direct mail.",
-   "Location-targeted lead campaigns have brought in 2,322 leads at 43p each."
+   "G.Network is building full fibre broadband street by street across London, so its marketing has to feel local to each neighbourhood it reaches.",
+   "We built the social strategy and creative around those neighbourhoods. We champion local businesses on G.Network's channels, run competitions and giveaways and celebrate milestones such as its place in The Sunday Times 100 Tech. Alongside that we produce monthly campaigns across paid social, out of home and direct mail.",
+   "Location targeted lead campaigns have brought in 2,322 leads at 43p each."
   ],
   "numbers": [
    [
@@ -420,8 +420,8 @@
   },
   "text": [
    "New York Bakery came to us for a TV sponsorship package of three Channel 4 idents, and then for the campaign world behind Philly Deli, its bagel partnership with Philadelphia.",
-   "The idents had under a month of planning and a single day to shoot all three. We ran casting, creative direction, pre-production, filming and post ourselves, with no handoffs. They reached 50m people, and New York Bakery has since come back to run another TV sponsorship.",
-   "For Philly Deli we created the campaign's visual world and carried it into recipe films and motion graphics for social, out-of-home and in-store designs, and creative direction for the website."
+   "The idents had under a month of planning and a single day to shoot all three. We ran casting, creative direction, pre production, filming and post ourselves, with no handoffs. They reached 50m people, and New York Bakery has since come back to run another TV sponsorship.",
+   "For Philly Deli we created the campaign's visual world and carried it into recipe films and motion graphics for social and designs for out of home and in store. We also led creative direction for the website."
   ],
   "numbers": [
    [
@@ -461,9 +461,9 @@
    "portrait": true
   },
   "text": [
-   "We brought Yutaka's Japanese heritage to life across London, wrapping Tube escalators and bus shelters in seasonal illustration built around the brand's Make Mealtimes Blossom platform. Soft landscapes, cherry blossom and hand-painted detail turned everyday commuter spaces into a moment of calm.",
-   "Each execution was made for its site, from full-height escalator panels at Tottenham Court Road to bus shelter posters, so the artwork felt considered rather than resized. Bold Yutaka red kept the brand unmistakable against the softness of the watercolour.",
-   "The same world carried into social banners, Instagram and in-store ads for Tesco, translated into motion for feed and story formats. Yutaka told one seasonal story from the street to the scroll, and came in 25% under its media budget."
+   "We brought Yutaka's Japanese heritage to life across London, wrapping Tube escalators and bus shelters in seasonal illustration built around the brand's Make Mealtimes Blossom platform. Soft landscapes, cherry blossom and hand painted detail turned everyday commuter spaces into a moment of calm.",
+   "Each execution was made for its site, from full height escalator panels at Tottenham Court Road to bus shelter posters, so the artwork felt considered rather than resized. Bold Yutaka red kept the brand unmistakable against the softness of the watercolour.",
+   "The same world carried into social banners, Instagram and in store ads for Tesco, translated into motion for feed and story formats. Yutaka told one seasonal story from the street to the scroll, and came in 25% under its media budget."
   ],
   "numbers": [
    [
