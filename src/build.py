@@ -768,7 +768,8 @@ def llms(P, names):
     for c in caps:
         out += [f"- {c['name']}. {c['desc']}"] + [f"  - {i}" for i in c['items']]
     out += ['', '## Pages', '']
-    out += [f"- [{P[n]['title'].split(' | ')[0] if n else 'Home'}]({SITE}{path_of(n)}): {P[n]['desc']}" for n in names if not n.startswith('work-') and n not in CONTENT]
+    label = lambda n: 'Home' if not n else {'capabilities': 'Capabilities'}.get(n, P[n]['title'].split(' | ')[0])
+    out += [f"- [{label(n)}]({SITE}{path_of(n)}): {P[n]['desc']}" for n in names if not n.startswith('work-') and n not in CONTENT]
     out += ['', '## Specialisms', '']
     out += [f"- [{name_of(m['route'])}]({SITE}/{m['route']}): {m['desc']}" for m in SPOKES]
     if ARTICLES:
