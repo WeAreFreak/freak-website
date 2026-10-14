@@ -169,8 +169,6 @@ def assemble():
     t = t.replace('<!--@@LEGAL@@-->', sheets)
     # the Capabilities page shows the three newest Resource Centre articles
     t = t.replace('<!--@@CAP_READING@@-->', wire(''.join(res_card(a) for a in ARTICLES[:3])))
-    # the world view's Resource Centre panel shows the newest article
-    t = t.replace('<!--@@LATEST@@-->', wire(latest_html(ARTICLES[0])))
     t = t.replace('"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"', '"three": "/vendor/three/build/three.module.min.js"')
     t = t.replace('"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"', '"three/addons/": "/vendor/three/examples/jsm/"')
     return t
@@ -348,15 +346,6 @@ def res_card(a, eager=False):
             f'<div class="frame"><img src="{a["card"]}" alt="{esc(a.get("card_alt", text_of(a["h1"])))}"{"" if eager else " loading=\"lazy\""} width="960" height="600"></div>'
             f'<div class="res-meta"><b>{esc(a["category"])}</b><span>{nice_date(a["date"])}</span><span>{read_minutes(a)} min read</span></div>'
             f'<h3>{text_of(a["h1"])}</h3><p>{esc(a["summary"])}</p></a>')
-
-
-def latest_html(a):
-    d = nice_date(a['date']).rsplit(' ', 1)[0]
-    return (f'<a class="latest-item" href="/resources/{a["route"].split("/", 1)[1]}" data-cursor="Read">'
-            f'<span class="latest-kicker"><b>Resource Centre</b><span>{esc(a["label"])}</span></span>'
-            f'<span class="latest-title">{text_of(a["h1"]).rstrip(".")}</span></a>'
-            f'<div class="latest-foot"><span>{d}, {read_minutes(a)} min read</span>'
-            f'<a class="latest-all" href="/resources">All guides<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div>')
 
 
 def reading_html(m, title='Further reading', sub='From the Resource Centre.'):

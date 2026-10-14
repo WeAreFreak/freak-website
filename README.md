@@ -43,7 +43,7 @@ Old links in the form `/#work-hoover` still work: the app moves them to `/work/h
 
 ## Making a change
 
-1. Edit the files in `src/`. Case study copy is in `src/content/work.json`, and the specialism, AI and Resource Centre pages are in `src/content/pages/`. To add an article, copy one in `src/content/pages/resources/` and change its details and body. It appears in the Resource Centre, the sitemap, llms.txt and its structured data on the next build. The newest article by date also fills the Resource Centre panel above the card on the 3D world, which shows on screens 1100px wide or more, as does the Resource Centre link in the top menu.
+1. Edit the files in `src/`. Case study copy is in `src/content/work.json`, and the specialism, AI and Resource Centre pages are in `src/content/pages/`. To add an article, copy one in `src/content/pages/resources/` and change its details and body. It appears in the Resource Centre, the sitemap, llms.txt and its structured data on the next build. Resource Centre is the sixth card on the 3D world, after About, and the last link in the top menu on screens 1100px wide or more.
 2. Run `python3 src/build.py` (Python 3, plus Pillow for the share images). The build stops if a page links to an address that doesn't exist. `--draft` builds anyway and lists the broken links.
 3. Commit the rebuilt files with the source and push to a branch. Check the Vercel preview, then merge to `main`.
 

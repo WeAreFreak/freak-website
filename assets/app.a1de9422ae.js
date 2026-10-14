@@ -12,6 +12,7 @@ const STOPS = [
   { id: 'ai', title: 'AI', cta: 'Explore Freak Lab', deg: -52 },       // between Capabilities and Contact, so the other views stay as tuned
   { id: 'contact', title: 'Contact', cta: 'Get in touch', deg: -70 },
   { id: 'about', title: 'About', cta: 'Meet Freak', deg: -105 },
+  { id: 'resources', title: 'Resource Centre', cta: 'Read the guides', deg: -118 },   // just past About, before the F turns its back
 ];
 
 /* Case studies. Modules render in this order and are skipped when empty:
@@ -452,8 +453,6 @@ function loop() {
 
 /* ---------------- interaction ---------------- */
 const card = document.getElementById('card');
-// the Resource Centre panel sits on top of the card, so it follows the card's height
-try { new ResizeObserver(() => document.documentElement.style.setProperty('--card-h', card.offsetHeight + 'px')).observe(card); } catch (e) {}
 const swap = document.getElementById('cardSwap');
 const dots = [...document.querySelectorAll('#dots span')];
 const prevBtn = document.getElementById('prevStop');
@@ -490,7 +489,8 @@ function setTitle(el, text) {
   el.classList.remove('out');
   el.dataset.title = text;
   el.setAttribute('aria-label', text);
-  el.innerHTML = [...text].map((c, i) => `<span class="ltr" aria-hidden="true" style="--i:${i}">${c === ' ' ? ' ' : esc(c)}</span>`).join('');
+  let i = 0;   // letters are grouped by word, so a long title like Resource Centre breaks between words
+  el.innerHTML = text.split(' ').map(w => `<span class="word">${[...w].map(c => `<span class="ltr" aria-hidden="true" style="--i:${i++}">${esc(c)}</span>`).join('')}</span>`).join(`<span class="ltr" aria-hidden="true" style="--i:${0}"> </span>`);
 }
 
 /* Magnetic buttons on the card (mouse and trackpad only) */
@@ -981,6 +981,7 @@ const SoundKit = (() => {
     { bass: 33, notes: [45, 52, 57, 59, 64], top: [69, 71, 73, 76, 78] },   // Aadd9, for AI
     { bass: 31, notes: [50, 54, 57, 59, 61], top: [66, 69, 71, 73, 74, 78] },   // Gmaj9#11
     { bass: 40, notes: [47, 54, 55, 59, 62], top: [66, 67, 71, 74, 78] },   // Em9
+    { bass: 42, notes: [49, 54, 57, 59, 64], top: [66, 69, 71, 73, 76] },   // F#m11, for the Resource Centre
   ];
 
   function noiseBuffer(ctx) {

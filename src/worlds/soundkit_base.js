@@ -11,6 +11,7 @@ const SoundKit = (() => {
     { bass: 33, notes: [45, 52, 57, 59, 64], top: [69, 71, 73, 76, 78] },   // Aadd9, for AI
     { bass: 31, notes: [50, 54, 57, 59, 61], top: [66, 69, 71, 73, 74, 78] },   // Gmaj9#11
     { bass: 40, notes: [47, 54, 55, 59, 62], top: [66, 67, 71, 74, 78] },   // Em9
+    { bass: 42, notes: [49, 54, 57, 59, 64], top: [66, 69, 71, 73, 76] },   // F#m11, for the Resource Centre
   ];
 
   function noiseBuffer(ctx) {

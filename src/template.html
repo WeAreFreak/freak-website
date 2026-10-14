@@ -110,7 +110,7 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 }
 .card.moving { opacity: .7; transform: translateY(4px); }
 .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.card-count { font-size: 12px; letter-spacing: .14em; color: var(--on-glass-quiet); font-variant-numeric: tabular-nums; }
+.card-count { font-size: 12px; letter-spacing: .14em; color: var(--on-glass-quiet); font-variant-numeric: tabular-nums; white-space: nowrap; flex: none; }
 .card h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(38px, 4.4vw, 52px); line-height: 1; letter-spacing: -.01em; }
 .card-swap { display: grid; gap: 16px; }
 /* The stop's line: every line sits in the same grid cell so the card never jumps; the current one fades up */
@@ -119,6 +119,7 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .card-line span.on { opacity: .86; transform: none; transition-delay: .12s; }
 /* Card changes: title letters rise into place one after another; the old title lifts away first */
 .card h2 { display: flex; flex-wrap: wrap; overflow: hidden; padding-bottom: .12em; margin-bottom: -.12em; }
+.card h2 .word { display: inline-flex; white-space: nowrap; }
 .card h2 .ltr { display: inline-block; white-space: pre; animation: ltrIn .7s var(--ease) both; animation-delay: calc(var(--i) * 28ms); }
 .card h2.out .ltr { animation: ltrOut .22s ease-in both; animation-delay: calc(var(--i) * 12ms); }
 @keyframes ltrIn { from { transform: translateY(105%); opacity: 0; } to { transform: none; opacity: 1; } }
@@ -150,32 +151,6 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .dots span.on { opacity: 1; transform: scale(1.3); background: var(--lime); }
 .hint { font-size: 12px; color: var(--on-glass-quiet); }
 
-/* ---------- latest from the Resource Centre (desktop only, above the card) ---------- */
-.latest {
-  position: fixed; z-index: 4; display: none;
-  left: clamp(16px, 4vw, 48px); bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(16px, 4vw, 44px) + var(--card-h, 272px) + 12px);
-  width: min(316px, calc(100% - 32px));
-  background: var(--glass); color: var(--on-glass);
-  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
-  border: 1px solid var(--glass-line); border-radius: 18px;
-  padding: 16px 24px 12px; gap: 10px;
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
-}
-.latest a { color: inherit; text-decoration: none; }
-.latest-item { display: grid; gap: 8px; }
-.latest-kicker { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-glass-quiet); }
-.latest-kicker b { color: var(--lime); font-weight: 600; }
-.latest-title { font-family: var(--display); font-weight: 400; font-size: 19px; line-height: 1.22; text-wrap: pretty;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.latest-item:hover .latest-title, .latest-item:focus-visible .latest-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-.latest-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--glass-line); padding-top: 10px; font-size: 12.5px; color: var(--on-glass-quiet); }
-.latest-all { display: inline-flex; align-items: center; gap: 6px; color: var(--on-glass) !important; font-weight: 500; }
-.latest-all svg { width: 14px; height: 14px; transition: transform .35s var(--ease); }
-.latest-all:hover svg { transform: translateX(3px); }
-html.intro .latest { opacity: 0; transform: translateY(28px); pointer-events: none; }
-html.revealing .latest { transition-duration: .9s; transition-delay: .6s; }
-html.diving .latest { opacity: 0; transform: translateY(18px) scale(.98); pointer-events: none; }
-@media (min-width: 1100px) and (min-height: 640px) { .latest { display: grid; } }
 @media (max-width: 1099px) { .nav-res { display: none !important; } }
 
 /* ---------- sheets ---------- */
@@ -782,15 +757,15 @@ a.cta svg { width: 16px; height: 16px; }
     <a href="/work" data-open="work">Work</a>
     <a href="/capabilities" data-open="capabilities">Capabilities</a>
     <a href="/ai" data-open="ai">AI</a>
-    <a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
     <a href="/contact" data-open="contact">Contact</a>
     <a href="/about" data-open="about">About</a>
+    <a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
   </nav>
 </header>
 
 <section class="card" id="card" aria-live="polite">
   <div class="card-swap" id="cardSwap">
-    <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 5</span></div>
+    <div class="card-head"><h2 id="cardTitle">Work</h2><span class="card-count" id="cardCount">1 / 6</span></div>
     <!-- One line per card stop, matched by data-stop -->
     <p class="card-line" id="cardLine">
       <span data-stop="work" class="on">Campaigns, content and commerce for global brands</span>
@@ -798,21 +773,20 @@ a.cta svg { width: 16px; height: 16px; }
       <span data-stop="ai" aria-hidden="true">AI tools we build in house for copy, content and reviews</span>
       <span data-stop="contact" aria-hidden="true">Start a project with our teams in London, Barcelona or Abu Dhabi</span>
       <span data-stop="about" aria-hidden="true">An independent team working in over 100&nbsp;countries</span>
+      <span data-stop="resources" aria-hidden="true">Guides and white papers on Amazon, AI, content and the rules around them</span>
     </p>
     <button class="open-btn magnet" id="cardOpen"><span class="cta-label" id="cardCta">See the work</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
   </div>
   <div class="card-foot">
     <div class="steps">
       <button class="round magnet" id="prevStop" aria-label="Previous card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
-      <div class="dots" id="dots"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="dots" id="dots"><span></span><span></span><span></span><span></span><span></span><span></span></div>
       <button class="round magnet" id="nextStop" aria-label="Next card"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button>
     </div>
     <span class="hint" id="dragHint">Drag the desert to turn</span>
   </div>
 </section>
 
-<!-- Desktop only: the newest Resource Centre article, stacked above the card -->
-<aside class="latest" id="latest" aria-label="Latest from the Resource Centre"><!--@@LATEST@@--></aside>
 
 <button class="sound" id="soundBtn" aria-pressed="false" aria-label="Sound off. Turn on ambient sound"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="sound-label">Sound off</span></button>
 <div class="moods" id="moods" role="radiogroup" aria-label="Sound options" hidden></div>
@@ -821,7 +795,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap" id="workGrid">
@@ -835,7 +809,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="cap" id="capPage">
@@ -953,7 +927,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -981,7 +955,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <div class="wrap">
@@ -1005,7 +979,7 @@ a.cta svg { width: 16px; height: 16px; }
 <section class="sheet" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden>
   <div class="sheet-bar">
     <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
-    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a>
+    <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
   <article class="pg" id="pageBody"></article>
@@ -1035,6 +1009,7 @@ const STOPS = [
   { id: 'ai', title: 'AI', cta: 'Explore Freak Lab', deg: -52 },       // between Capabilities and Contact, so the other views stay as tuned
   { id: 'contact', title: 'Contact', cta: 'Get in touch', deg: -70 },
   { id: 'about', title: 'About', cta: 'Meet Freak', deg: -105 },
+  { id: 'resources', title: 'Resource Centre', cta: 'Read the guides', deg: -118 },   // just past About, before the F turns its back
 ];
 
 /* Case studies. Modules render in this order and are skipped when empty:
@@ -1475,8 +1450,6 @@ function loop() {
 
 /* ---------------- interaction ---------------- */
 const card = document.getElementById('card');
-// the Resource Centre panel sits on top of the card, so it follows the card's height
-try { new ResizeObserver(() => document.documentElement.style.setProperty('--card-h', card.offsetHeight + 'px')).observe(card); } catch (e) {}
 const swap = document.getElementById('cardSwap');
 const dots = [...document.querySelectorAll('#dots span')];
 const prevBtn = document.getElementById('prevStop');
@@ -1513,7 +1486,8 @@ function setTitle(el, text) {
   el.classList.remove('out');
   el.dataset.title = text;
   el.setAttribute('aria-label', text);
-  el.innerHTML = [...text].map((c, i) => `<span class="ltr" aria-hidden="true" style="--i:${i}">${c === ' ' ? ' ' : esc(c)}</span>`).join('');
+  let i = 0;   // letters are grouped by word, so a long title like Resource Centre breaks between words
+  el.innerHTML = text.split(' ').map(w => `<span class="word">${[...w].map(c => `<span class="ltr" aria-hidden="true" style="--i:${i++}">${esc(c)}</span>`).join('')}</span>`).join(`<span class="ltr" aria-hidden="true" style="--i:${0}"> </span>`);
 }
 
 /* Magnetic buttons on the card (mouse and trackpad only) */
@@ -2003,6 +1977,7 @@ const SoundKit = (() => {
     { bass: 35, notes: [47, 54, 57, 62, 64], top: [66, 69, 71, 74, 76] },   // Bm11
     { bass: 31, notes: [50, 54, 57, 59, 61], top: [66, 69, 71, 73, 74, 78] },   // Gmaj9#11
     { bass: 40, notes: [47, 54, 55, 59, 62], top: [66, 67, 71, 74, 78] },   // Em9
+    { bass: 42, notes: [49, 54, 57, 59, 64], top: [66, 69, 71, 73, 76] },   // F#m11, for the Resource Centre
   ];
 
   function noiseBuffer(ctx) {
