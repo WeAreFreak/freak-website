@@ -90,7 +90,7 @@ def pages():
     p = {
         '': {'title': 'Freak | Independent creative, data and AI agency', 'desc': DESC},
         'work': {'title': 'Work | Freak', 'desc': 'Campaigns, ecommerce, film and interactive work for clients across food, health, culture and tech, from Freak.'},
-        'capabilities': {'title': 'Capabilities | Freak', 'desc': 'Creative, data and AI under one roof. Amazon, content and live production, influencer campaigns and our own AI tools, from Freak in London, Barcelona and Abu Dhabi.'},
+        'capabilities': {'title': 'Full service creative and marketing agency | Freak', 'desc': 'Full service creative, data and AI under one roof. Amazon, content and live production, influencer campaigns and our own AI tools, from Freak in London, Barcelona and Abu Dhabi.'},
         'about': {'title': 'About | Freak', 'desc': 'A multidisciplinary agency for bold brands with stories worth telling. Meet Freak, with a head office in London and hubs in Barcelona and Abu Dhabi.'},
         'contact': {'title': 'Contact | Freak', 'desc': 'Talk to Freak about a new project. Email sales@wearefreak.com or visit the studio at 22 Ash Ave, London SE17 1HS.'},
         'terms': {'title': 'Terms of use | Freak', 'desc': 'The terms that apply to using wearefreak.com.'},
@@ -427,6 +427,48 @@ def resources_html(m):
                f'<p>Interviews, features and the stories other people have written about our work.</p></header><ul class="press">{press}</ul></section>' if press else ''))
 
 
+SIZES = '(max-width: 900px) 100vw, 1200px'
+
+
+def variant(src, w):
+    """A smaller copy of a content image for phones, made once and kept in img/r."""
+    from PIL import Image
+    base = os.path.splitext(os.path.basename(src))[0]
+    out_rel = f'img/r/{os.path.dirname(src)[4:].replace("/", "-") or "img"}-{base}-{w}.webp'
+    out, full = os.path.join(R, out_rel), os.path.join(R, src)
+    if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(full):
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        im = Image.open(full)
+        im = im.convert('RGBA' if im.mode in ('RGBA', 'LA', 'P') else 'RGB')
+        im.resize((w, round(im.height * w / im.width)), Image.LANCZOS).save(out, 'WEBP', quality=80, method=6)
+    return out_rel
+
+
+def responsive(h):
+    """Wide content images get 800 and 1200 pixel copies, so phones download a smaller file."""
+    from PIL import Image
+    def fix(mt):
+        tag, src = mt.group(0), mt.group(1)
+        if 'srcset=' in tag or not os.path.exists(os.path.join(R, src)):
+            return tag
+        w = Image.open(os.path.join(R, src)).width
+        if w < 1100:
+            return tag
+        steps = [x for x in (800, 1200) if x < w - 150]
+        srcset = ', '.join(f'{variant(src, x)} {x}w' for x in steps) + f', {src} {w}w'
+        return tag[:-1] + f' srcset="{srcset}" sizes="{SIZES}">'
+    return re.sub(r'<img\s[^>]*?src="(img/[^"]+\.webp)"[^>]*>', fix, h)
+
+
+def label_tables(h):
+    """Wide tables scroll sideways on phones, so each scroll box is focusable and named after the heading above it."""
+    def fix(mt):
+        heads = re.findall(r'<h[23][^>]*>(.*?)</h[23]>', h[:mt.start()], flags=re.S)
+        name = text_of(heads[-1]).rstrip('.') if heads else 'Table'
+        return f'<div class="tbl" tabindex="0" role="region" aria-label="{esc(name)}">'
+    return re.sub(r'<div class="tbl">', fix, h)
+
+
 def render(name):
     m = CONTENT[name]
     if m['kind'] == 'article':
@@ -435,7 +477,7 @@ def render(name):
         parts = [page_head(m), resources_html(m), faq_html(m), cta_html(m)]
     else:
         parts = [page_head(m), hero_html(m), m['body'], cases_html(m), reading_html(m), faq_html(m), related_html(m), cta_html(m)]
-    return wire('\n'.join(x for x in parts if x))
+    return wire(responsive(label_tables('\n'.join(x for x in parts if x))))
 
 
 def open_sheet(body, sid):

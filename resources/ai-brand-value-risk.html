@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--on-glass); font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
   transition: opacity .5s var(--ease); pointer-events: none;
 }
-.loading-note.gone { opacity: 0; }
+.loading-note.gone { opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), visibility 0s linear .5s; }
 
 /* ---------- header ---------- */
 .top {
@@ -602,7 +602,7 @@ a.cta svg { width: 16px; height: 16px; }
 .pg-split > * { min-width: 0; }
 .pg-split.flip > :first-child { order: 2; }
 .pg-copy { display: grid; gap: 14px; }
-.pg-copy h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
+.pg-copy h3, .pg-copy h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
 .pg-copy p { margin: 0; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
 .pg-copy .label + h3 { margin-top: -4px; }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
@@ -770,11 +770,11 @@ a.cta svg { width: 16px; height: 16px; }
 <canvas id="world" aria-hidden="true"></canvas>
 <div class="labels" id="labels" aria-hidden="true" hidden></div>
 <div class="still" id="still"></div>
-<div class="loading-note" id="loadingNote">Entering Freak, Welcome</div>
+<div class="loading-note" id="loadingNote" role="status">Entering Freak, Welcome</div>
 
 <header class="top">
   <div class="brand-wrap">
-    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></button>
     <h1 class="tagline">Independent creative, data and AI agency</h1>
   </div>
   <nav class="nav" aria-label="Main">
@@ -818,7 +818,7 @@ a.cta svg { width: 16px; height: 16px; }
 <!-- Work: grid and case study share one sheet -->
 <section class="sheet" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -881,7 +881,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -889,8 +889,8 @@ a.cta svg { width: 16px; height: 16px; }
   <div class="wrap">
     <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative, data and AI, under one roof.</h1></div>
     <div class="cap-intro up">
-      <p>Freak is an independent, full service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
-      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
+      <p>Freak is an independent, full service creative and marketing agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
+      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line as one integrated team, and we fit around the way your team works.</p>
     </div>
     <div class="proof">
       <div class="up"><b data-count="100+">100+</b><span>countries served</span></div>
@@ -999,7 +999,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1027,7 +1027,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1051,7 +1051,7 @@ a.cta svg { width: 16px; height: 16px; }
      prerendered HTML; moving between them inside the app loads just the page body from /f/<address> -->
 <section class="sheet open" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle">
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1070,8 +1070,8 @@ a.cta svg { width: 16px; height: 16px; }
 
 <h2 id="what-our-impact-assessments-found">What our impact assessments found</h2>
 <p>We ran impact assessments for brands across categories, adding a made with AI label to real content and measuring the response. Engagement and conversion fell whatever the product's price point, and the size of the fall was strongly linked to price.</p>
-<figure class="pg-fig"><img src="img/p/r-ai-brand.webp" alt="A chart showing falls in social engagement and ecommerce conversion when content carries a made with AI label" loading="lazy" width="1600" height="1000"><figcaption>Results from Freak's impact assessments, with IAB research on attitudes to AI ads.</figcaption></figure>
-<div class="tbl"><table>
+<figure class="pg-fig"><img src="img/p/r-ai-brand.webp" alt="A chart showing falls in social engagement and ecommerce conversion when content carries a made with AI label" loading="lazy" width="1600" height="1000" srcset="img/r/p-r-ai-brand-800.webp 800w, img/r/p-r-ai-brand-1200.webp 1200w, img/p/r-ai-brand.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"><figcaption>Results from Freak's impact assessments, with IAB research on attitudes to AI ads.</figcaption></figure>
+<div class="tbl" tabindex="0" role="region" aria-label="What our impact assessments found"><table>
 <thead><tr><th>Measure</th><th class="num">Change with a made with AI label</th></tr></thead>
 <tbody>
 <tr><td>Social media engagement rate</td><td class="num">-15 - 20%</td></tr>
@@ -1107,7 +1107,7 @@ a.cta svg { width: 16px; height: 16px; }
 <p>The winners won't be the brands using AI the most. They'll be the ones who know where to use it and where not to, and who replace guesswork with evidence. That's how we build and use <a href="/ai" data-open="ai">Freak Lab</a>, and how our <a href="/capabilities/content-production" data-open="capabilities/content-production">content team</a> decides where AI belongs on each brief.</p>
 <p><i>This article is a general overview and isn't legal advice.</i></p><h2 id="sources">Sources</h2><ol class="sources"><li><a href="https://lbbonline.com/news/ai-compliance-brand-value-risk-opportunity-creativity" target="_blank" rel="noopener">Brand value, not compliance, is the biggest AI risk</a>, LBB</li><li><a href="https://www.iab.com/insights/the-ai-ad-gap-widens/" target="_blank" rel="noopener">The AI ad gap widens</a>, IAB</li><li><a href="https://artificialintelligenceact.eu/transparency-rules-article-50/" target="_blank" rel="noopener">The EU AI Act's transparency rules, a practical guide to Article 50</a>, artificialintelligenceact.eu</li><li><a href="https://www.cooley.com/news/insight/2026/2026-01-29-new-york-enacts-synthetic-performer-disclosure-law-for-advertisements-including-those-using-generative-ai" target="_blank" rel="noopener">New York enacts synthetic performer disclosure law for advertisements</a>, Cooley</li></ol></div><aside class="pg-aside"><nav aria-label="In this article"><span class="label">In this article</span><a href="#the-blind-spot">The blind spot</a><a href="#what-our-impact-assessments-found">What our impact assessments found</a><a href="#the-rules-are-hardening">The rules are hardening</a><a href="#six-steps-to-use-ai-without-hurting-the-brand">Six steps to use AI without hurting the brand</a><a href="#an-advantage-for-agile-teams">An advantage for agile teams</a><a href="#sources">Sources</a></nav><div class="box"><span class="label">Freak Lab</span><b>AI with the checks built in</b><p>Our tools flag AI labelling and run quality checks on every asset before it ships.</p><a class="stage-link" href="/ai" data-open="ai">See Freak Lab<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></aside></div>
 <section class="pg-sec" id="faq"><header><span class="label">FAQs</span><h2>Questions clients ask us.</h2></header><div class="pg-faq"><details><summary>Does labelling content as made with AI hurt performance?</summary><p>In Freak's impact assessments it did. When real content carried a made with AI label, social engagement rates fell by 15 - 20% and ecommerce conversion rates by 13 - 16%. The biggest falls were for premium brands and premium products within a category.</p></details><details><summary>Does the EU AI Act require labels on AI generated ads?</summary><p>Article 50 of the EU AI Act requires deployers to disclose deepfakes, meaning AI generated or manipulated images, audio or video that resemble real people, objects, places or events and would falsely appear authentic. It applies from 2nd Aug 2026. Evidently creative or satirical work has a lighter duty, and it's worth taking legal advice on each use.</p></details><details><summary>What is New York's synthetic performer law?</summary><p>Signed in December 2025 and in force from 9th Jun 2026, it requires advertisers to conspicuously disclose when an ad includes a synthetic performer, a digitally created person who isn't a recognisable real individual. Penalties are $1,000 for a first violation and $5,000 for each one after.</p></details><details><summary>Where is it safe to use AI in marketing?</summary><p>Start in lower risk places such as martech, research, ideation, creative development and quality checks. Use it more carefully in high visibility work like brand campaigns, social and ecommerce content, and test the impact before you scale.</p></details></div></section>
-<section class="pg-sec" id="reading"><header><span class="label">Keep reading</span><h2>More from the Resource Centre.</h2></header><div class="res-grid"><a class="res-card" href="/resources/amazon-image-visual-engagement-framework" data-cat="Amazon" data-open="resources/amazon-image-visual-engagement-framework"><div class="frame"><img src="img/p/r-framework.webp" alt="An attention heatmap over a Feliway Amazon image with the eye path numbered, beside the framework's five measures" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Amazon</b><span>2nd Sep 2026</span><span>3 min read</span></div><h3>How we score Amazon images before shoppers ever see them.</h3><p>The five measures behind our neural marketing framework, what each one tests and how we use them to fix Amazon images before they go live.</p></a><a class="res-card" href="/resources/ugc-for-amazon-and-social" data-cat="Content" data-open="resources/ugc-for-amazon-and-social"><div class="frame"><img src="img/p/r-ugc.webp" alt="Three vertical UGC videos on phones, labelled with the placement each one is cut for" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Content</b><span>10th Jun 2026</span><span>2 min read</span></div><h3>UGC that works on Amazon and social, from brief to final cut.</h3><p>How we brief, cast and cut UGC for TikTok, Reels and Amazon, with rights agreed first and versions for organic and paid.</p></a><a class="res-card" href="/resources/hfss-advertising-rules-2026" data-cat="Advertising rules" data-open="resources/hfss-advertising-rules-2026"><div class="frame"><img src="img/p/r-hfss.webp" alt="A chart of when less healthy food ads are restricted on TV, on demand and online, with the channels still open" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Advertising rules</b><span>30th Sep 2026</span><span>4 min read</span></div><h3>HFSS advertising rules in 2026, and what food brands can still do.</h3><p>What's banned on TV and online since 5th Jan 2026, what's still open and how food and drink brands are adapting their media and creative.</p></a></div></section>
+<section class="pg-sec" id="reading"><header><span class="label">Keep reading</span><h2>More from the Resource Centre.</h2></header><div class="res-grid"><a class="res-card" href="/resources/amazon-image-visual-engagement-framework" data-cat="Amazon" data-open="resources/amazon-image-visual-engagement-framework"><div class="frame"><img src="img/p/r-framework.webp" alt="An attention heatmap over a Feliway Amazon image with the eye path numbered, beside the framework's five measures" loading="lazy" width="960" height="600" srcset="img/r/p-r-framework-800.webp 800w, img/r/p-r-framework-1200.webp 1200w, img/p/r-framework.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>Amazon</b><span>2nd Sep 2026</span><span>3 min read</span></div><h3>How we score Amazon images before shoppers ever see them.</h3><p>The five measures behind our neural marketing framework, what each one tests and how we use them to fix Amazon images before they go live.</p></a><a class="res-card" href="/resources/ugc-for-amazon-and-social" data-cat="Content" data-open="resources/ugc-for-amazon-and-social"><div class="frame"><img src="img/p/r-ugc.webp" alt="Three vertical UGC videos on phones, labelled with the placement each one is cut for" loading="lazy" width="960" height="600" srcset="img/r/p-r-ugc-800.webp 800w, img/r/p-r-ugc-1200.webp 1200w, img/p/r-ugc.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>Content</b><span>10th Jun 2026</span><span>2 min read</span></div><h3>UGC that works on Amazon and social, from brief to final cut.</h3><p>How we brief, cast and cut UGC for TikTok, Reels and Amazon, with rights agreed first and versions for organic and paid.</p></a><a class="res-card" href="/resources/hfss-advertising-rules-2026" data-cat="Advertising rules" data-open="resources/hfss-advertising-rules-2026"><div class="frame"><img src="img/p/r-hfss.webp" alt="A chart of when less healthy food ads are restricted on TV, on demand and online, with the channels still open" loading="lazy" width="960" height="600" srcset="img/r/p-r-hfss-800.webp 800w, img/r/p-r-hfss-1200.webp 1200w, img/p/r-hfss.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>Advertising rules</b><span>30th Sep 2026</span><span>4 min read</span></div><h3>HFSS advertising rules in 2026, and what food brands can still do.</h3><p>What's banned on TV and online since 5th Jan 2026, what's still open and how food and drink brands are adapting their media and creative.</p></a></div></section>
 <section class="pg-sec" id="related"><header><span class="label">Keep exploring</span></header><div class="chips"><a href="/ai" data-open="ai">AI<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/abu-dhabi" data-open="capabilities/abu-dhabi">Abu Dhabi<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/resources" data-open="resources">Resource Centre<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></section>
 <section class="pg-band"><div class="pgw pg-cta"><div><span class="label">Start a project</span><h2>Got a brief like this?</h2><p>Tell us where you want to grow, and we'll show you how we'd get there.</p></div><a class="cta" href="/contact" data-open="contact">Start a project<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></section>
 </article>
@@ -1116,7 +1116,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1151,7 +1151,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-privacy" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1194,7 +1194,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-cookies" role="dialog" aria-modal="true" aria-labelledby="cookiesTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1227,6 +1227,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.77bd3bd658.js"></script>
+<script type="module" src="/assets/app.faebc9547f.js"></script>
 </body>
 </html>

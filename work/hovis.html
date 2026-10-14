@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--on-glass); font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
   transition: opacity .5s var(--ease); pointer-events: none;
 }
-.loading-note.gone { opacity: 0; }
+.loading-note.gone { opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), visibility 0s linear .5s; }
 
 /* ---------- header ---------- */
 .top {
@@ -602,7 +602,7 @@ a.cta svg { width: 16px; height: 16px; }
 .pg-split > * { min-width: 0; }
 .pg-split.flip > :first-child { order: 2; }
 .pg-copy { display: grid; gap: 14px; }
-.pg-copy h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
+.pg-copy h3, .pg-copy h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
 .pg-copy p { margin: 0; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
 .pg-copy .label + h3 { margin-top: -4px; }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
@@ -770,11 +770,11 @@ a.cta svg { width: 16px; height: 16px; }
 <canvas id="world" aria-hidden="true"></canvas>
 <div class="labels" id="labels" aria-hidden="true" hidden></div>
 <div class="still" id="still"></div>
-<div class="loading-note" id="loadingNote">Entering Freak, Welcome</div>
+<div class="loading-note" id="loadingNote" role="status">Entering Freak, Welcome</div>
 
 <header class="top">
   <div class="brand-wrap">
-    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></button>
     <h1 class="tagline">Independent creative, data and AI agency</h1>
   </div>
   <nav class="nav" aria-label="Main">
@@ -818,7 +818,7 @@ a.cta svg { width: 16px; height: 16px; }
 <!-- Work: grid and case study share one sheet -->
 <section class="sheet open" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle">
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -887,7 +887,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -895,8 +895,8 @@ a.cta svg { width: 16px; height: 16px; }
   <div class="wrap">
     <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative, data and AI, under one roof.</h1></div>
     <div class="cap-intro up">
-      <p>Freak is an independent, full service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
-      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
+      <p>Freak is an independent, full service creative and marketing agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
+      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line as one integrated team, and we fit around the way your team works.</p>
     </div>
     <div class="proof">
       <div class="up"><b data-count="100+">100+</b><span>countries served</span></div>
@@ -1005,7 +1005,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1033,7 +1033,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1057,7 +1057,7 @@ a.cta svg { width: 16px; height: 16px; }
      prerendered HTML; moving between them inside the app loads just the page body from /f/<address> -->
 <section class="sheet" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1067,7 +1067,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1102,7 +1102,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-privacy" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1145,7 +1145,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-cookies" role="dialog" aria-modal="true" aria-labelledby="cookiesTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1178,6 +1178,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.77bd3bd658.js"></script>
+<script type="module" src="/assets/app.faebc9547f.js"></script>
 </body>
 </html>

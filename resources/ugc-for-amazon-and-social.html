@@ -75,7 +75,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--on-glass); font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
   transition: opacity .5s var(--ease); pointer-events: none;
 }
-.loading-note.gone { opacity: 0; }
+.loading-note.gone { opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), visibility 0s linear .5s; }
 
 /* ---------- header ---------- */
 .top {
@@ -602,7 +602,7 @@ a.cta svg { width: 16px; height: 16px; }
 .pg-split > * { min-width: 0; }
 .pg-split.flip > :first-child { order: 2; }
 .pg-copy { display: grid; gap: 14px; }
-.pg-copy h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
+.pg-copy h3, .pg-copy h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 2.8vw, 36px); line-height: 1.12; }
 .pg-copy p { margin: 0; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
 .pg-copy .label + h3 { margin-top: -4px; }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
@@ -770,11 +770,11 @@ a.cta svg { width: 16px; height: 16px; }
 <canvas id="world" aria-hidden="true"></canvas>
 <div class="labels" id="labels" aria-hidden="true" hidden></div>
 <div class="still" id="still"></div>
-<div class="loading-note" id="loadingNote">Entering Freak, Welcome</div>
+<div class="loading-note" id="loadingNote" role="status">Entering Freak, Welcome</div>
 
 <header class="top">
   <div class="brand-wrap">
-    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak"></button>
+    <button class="brand" id="homeBtn" aria-label="Freak home"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></button>
     <h1 class="tagline">Independent creative, data and AI agency</h1>
   </div>
   <nav class="nav" aria-label="Main">
@@ -818,7 +818,7 @@ a.cta svg { width: 16px; height: 16px; }
 <!-- Work: grid and case study share one sheet -->
 <section class="sheet" id="sheet-work" role="dialog" aria-modal="true" aria-labelledby="workTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work" aria-current="true">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -881,7 +881,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-capabilities" role="dialog" aria-modal="true" aria-labelledby="capTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities" aria-current="true">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -889,8 +889,8 @@ a.cta svg { width: 16px; height: 16px; }
   <div class="wrap">
     <div class="page-head up"><span class="label">Capabilities</span><h1 id="capTitle">Creative, data and AI, under one roof.</h1></div>
     <div class="cap-intro up">
-      <p>Freak is an independent, full service agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
-      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line, and we fit around the way your team works.</p>
+      <p>Freak is an independent, full service creative and marketing agency. We don't believe you can separate creative from data any more, so the work we make for brand, social and the digital shelf is tested and measured for what it does to revenue. We build our own AI tools too, so the data does more of the work.</p>
+      <p>Everything is made in house, in our own production studio for 3D, 2D, live production and interactive. Our head office is in London, with global hubs in Barcelona and Abu Dhabi, and we look after clients in more than 100 countries. We work through the line as one integrated team, and we fit around the way your team works.</p>
     </div>
     <div class="proof">
       <div class="up"><b data-count="100+">100+</b><span>countries served</span></div>
@@ -999,7 +999,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about" aria-current="true">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1027,7 +1027,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-contact" role="dialog" aria-modal="true" aria-labelledby="contactTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact" aria-current="true">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1051,7 +1051,7 @@ a.cta svg { width: 16px; height: 16px; }
      prerendered HTML; moving between them inside the app loads just the page body from /f/<address> -->
 <section class="sheet open" id="sheet-page" role="dialog" aria-modal="true" aria-labelledby="pageTitle">
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1066,7 +1066,7 @@ a.cta svg { width: 16px; height: 16px; }
 <div class="pg-article"><div class="prose"><h2 id="why-ugc-works">Why UGC works</h2>
 <p>Shoppers have learned to scroll past ads. Content that looks like it came from someone like them gets watched. UGC feels native in TikTok and Reels, it answers the questions a shopper has on a product page and it gives a brand far more content than a traditional shoot can for the same budget.</p>
 <p>The catch is that it has to do a brand's job while sounding like a person. That's where the planning goes.</p>
-<figure class="pg-fig"><img src="img/p/r-ugc.webp" alt="Three vertical UGC videos on phones, labelled with the placement each one is cut for" loading="lazy" width="1600" height="1000"><figcaption>One shoot, cut for different placements.</figcaption></figure>
+<figure class="pg-fig"><img src="img/p/r-ugc.webp" alt="Three vertical UGC videos on phones, labelled with the placement each one is cut for" loading="lazy" width="1600" height="1000" srcset="img/r/p-r-ugc-800.webp 800w, img/r/p-r-ugc-1200.webp 1200w, img/p/r-ugc.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"><figcaption>One shoot, cut for different placements.</figcaption></figure>
 
 <h2 id="write-a-brief-that-keeps-their-voice">Write a brief that keeps their voice</h2>
 <p>A good UGC brief gives creators structure without a script that makes them sound like an ad. Ours always covers four things.</p>
@@ -1106,7 +1106,7 @@ a.cta svg { width: 16px; height: 16px; }
 <h2 id="measure-then-go-again">Measure, then go again</h2>
 <p>Track views, engagement and conversion for every cut, then brief the next round from what worked. The best performing creators become your regulars, and the best performing content becomes your ads. Our <a href="/capabilities/content-production" data-open="capabilities/content-production">content production team</a> runs UGC end to end, alongside our <a href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing">influencer programmes</a>.</p><h2 id="sources">Sources</h2><ol class="sources"><li><a href="https://www.asa.org.uk/resource/influencers-guide.html" target="_blank" rel="noopener">Influencers' guide to making clear that ads are ads</a>, ASA and CMA</li><li><a href="https://www.cooley.com/news/insight/2026/2026-01-29-new-york-enacts-synthetic-performer-disclosure-law-for-advertisements-including-those-using-generative-ai" target="_blank" rel="noopener">New York enacts synthetic performer disclosure law for advertisements</a>, Cooley</li></ol></div><aside class="pg-aside"><nav aria-label="In this article"><span class="label">In this article</span><a href="#why-ugc-works">Why UGC works</a><a href="#write-a-brief-that-keeps-their-voice">Write a brief that keeps their voice</a><a href="#cast-for-the-audience-not-the-follower-count">Cast for the audience, not the follower count</a><a href="#agree-the-rights-before-anyone-presses-record">Agree the rights before anyone presses record</a><a href="#cut-for-every-placement">Cut for every placement</a><a href="#where-ai-fits-and-where-it-doesn-t">Where AI fits, and where it doesn't</a><a href="#measure-then-go-again">Measure, then go again</a><a href="#sources">Sources</a></nav><div class="box"><span class="label">Content production</span><b>UGC, end to end</b><p>From casting and scripts to the final cuts for every channel.</p><a class="stage-link" href="/capabilities/content-production" data-open="capabilities/content-production">Our content services<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></aside></div>
 <section class="pg-sec" id="faq"><header><span class="label">FAQs</span><h2>Questions clients ask us.</h2></header><div class="pg-faq"><details><summary>What is UGC?</summary><p>UGC, or user generated content, is content made by customers or creators in their own voice rather than by the brand. Brands use it because it feels native in social feeds and on product pages, and shoppers trust it.</p></details><details><summary>Can UGC be used on Amazon?</summary><p>Yes. UGC style video works well as a product demonstration on the listing and in Amazon video ads, as long as you hold the rights and the claims match what the brand is allowed to say.</p></details><details><summary>Who owns the rights to UGC?</summary><p>The creator does, unless they agree otherwise. Agree in writing where the content can run, for how long and whether it can be used in paid ads, before anything is filmed.</p></details><details><summary>Should we use AI to make UGC?</summary><p>Not to invent customers. AI generated people passed off as real reviewers damage trust, and laws such as New York's synthetic performer rules now require disclosure. Use AI for editing, versioning and captions instead.</p></details></div></section>
-<section class="pg-sec" id="reading"><header><span class="label">Keep reading</span><h2>More from the Resource Centre.</h2></header><div class="res-grid"><a class="res-card" href="/resources/creator-seeding-process" data-cat="Creators" data-open="resources/creator-seeding-process"><div class="frame"><img src="img/p/r-seeding.webp" alt="Nine stages of creator seeding from source to roster, with the two seeding tiers" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Creators</b><span>5th Aug 2026</span><span>3 min read</span></div><h3>Creator seeding that gets posts, not just parcels.</h3><p>The nine stages, vetting checks and two tiers we use for creator seeding and gifting, plus the changes that lift the post rate.</p></a><a class="res-card" href="/resources/ai-brand-value-risk" data-cat="AI" data-open="resources/ai-brand-value-risk"><div class="frame"><img src="img/p/r-ai-brand.webp" alt="A chart showing falls in social engagement and ecommerce conversion when content carries a made with AI label" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>AI</b><span>16th Sep 2026</span><span>3 min read</span></div><h3>Brand value, not compliance, is the biggest AI risk.</h3><p>What our impact assessments found when real content carried a made with AI label, the rules now in force and six steps to use AI without hurting the brand.</p></a><a class="res-card" href="/resources/ecommerce-product-shoot-planning" data-cat="Production" data-open="resources/ecommerce-product-shoot-planning"><div class="frame"><img src="img/p/r-shoot.webp" alt="A shot matrix listing Hoover products against every asset the shoot had to deliver" loading="lazy" width="960" height="600"></div><div class="res-meta"><b>Production</b><span>24th Jun 2026</span><span>2 min read</span></div><h3>From one shoot to every listing, planning an ecommerce product shoot.</h3><p>The shot matrix, location, casting and product tests behind a five day shoot that gave Hoover films and 120+ images for every listing.</p></a></div></section>
+<section class="pg-sec" id="reading"><header><span class="label">Keep reading</span><h2>More from the Resource Centre.</h2></header><div class="res-grid"><a class="res-card" href="/resources/creator-seeding-process" data-cat="Creators" data-open="resources/creator-seeding-process"><div class="frame"><img src="img/p/r-seeding.webp" alt="Nine stages of creator seeding from source to roster, with the two seeding tiers" loading="lazy" width="960" height="600" srcset="img/r/p-r-seeding-800.webp 800w, img/r/p-r-seeding-1200.webp 1200w, img/p/r-seeding.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>Creators</b><span>5th Aug 2026</span><span>3 min read</span></div><h3>Creator seeding that gets posts, not just parcels.</h3><p>The nine stages, vetting checks and two tiers we use for creator seeding and gifting, plus the changes that lift the post rate.</p></a><a class="res-card" href="/resources/ai-brand-value-risk" data-cat="AI" data-open="resources/ai-brand-value-risk"><div class="frame"><img src="img/p/r-ai-brand.webp" alt="A chart showing falls in social engagement and ecommerce conversion when content carries a made with AI label" loading="lazy" width="960" height="600" srcset="img/r/p-r-ai-brand-800.webp 800w, img/r/p-r-ai-brand-1200.webp 1200w, img/p/r-ai-brand.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>AI</b><span>16th Sep 2026</span><span>3 min read</span></div><h3>Brand value, not compliance, is the biggest AI risk.</h3><p>What our impact assessments found when real content carried a made with AI label, the rules now in force and six steps to use AI without hurting the brand.</p></a><a class="res-card" href="/resources/ecommerce-product-shoot-planning" data-cat="Production" data-open="resources/ecommerce-product-shoot-planning"><div class="frame"><img src="img/p/r-shoot.webp" alt="A shot matrix listing Hoover products against every asset the shoot had to deliver" loading="lazy" width="960" height="600" srcset="img/r/p-r-shoot-800.webp 800w, img/r/p-r-shoot-1200.webp 1200w, img/p/r-shoot.webp 1600w" sizes="(max-width: 900px) 100vw, 1200px"></div><div class="res-meta"><b>Production</b><span>24th Jun 2026</span><span>2 min read</span></div><h3>From one shoot to every listing, planning an ecommerce product shoot.</h3><p>The shot matrix, location, casting and product tests behind a five day shoot that gave Hoover films and 120+ images for every listing.</p></a></div></section>
 <section class="pg-sec" id="related"><header><span class="label">Keep exploring</span></header><div class="chips"><a href="/capabilities/content-production" data-open="capabilities/content-production">Content production<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/influencer-marketing" data-open="capabilities/influencer-marketing">Influencer campaigns, seeding and gifting<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/capabilities/amazon-agency" data-open="capabilities/amazon-agency">Amazon agency<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a><a href="/work/drscholls" data-open="work-drscholls">Dr Scholl's<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></section>
 <section class="pg-band"><div class="pgw pg-cta"><div><span class="label">Start a project</span><h2>Got a brief like this?</h2><p>Tell us where you want to grow, and we'll show you how we'd get there.</p></div><a class="cta" href="/contact" data-open="contact">Start a project<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></div></section>
 </article>
@@ -1115,7 +1115,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-terms" role="dialog" aria-modal="true" aria-labelledby="termsTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1150,7 +1150,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-privacy" role="dialog" aria-modal="true" aria-labelledby="privacyTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1193,7 +1193,7 @@ a.cta svg { width: 16px; height: 16px; }
 
 <section class="sheet" id="sheet-cookies" role="dialog" aria-modal="true" aria-labelledby="cookiesTitle" hidden>
   <div class="sheet-bar">
-    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak"></a>
+    <a class="brand" href="/" data-close aria-label="Back to the 3D world"><img src="img/wordmark.png" alt="Freak" width="480" height="147"></a>
     <nav aria-label="Pages"><a href="/work" data-open="work">Work</a><a href="/capabilities" data-open="capabilities">Capabilities</a><a href="/ai" data-open="ai">AI</a><a href="/contact" data-open="contact">Contact</a><a href="/about" data-open="about">About</a><a href="/resources" data-open="resources" class="nav-res">Resource Centre</a>
       <button class="close" data-close aria-label="Close and return to the 3D world"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15"/></svg></button></nav>
   </div>
@@ -1226,6 +1226,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.77bd3bd658.js"></script>
+<script type="module" src="/assets/app.faebc9547f.js"></script>
 </body>
 </html>
