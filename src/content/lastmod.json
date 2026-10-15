@@ -84,8 +84,8 @@
   "date": "2026-10-15"
  },
  "resources": {
-  "hash": "6333a9ba1f69c0a3",
-  "date": "2026-10-15"
+  "hash": "1b420785d9c1b33f",
+  "date": "2026-10-16"
  },
  "resources/amazon-alexa-for-shopping": {
   "hash": "08014374bf88a378",
@@ -98,6 +98,10 @@
  "resources/ai-brand-value-risk": {
   "hash": "3156ec94a4d77aa6",
   "date": "2026-10-15"
+ },
+ "resources/reddit-seo-ai-search": {
+  "hash": "61551121008b7950",
+  "date": "2026-10-16"
  },
  "resources/amazon-image-visual-engagement-framework": {
   "hash": "0673cb4406e89ec6",
