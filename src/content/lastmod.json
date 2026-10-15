@@ -84,7 +84,7 @@
   "date": "2026-10-15"
  },
  "resources": {
-  "hash": "806f3ef27be6dddc",
+  "hash": "2465f2b5bd5bef7d",
   "date": "2026-10-15"
  },
  "resources/amazon-alexa-for-shopping": {
@@ -112,7 +112,7 @@
   "date": "2026-10-15"
  },
  "resources/amazon-image-visual-engagement-framework": {
-  "hash": "6a7ea245a5bf91e8",
+  "hash": "8ccfc35d2f796fba",
   "date": "2026-10-15"
  },
  "resources/amazon-review-moderation": {
@@ -137,6 +137,10 @@
  },
  "resources/ugc-for-amazon-and-social": {
   "hash": "6853ea4cac514de4",
+  "date": "2026-10-15"
+ },
+ "resources/neuromarketing-ai-image-analysis": {
+  "hash": "4d2b002716c47fe4",
   "date": "2026-10-15"
  },
  "contact": {

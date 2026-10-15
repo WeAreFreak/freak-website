@@ -1,0 +1,115 @@
+<!--meta
+{
+ "kind": "article", "order": 0, "date": "2026-01-20", "category": "AI",
+ "title": "Neuromarketing and AI image analysis | How we weight the score | Freak",
+ "desc": "The eye tracking research behind our AI image analysis, our path since building VR eye tracking in 2019 and the rule we use to weight the score by where an image is seen.",
+ "label": "Case study", "crumb": "Neuromarketing and AI",
+ "h1": "Neuromarketing and AI image analysis, and how we weight the score.",
+ "lede": "Eye tracking research has shown for more than a century that the eye picks what to look at before the viewer starts thinking, and that the job in hand changes where it goes. This is the research our image analysis is built on, the path we've taken since 2019 and the rule we use to weight the score.",
+ "summary": "The research behind our neural marketing framework, how we got here from VR eye tracking in 2019 and the weights we give each measure for search, gallery and A+ images.",
+ "card": "img/p/r-neuromarketing.webp", "card_alt": "Freak's starting weights for the five measures, shown for main images in mobile search, gallery images and A+ modules",
+ "author": {"name": "Stuart Willison", "role": "Data Specialist"},
+ "keywords": ["neuromarketing", "eye tracking", "AI image analysis", "visual saliency", "saliency model", "Amazon images", "attention heatmap", "VR eye tracking"],
+ "sources": [
+  ["Did Javal measure eye movements during reading?", "https://bop.unibe.ch/JEMR/article/view/2284", "Wade and Tatler, Journal of Eye Movement Research, 2009"],
+  ["A model of saliency based visual attention for rapid scene analysis", "https://sites.krieger.jhu.edu/cns/files/2021/08/Itti_etal98.pdf", "Itti, Koch and Niebur, IEEE, 1998"],
+  ["Ad gist, ad communication in a single eye fixation", "https://ideas.repec.org/a/inm/ormksc/v31y2012i1p59-73.html", "Pieters and Wedel, Marketing Science, 2012"],
+  ["The stopping power of advertising, measures and effects of visual complexity", "https://repository.tilburguniversity.edu/items/3fddf97a-469e-4d38-9c26-8dbd00c750b2", "Pieters, Wedel and Batra, Journal of Marketing, 2010"],
+  ["Relative visual saliency differences induce sizable bias in consumer choice", "https://papers.ssrn.com/ab_id=1998433", "Milosavljevic, Navalpakkam, Koch and Rangel, Journal of Consumer Psychology, 2012"],
+  ["The visual environment and attention in decision making", "https://pure.au.dk/portal/en/publications/the-visual-environment-and-attention-in-decision-making/", "Orquin, Lahm and Stojić, Psychological Bulletin, 2021"],
+  ["The buffer effect, the role of color when advertising exposures are brief and blurred", "https://ideas.repec.org/a/inm/ormksc/v34y2015i1p134-143.html", "Wedel and Pieters, Marketing Science, 2015"],
+  ["The central fixation bias in scene viewing", "https://pubmed.ncbi.nlm.nih.gov/18217799/", "Tatler, Journal of Vision, 2007"],
+  ["The influence of banner advertisements on attention and memory, human faces with averted gaze can enhance advertising effectiveness", "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2014.00166/full", "Sajjacholapunt and Ball, Frontiers in Psychology, 2014"],
+  ["Does text attract attention on e-commerce images", "https://openaccess.thecvf.com/content/CVPR2022/papers/Jiang_Does_Text_Attract_Attention_on_E-Commerce_Images_A_Novel_Saliency_CVPR_2022_paper.pdf", "Jiang and others, CVPR, 2022"],
+  ["SUM, saliency unification through Mamba for visual attention modeling", "https://openaccess.thecvf.com/content/WACV2025/html/Hosseini_SUM_Saliency_Unification_through_Mamba_for_Visual_Attention_Modeling_WACV_2025_paper.html", "Hosseini and others, WACV, 2025"],
+  ["Modeling saliency dataset bias", "https://openaccess.thecvf.com/content/ICCV2025/html/Kummerer_Modeling_Saliency_Dataset_Bias_ICCV_2025_paper.html", "Kümmerer and others, ICCV, 2025"],
+  ["VIVE Pro Eye launches today in North America", "https://www.vive.com/us/newsroom/2019-06-06/", "HTC, 2019"],
+  ["Handbook on constructing composite indicators", "https://knowledge4policy.ec.europa.eu/sites/default/files/jrc47008_handbook_final.pdf", "OECD and JRC, 2008"]
+ ],
+ "aside": {"label": "Freak Lab", "title": "The tools we build in house", "text": "AI tools for copy, content, reviews and image analysis, built on paid data and our own frameworks.", "href": "/ai", "link": "See Freak Lab"},
+ "faq": [
+  ["What is neuromarketing?", "Neuromarketing studies how people's eyes and brains respond to marketing, using methods such as eye tracking. For product images it tells us what a shopper notices first, in what order and whether they understand it."],
+  ["Why does the weighting change from one image to another?", "Because shoppers are doing different things. A main image in search gets a fraction of a second next to its competitors, gallery images are opened on purpose and A+ is read by people already considering the product. The measures that predict success are different in each case."],
+  ["Why does colour count for less than saliency?", "Most of colour's pull on the eye comes from contrast, and saliency already measures contrast. We score colour on how well it fits the category and the brand, so the same contrast isn't counted twice."],
+  ["How accurate is AI at predicting where people look?", "On photos the best saliency models now come close to real eye tracking. On product images they're weaker unless they've been trained on ecommerce images, which is why we tune them with eye tracking on each image type and treat predicted eye paths as a guide to the first few looks."],
+  ["Does a high score mean more sales?", "A high score means an image is likely to be seen and understood, which is the first step to a click or a sale. Price, reviews and rank matter too, which is why we test the winning images with Amazon's own A/B tests."]
+ ],
+ "reading": ["resources/amazon-image-visual-engagement-framework", "resources/amazon-a-plus-content-guide", "resources/ai-brand-value-risk"],
+ "related": ["ai", "capabilities/amazon-agency", "capabilities/content-production"]
+}
+-->
+<h2>What neuromarketing measures</h2>
+<p>Neuromarketing studies how people's eyes and brains respond to marketing. For product images most of what's useful comes from one method, eye tracking, which records where people look, in what order and for how long.</p>
+<p>The finding we rely on most is old and well replicated. The eye picks what to look at before the viewer starts thinking, and the job they're doing changes where it goes. A shopper flicking through search results on a phone and a shopper reading a comparison table are doing different jobs, so their images shouldn't be judged the same way.</p>
+<figure class="pg-fig"><img src="img/p/r-neuromarketing.webp" alt="Freak's starting weights for the five measures, shown for main images in mobile search, gallery images and A+ modules" loading="lazy" width="1600" height="1000"><figcaption>Our starting weights for each measure, by where the image is seen.</figcaption></figure>
+
+<h2>The research we build on</h2>
+<p>Our framework rests on more than a century of work. A few of these dates are often misquoted, so we've checked them against the original papers.</p>
+<div class="tbl"><table>
+<thead><tr><th>Year</th><th>Who</th><th>What it showed</th></tr></thead>
+<tbody>
+<tr><td>1879</td><td>Javal</td><td>Named the jumps the eye makes when reading saccades, from observations made in his lab</td></tr>
+<tr><td>1898</td><td>Huey and Delabarre</td><td>Early eye trackers, attached to the eye to record its movements while reading</td></tr>
+<tr><td>1935</td><td>Buswell</td><td>Photographed 200 people looking at pictures and found their instructions changed where they looked</td></tr>
+<tr><td>1967</td><td>Yarbus</td><td>Eye Movements and Vision, published in English, showed the viewer's task steers the eye</td></tr>
+<tr><td>1980</td><td>Treisman and Gelade</td><td>Simple features such as colour and orientation register early and all at once, before attention</td></tr>
+<tr><td>1998</td><td>Itti, Koch and Niebur</td><td>The first working computer model of visual saliency</td></tr>
+<tr><td>2004</td><td>Pieters and Wedel</td><td>Eye tracked more than 3.6k consumers looking at 1,363 magazine ads</td></tr>
+<tr><td>2006</td><td>Nielsen Norman Group</td><td>The F shaped pattern people use to scan web pages</td></tr>
+<tr><td>2009</td><td>Judd and colleagues, MIT</td><td>1,003 images eye tracked by 15 viewers, the start of the MIT saliency benchmark</td></tr>
+<tr><td>2012</td><td>Pieters and Wedel</td><td>People get the gist of an ad in a single glance of a tenth of a second</td></tr>
+<tr><td>2019</td><td>HTC and Tobii</td><td>The Vive Pro Eye goes on sale with eye tracking built into a VR headset</td></tr>
+<tr><td>2022</td><td>Jiang and colleagues</td><td>The first eye tracking dataset of ecommerce images</td></tr>
+<tr><td>2025</td><td>Hosseini and colleagues</td><td>SUM, a saliency model with separate modes for photos, ecommerce images and interfaces</td></tr>
+</tbody></table></div>
+<p>Two lessons run through all of it. Each step made attention data bigger and cheaper, which is what made prediction possible. And from Buswell to Yarbus to Pieters and Wedel, the viewer's task keeps deciding where the eye goes.</p>
+
+<h2>Our path since 2019</h2>
+<p>We started with headsets. In 2019 we built VR eye tracking for J&amp;J, the same year HTC put eye tracking into the Vive Pro Eye. It showed us how people actually take in content and products, rather than how they say they do.</p>
+<p>Since then most of what we make for brands has moved to the phone, on Amazon, in social feeds and on product pages. So we turned what eye tracking taught us into a framework of five measures, and we use it to brief, check and fix ecommerce images before they go live. The next step was scale. Neural networks trained on eye tracking data can predict a heatmap in seconds, so every image can be scored rather than a sample. This year we're building the framework into Freak Lab as an image analyser that gives every image a score out of 100.</p>
+
+<h2>The five measures</h2>
+<ul>
+<li><b>Visual saliency.</b> What grabs the eye before the viewer starts thinking.</li>
+<li><b>Three second rule.</b> Whether the main benefit lands at a glance, at the size the shopper actually sees it.</li>
+<li><b>Trust anchors.</b> Faces, hands, numbers and proof that pull the eye and reassure.</li>
+<li><b>Reading pattern.</b> The order the eye takes across the image.</li>
+<li><b>Colour.</b> Whether the colours fit the category, the brand and the message.</li>
+</ul>
+
+<h2>How we weight the score</h2>
+<p>Each measure is scored out of 100, and how much it counts towards the overall score depends on where the image will be seen. These are our starting weights.</p>
+<div class="tbl"><table>
+<thead><tr><th>Measure</th><th>Main image in mobile search</th><th>Gallery images and infographics</th><th>A+ modules</th></tr></thead>
+<tbody>
+<tr><td>Visual saliency</td><td>35</td><td>15</td><td>10</td></tr>
+<tr><td>Three second rule</td><td>40</td><td>30</td><td>25</td></tr>
+<tr><td>Trust anchors</td><td>5</td><td>25</td><td>30</td></tr>
+<tr><td>Reading pattern</td><td>5</td><td>20</td><td>25</td></tr>
+<tr><td>Colour</td><td>15</td><td>10</td><td>10</td></tr>
+<tr><td><b>Total</b></td><td><b>100</b></td><td><b>100</b></td><td><b>100</b></td></tr>
+</tbody></table></div>
+<p><b>Main image in mobile search.</b> The tile is around 150 - 200 pixels wide on a phone and gets a fraction of a second next to its competitors. When people choose that fast, what stands out can outweigh what they'd normally prefer, and the gist of an image is taken in within a single glance. So the three second rule and saliency carry 75 of the 100 points. Amazon doesn't allow text, badges or graphics on the main image, and the first look at a single product goes to the centre whatever the layout, so trust anchors and reading pattern only get a token weight.</p>
+<p><b>Gallery images and infographics.</b> Shoppers open the gallery on purpose, and Baymard found 56% start a product page by exploring the images. Grabbing the eye matters less here than what the eye finds, so saliency drops and trust anchors and reading pattern rise. The three second rule stays the biggest single weight, because text that reads well on a desktop often can't be read on a phone, and an infographic nobody can read fails at everything else.</p>
+<p><b>A+ modules.</b> A+ sits lower on the page in front of shoppers who are already considering the product. Its job is to persuade and reassure, so trust anchors and reading pattern carry the most weight. Comparison tables are read row by row, and a stack of modules needs a clear place to start.</p>
+<p><b>Colour.</b> It gets less than people expect. Most of colour's pull on the eye comes from contrast, and contrast is already part of saliency, so counting it twice would reward loud images. Research on what individual colours mean is also weaker than marketing folklore suggests, and the popular claim that up to 90% of snap judgements come down to colour has no source behind it. We score colour on fit with the category and the brand, and on how much the product's own colour helps it be recognised in a small, blurry thumbnail.</p>
+
+<h2>The rules on top of the weights</h2>
+<p>A simple weighted average can reward images that are eye catching and confusing at the same time. Five rules stop that.</p>
+<ol>
+<li><b>Amazon's rules come first.</b> A main image that breaks them, with a background that isn't pure white, a product filling well under 85% of the frame or text on the image, is flagged and its score capped however well it does elsewhere.</li>
+<li><b>Saliency counts in full only when the image is understood.</b> Attention amplifies how shoppers already feel about a product rather than creating liking on its own. An image that grabs the eye but isn't understood keeps as little as half its saliency points.</li>
+<li><b>Text only counts if it can be read.</b> Claims, numbers and reading order on gallery and A+ images are only credited when the text is legible at the size it appears on a phone.</li>
+<li><b>Each signal is scored once.</b> Contrast and the pull of faces and text belong to saliency. What a face or claim does next belongs to trust anchors. One strong feature can't score in three places.</li>
+<li><b>Main images are judged against their neighbours.</b> Every compliant main image is a product on white, so we score saliency inside a simulated mobile results page, against the tiles around it.</li>
+</ol>
+<p>Inside trust anchors, a face looking towards the product or the claim earns credit, and one staring out of the image can take it away by holding the eye. Badges help up to a point, and more than two count against an image.</p>
+
+<h2>What the models can and can't do</h2>
+<p>On photos, the best saliency models now predict where people look almost as well as real eye tracking does. On product images they're weaker. Models lose around 40% of their accuracy when they're moved to a new kind of image, and on ecommerce images a model trained for them matches real eye tracking with a correlation of 0.79, against 0.56 for a leading model trained on photos. Text explains much of the gap, as it draws about five times the attention of objects on some ecommerce images.</p>
+<p>Predicted eye paths are much less reliable than heatmaps, so we treat them as a guide to the first few looks. A heatmap also shows what gets seen, which isn't the same as what persuades. That's why saliency is one measure of five, and why our scoring engine grades each image from the measured data against the framework rather than reading meaning into a heatmap.</p>
+
+<h2>How the weights will change</h2>
+<p>No published study links all five measures to Amazon sales, and none of the attention tools we've looked at publish how their overall scores are weighted. So these weights are our expert starting point, built from the research above, and we're publishing them so clients can see what drives a score.</p>
+<p>They'll be tuned against real results. Amazon's Manage Your Experiments splits shoppers between two versions of an image or A+ module, so every finished test tells us which image won with everything else held still. We'll fit the weights to those results for each use case, alongside a small eye tracking study on each image type and the judgement of our own designers, and only move them once enough tests have landed to justify it.</p>
+<div class="key"><b>In short</b><ul><li>Shoppers judge a product image at a glance, and what they're doing changes where they look</li><li>Our score weights five measures differently for search, gallery and A+ images</li><li>An image has to be understood before its attention counts in full</li><li>The weights are a starting point, refined with real A/B test results</li></ul></div>

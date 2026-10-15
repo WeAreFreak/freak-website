@@ -73,6 +73,7 @@ Freak (WeAreFreak Ltd, company 09308352) is an independent creative, data and AI
 - [Amazon A+ content that sells, and what we changed for Feliway](https://www.wearefreak.com/resources/amazon-a-plus-content-guide): How to plan Amazon A+ content and the image stack above it, from information hierarchy to testing, with the changes that doubled Feliway's sales.
 - [From one shoot to every listing, planning an ecommerce product shoot](https://www.wearefreak.com/resources/ecommerce-product-shoot-planning): How to plan one product shoot for Amazon, retailers and social. The shot matrix, location, casting and product tests behind Freak's Hoover shoot.
 - [UGC that works on Amazon and social, from brief to final cut](https://www.wearefreak.com/resources/ugc-for-amazon-and-social): How to brief, cast and cut UGC that works on TikTok, Reels and Amazon product pages, with usage rights agreed first and versions for organic and paid.
+- [Neuromarketing and AI image analysis, and how we weight the score](https://www.wearefreak.com/resources/neuromarketing-ai-image-analysis): The eye tracking research behind our AI image analysis, our path since building VR eye tracking in 2019 and the rule we use to weight the score by where an image is seen.
 
 ## Case studies
 
