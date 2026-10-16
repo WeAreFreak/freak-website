@@ -221,6 +221,9 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .cs-head .client { font-size: 15px; font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.tags a.site { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; color: var(--ink); text-decoration: none; transition: background .2s; }
+.tags a.site:hover { background: var(--lime); }
+.tags a.site svg { width: 11px; height: 11px; }
 .mod { padding-block: 24px; border-top: 1px solid var(--rule); }
 .mod-text { display: grid; gap: 18px; }
 .mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
@@ -535,6 +538,8 @@ a.link-btn { color: var(--paper); }
 .mod-story .story { display: grid; gap: 18px; min-width: 0; }
 .mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
 .mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-story .story a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: background .2s; }
+.mod-story .story a:hover { background: rgba(166, 242, 10, .28); }
 .mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
 .mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
 a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
@@ -873,6 +878,10 @@ a.cta svg { width: 16px; height: 16px; }
     <div class="tile-img"><img src="img/yutaka.webp" alt="Yutaka, Make Mealtimes Blossom" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>Yutaka</strong><span>Make Mealtimes Blossom</span></div>
   </a>
+  <a class="tile" href="/work/apt" data-case="apt" data-cursor="View" data-preview="vid/apt-preview.mp4">
+    <div class="tile-img"><img src="img/apt.webp" alt="Advanced Plastic Technology, From click to quote" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Advanced Plastic Technology</strong><span>From click to quote</span></div>
+  </a>
 </div>
   </div>
   <article class="wrap" id="caseStudy" aria-labelledby="csTitle"><div class="cs-hero rv"><img src="img/evermix.webp" alt="Evermix, Making Sound Resound" width="960" height="503"></div><header class="cs-head up" style="transition-delay:150ms"><span class="client">Evermix</span><h1 id="csTitle">Making Sound Resound</h1><div class="tags"><span>Rebrand</span><span>Visual Identity</span><span>Social Media</span><span>Motion Design</span></div></header><section class="mod mod-video rv"><video src="vid/evermix.mp4" poster="vid/evermix.webp" controls playsinline preload="none" aria-label="Evermix film"></video></section><section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up" style="transition-delay:90ms">Evermix makes portable audio kit for artists, DJs and performers. It needed a brand as loud as the scene it sells into.</p></div></section><section class="mod mod-story"><span class="label up">The idea</span><div class="story"><p class="up" style="transition-delay:0ms">We started with a full brand audit, then rebuilt the identity with a new type system, a high energy palette and motion and social guidelines built around the feel of nightlife and music, carried by the line Making Sound Resound.</p><p class="up" style="transition-delay:90ms">Since the refresh we've run Evermix's social month to month, from behind the scenes studio sessions to creator campaigns, alongside its ecommerce content and website. Reach across its socials is up five times.</p></div></section><section class="mod mod-results"><span class="label up">The results</span><div class="numbers"><div class="up" style="transition-delay:0ms"><b data-count="5x">5x</b><span>reach across socials</span></div><div class="up" style="transition-delay:120ms"><b data-count="387%">387%</b><span>follower growth</span></div><div class="up" style="transition-delay:240ms"><b data-count="23k">23k</b><span>followers</span></div></div></section><section class="mod mod-quote"><blockquote><q data-lines>“Freak understood our brand from day one. Rather than changing who we are, they elevated what already made Evermix special. They're creative, commercially minded and a genuinely great team to work with.”</q><cite class="up" style="transition-delay:450ms">Macky Drese, Co-Founder and CEO, Evermix</cite></blockquote></section><section class="mod"><div class="carousel" tabindex="0" aria-label="Evermix gallery"><div class="cimg rv" style="transition-delay:0ms"><img src="img/cs/evermix_1.webp" alt="Evermix work, image 1" loading="lazy"></div><div class="cimg rv" style="transition-delay:120ms"><img src="img/cs/evermix_2.webp" alt="Evermix work, image 2" loading="lazy"></div><div class="cimg rv" style="transition-delay:240ms"><img src="img/cs/evermix_3.webp" alt="Evermix work, image 3" loading="lazy"></div><div class="cimg rv" style="transition-delay:360ms"><img src="img/cs/evermix_4.webp" alt="Evermix work, image 4" loading="lazy"></div><div class="cimg rv" style="transition-delay:480ms"><img src="img/cs/evermix_5.webp" alt="Evermix work, image 5" loading="lazy"></div></div>
@@ -1178,6 +1187,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.1a84d88c56.js"></script>
+<script type="module" src="/assets/app.3d2ac0b48e.js"></script>
 </body>
 </html>

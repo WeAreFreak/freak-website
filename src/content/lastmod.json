@@ -1,166 +1,170 @@
 {
  "": {
-  "hash": "5146e6a92f9ca9cd",
-  "date": "2026-10-15"
+  "hash": "b90d333e23d1bfe0",
+  "date": "2026-10-16"
  },
  "work": {
-  "hash": "3cd5651375484247",
-  "date": "2026-10-15"
+  "hash": "8a8df913cce5d16e",
+  "date": "2026-10-16"
  },
  "work-hoover": {
-  "hash": "ab4262ed5c06909f",
-  "date": "2026-10-15"
+  "hash": "ee12bc731c422a5c",
+  "date": "2026-10-16"
  },
  "work-rnib": {
-  "hash": "66e9513055290925",
-  "date": "2026-10-15"
+  "hash": "c77aa6e22a8b3ff1",
+  "date": "2026-10-16"
  },
  "work-hovis": {
-  "hash": "b69d82aaa2e29e23",
-  "date": "2026-10-15"
+  "hash": "20d99d170a56978e",
+  "date": "2026-10-16"
  },
  "work-va": {
-  "hash": "4041ed57dffbebe7",
-  "date": "2026-10-15"
+  "hash": "147779de3c278656",
+  "date": "2026-10-16"
  },
  "work-drscholls": {
-  "hash": "b067322ad4e80dcb",
-  "date": "2026-10-15"
+  "hash": "92bb8b55f44adc7b",
+  "date": "2026-10-16"
  },
  "work-feliway": {
-  "hash": "8920b5e91338e664",
-  "date": "2026-10-15"
+  "hash": "5645c0a412020d6a",
+  "date": "2026-10-16"
  },
  "work-macmillan": {
-  "hash": "7eba6eaa0636d258",
-  "date": "2026-10-15"
+  "hash": "f04c99984eed3090",
+  "date": "2026-10-16"
  },
  "work-evermix": {
-  "hash": "bd22b34deb4fa5ab",
-  "date": "2026-10-15"
+  "hash": "05d9ca13896480b6",
+  "date": "2026-10-16"
  },
  "work-astus": {
-  "hash": "ba9db6a9e3469191",
-  "date": "2026-10-15"
+  "hash": "94a21faaa54113b6",
+  "date": "2026-10-16"
  },
  "work-gnetwork": {
-  "hash": "3da86a4232374713",
-  "date": "2026-10-15"
+  "hash": "f4605a6c8b8272e2",
+  "date": "2026-10-16"
  },
  "work-nyb": {
-  "hash": "828ed088519e893b",
-  "date": "2026-10-15"
+  "hash": "24c399def2b215ac",
+  "date": "2026-10-16"
  },
  "work-yutaka": {
-  "hash": "0ab332e40ca69926",
-  "date": "2026-10-15"
+  "hash": "9e07328e6b738bfb",
+  "date": "2026-10-16"
+ },
+ "work-apt": {
+  "hash": "024cb0afe2131a7d",
+  "date": "2026-10-16"
  },
  "capabilities": {
-  "hash": "f55de5482a4d5f5d",
-  "date": "2026-10-15"
+  "hash": "63ccd768257b6cc2",
+  "date": "2026-10-16"
  },
  "capabilities/amazon-agency": {
-  "hash": "9079f1a20fc5d6e0",
-  "date": "2026-10-15"
+  "hash": "cb6e200a9a4a28f9",
+  "date": "2026-10-16"
  },
  "capabilities/content-production": {
-  "hash": "4cffb6daec6b7d51",
-  "date": "2026-10-15"
+  "hash": "36150afaf62117aa",
+  "date": "2026-10-16"
  },
  "capabilities/live-production": {
-  "hash": "f664c55dbbd6a5a6",
-  "date": "2026-10-15"
+  "hash": "5d0c5cd26fc30d5c",
+  "date": "2026-10-16"
  },
  "capabilities/influencer-marketing": {
-  "hash": "d94443eae6b50cf3",
-  "date": "2026-10-15"
+  "hash": "235a3ccf37b0da99",
+  "date": "2026-10-16"
  },
  "capabilities/abu-dhabi": {
-  "hash": "b97eda13499ae7d7",
-  "date": "2026-10-15"
+  "hash": "661c3ca73f06d265",
+  "date": "2026-10-16"
  },
  "ai": {
-  "hash": "71c4bf42437de1d8",
-  "date": "2026-10-15"
+  "hash": "755a53efed4ddf9a",
+  "date": "2026-10-16"
  },
  "resources": {
-  "hash": "2465f2b5bd5bef7d",
-  "date": "2026-10-15"
+  "hash": "fc7365c25b50787c",
+  "date": "2026-10-16"
  },
  "resources/amazon-alexa-for-shopping": {
-  "hash": "9ca600ca48a4824a",
-  "date": "2026-10-15"
+  "hash": "35437e190e6ae174",
+  "date": "2026-10-16"
  },
  "resources/product-content-ai-shopping-agents": {
-  "hash": "a87679b8d17a2613",
-  "date": "2026-10-15"
+  "hash": "9963bd6e4bc5eee0",
+  "date": "2026-10-16"
  },
  "resources/hfss-advertising-rules-2026": {
-  "hash": "70804947c82cb5d7",
-  "date": "2026-10-15"
+  "hash": "971087389695259e",
+  "date": "2026-10-16"
  },
  "resources/amazon-listing-copy": {
-  "hash": "c6857165f7e160df",
-  "date": "2026-10-15"
+  "hash": "529fe245298dd317",
+  "date": "2026-10-16"
  },
  "resources/ai-brand-value-risk": {
-  "hash": "b01387b793c605eb",
-  "date": "2026-10-15"
+  "hash": "0df7b75db0683273",
+  "date": "2026-10-16"
  },
  "resources/reddit-seo-ai-search": {
-  "hash": "22613439ae1601da",
-  "date": "2026-10-15"
+  "hash": "1408389147867cd4",
+  "date": "2026-10-16"
  },
  "resources/amazon-image-visual-engagement-framework": {
-  "hash": "8ccfc35d2f796fba",
-  "date": "2026-10-15"
+  "hash": "04809ab157452cf1",
+  "date": "2026-10-16"
  },
  "resources/amazon-review-moderation": {
-  "hash": "5d8216dbe879ee0f",
-  "date": "2026-10-15"
+  "hash": "a877944f223be5c7",
+  "date": "2026-10-16"
  },
  "resources/creator-seeding-process": {
-  "hash": "d7811dc1101d63d1",
-  "date": "2026-10-15"
+  "hash": "c4e7263745a88875",
+  "date": "2026-10-16"
  },
  "resources/making-mapping-glastonbury": {
-  "hash": "7aa40c68f3732845",
-  "date": "2026-10-15"
+  "hash": "051cea9b61a51d99",
+  "date": "2026-10-16"
  },
  "resources/amazon-a-plus-content-guide": {
-  "hash": "1a12aef23ff4bf5b",
-  "date": "2026-10-15"
+  "hash": "e9556629126c0ee8",
+  "date": "2026-10-16"
  },
  "resources/ecommerce-product-shoot-planning": {
-  "hash": "69317a946294b38f",
-  "date": "2026-10-15"
+  "hash": "35f7e51610a72101",
+  "date": "2026-10-16"
  },
  "resources/ugc-for-amazon-and-social": {
-  "hash": "6853ea4cac514de4",
-  "date": "2026-10-15"
+  "hash": "3cfb4e77031bf524",
+  "date": "2026-10-16"
  },
  "resources/neuromarketing-ai-image-analysis": {
-  "hash": "4d2b002716c47fe4",
-  "date": "2026-10-15"
+  "hash": "3c33b6c30aad6474",
+  "date": "2026-10-16"
  },
  "contact": {
-  "hash": "baa9d464b6bb64a6",
-  "date": "2026-10-15"
+  "hash": "eef72bf8859eec69",
+  "date": "2026-10-16"
  },
  "about": {
-  "hash": "6dadbe524475f799",
-  "date": "2026-10-15"
+  "hash": "482d0c2cd3aa639f",
+  "date": "2026-10-16"
  },
  "terms": {
-  "hash": "80c07043c382b219",
-  "date": "2026-10-15"
+  "hash": "d5090d27059e701f",
+  "date": "2026-10-16"
  },
  "privacy": {
-  "hash": "74735bcfb7abe6e8",
-  "date": "2026-10-15"
+  "hash": "c74fe8857e091306",
+  "date": "2026-10-16"
  },
  "cookies": {
-  "hash": "32d548385586e1f5",
-  "date": "2026-10-15"
+  "hash": "035c22727099bf1d",
+  "date": "2026-10-16"
  }
 }

@@ -74,6 +74,22 @@ SPOKES = sorted((m for r, m in CONTENT.items() if m.get('kind') in ('spoke', 'ai
 
 
 # ---------------------------------------------------------------- page details
+LINK = re.compile(r'\[([^\]]+)\]\((https?://[^)\s]+)\)')
+
+
+def rich(s):
+    """Case study copy, with [words](https://...) turned into a link to the client's site."""
+    return LINK.sub(lambda m: f'<a href="{m.group(2)}" target="_blank" rel="noopener">{m.group(1)}</a>', esc(s))
+
+
+def plain(s):
+    """The same copy as plain words, for descriptions and llms.txt."""
+    return LINK.sub(lambda m: m.group(1), s)
+
+
+ARROW_OUT = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg>'
+
+
 def summary(text, limit=158):
     """First sentences of a paragraph, kept under a search snippet's length."""
     out = ''
@@ -99,7 +115,7 @@ def pages():
     }
     for w in WORK:
         first = w.get('challenge') or (w.get('text') or [''])[0]
-        p['work-' + w['id']] = {'title': f"{w['title']} | {w['client']} case study | Freak", 'desc': summary(first)}
+        p['work-' + w['id']] = {'title': f"{w['title']} | {w['client']} case study | Freak", 'desc': summary(plain(first))}
     for r, m in CONTENT.items():
         p[r] = {'title': m['title'], 'desc': m['desc'], 'page': 1}
     return p
@@ -196,9 +212,10 @@ def case_html(w):
     """The same markup the app renders for a case study, so the hand-over is invisible."""
     i = WORK.index(w); prev = WORK[i - 1]; nxt = WORK[(i + 1) % len(WORK)]
     d = lambda ms: f' style="transition-delay:{ms}ms"'
+    site = f'<a class="site" href="{esc(w["site"][1])}" target="_blank" rel="noopener">{esc(w["site"][0])}{ARROW_OUT}</a>' if w.get('site') else ''
     m = [f'<div class="cs-hero rv"><img src="{w["img"]}" alt="{esc(w["client"])}, {esc(w["title"])}" width="960" height="503"></div>',
          f'<header class="cs-head up"{d(150)}><span class="client">{esc(w["client"])}</span><h1 id="csTitle">{esc(w["title"])}</h1>'
-         f'<div class="tags">{"".join(f"<span>{esc(t)}</span>" for t in w["tags"])}</div></header>']
+         f'<div class="tags">{"".join(f"<span>{esc(t)}</span>" for t in w["tags"])}{site}</div></header>']
     v = w.get('video')
     if v:
         m.append(f'<section class="mod mod-video{" portrait" if v.get("portrait") else ""} rv"><video src="{v["src"]}" poster="{v["poster"]}" controls playsinline preload="none" aria-label="{esc(w["client"])} film"></video></section>')
@@ -206,9 +223,9 @@ def case_html(w):
     challenge = w.get('challenge') or (paras[0] if paras else '')
     idea = paras if w.get('challenge') else paras[1:]
     if challenge:
-        m.append(f'<section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up"{d(90)}>{esc(challenge)}</p></div></section>')
+        m.append(f'<section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up"{d(90)}>{rich(challenge)}</p></div></section>')
     if idea:
-        m.append('<section class="mod mod-story"><span class="label up">The idea</span><div class="story">' + ''.join(f'<p class="up"{d(k * 90)}>{esc(t)}</p>' for k, t in enumerate(idea)) + '</div></section>')
+        m.append('<section class="mod mod-story"><span class="label up">The idea</span><div class="story">' + ''.join(f'<p class="up"{d(k * 90)}>{rich(t)}</p>' for k, t in enumerate(idea)) + '</div></section>')
     if w.get('numbers'):
         m.append('<section class="mod mod-results"><span class="label up">The results</span><div class="numbers">' + ''.join(
             f'<div class="up"{d(k * 120)}><b data-count="{esc(n)}">{esc(n)}</b><span>{esc(l)}</span></div>' for k, (n, l) in enumerate(w['numbers'])) + '</div></section>')

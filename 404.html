@@ -220,6 +220,9 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .cs-head .client { font-size: 15px; font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.tags a.site { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; color: var(--ink); text-decoration: none; transition: background .2s; }
+.tags a.site:hover { background: var(--lime); }
+.tags a.site svg { width: 11px; height: 11px; }
 .mod { padding-block: 24px; border-top: 1px solid var(--rule); }
 .mod-text { display: grid; gap: 18px; }
 .mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
@@ -534,6 +537,8 @@ a.link-btn { color: var(--paper); }
 .mod-story .story { display: grid; gap: 18px; min-width: 0; }
 .mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
 .mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-story .story a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: background .2s; }
+.mod-story .story a:hover { background: rgba(166, 242, 10, .28); }
 .mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
 .mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
 a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
@@ -872,6 +877,10 @@ a.cta svg { width: 16px; height: 16px; }
     <div class="tile-img"><img src="img/yutaka.webp" alt="Yutaka, Make Mealtimes Blossom" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>Yutaka</strong><span>Make Mealtimes Blossom</span></div>
   </a>
+  <a class="tile" href="/work/apt" data-case="apt" data-cursor="View" data-preview="vid/apt-preview.mp4">
+    <div class="tile-img"><img src="img/apt.webp" alt="Advanced Plastic Technology, From click to quote" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Advanced Plastic Technology</strong><span>From click to quote</span></div>
+  </a>
 </div>
   </div>
   <article class="wrap" id="caseStudy" hidden></article>
@@ -1171,6 +1180,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.1a84d88c56.js"></script>
+<script type="module" src="/assets/app.3d2ac0b48e.js"></script>
 </body>
 </html>

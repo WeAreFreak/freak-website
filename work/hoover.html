@@ -221,6 +221,9 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .cs-head .client { font-size: 15px; font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.tags a.site { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; color: var(--ink); text-decoration: none; transition: background .2s; }
+.tags a.site:hover { background: var(--lime); }
+.tags a.site svg { width: 11px; height: 11px; }
 .mod { padding-block: 24px; border-top: 1px solid var(--rule); }
 .mod-text { display: grid; gap: 18px; }
 .mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
@@ -535,6 +538,8 @@ a.link-btn { color: var(--paper); }
 .mod-story .story { display: grid; gap: 18px; min-width: 0; }
 .mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
 .mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-story .story a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: background .2s; }
+.mod-story .story a:hover { background: rgba(166, 242, 10, .28); }
 .mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
 .mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
 a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
@@ -873,11 +878,15 @@ a.cta svg { width: 16px; height: 16px; }
     <div class="tile-img"><img src="img/yutaka.webp" alt="Yutaka, Make Mealtimes Blossom" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>Yutaka</strong><span>Make Mealtimes Blossom</span></div>
   </a>
+  <a class="tile" href="/work/apt" data-case="apt" data-cursor="View" data-preview="vid/apt-preview.mp4">
+    <div class="tile-img"><img src="img/apt.webp" alt="Advanced Plastic Technology, From click to quote" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Advanced Plastic Technology</strong><span>From click to quote</span></div>
+  </a>
 </div>
   </div>
   <article class="wrap" id="caseStudy" aria-labelledby="csTitle"><div class="cs-hero rv"><img src="img/hoover.webp" alt="Hoover, From live shoot to listing" width="960" height="503"></div><header class="cs-head up" style="transition-delay:150ms"><span class="client">Hoover</span><h1 id="csTitle">From live shoot to listing</h1><div class="tags"><span>Live Production</span><span>Ecommerce</span><span>Amazon</span><span>Photography</span><span>Film</span></div></header><section class="mod mod-video rv"><video src="vid/hoover.mp4" poster="vid/hoover.webp" controls playsinline preload="none" aria-label="Hoover film"></video></section><section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up" style="transition-delay:90ms">Hoover needed new photography and film for 15 of its vacuum cleaners, from cordless sticks and uprights to cylinders, a robot and a wet and dry floor washer. Its existing imagery felt dark and sterile and didn't look like the homes of the 20 to 40 year olds it wanted to reach. The brief asked for more colour, a lived in feel and more dynamic angles.</p></div></section><section class="mod mod-story"><span class="label up">The idea</span><div class="story"><p class="up" style="transition-delay:0ms">We produced the shoot end to end. The location, casting, set design, props and wardrobe, a film crew and a stills team, all planned product by product in a shot matrix. Before filming we tested debris on every machine, to find the cereal, coffee and crumbs that picked up cleanly on camera and reset quickly between takes. Over five days in a London family home we shot product films for web and Amazon and more than 120 retouched lifestyle images.</p><p class="up" style="transition-delay:90ms">Then we turned the shoot into ecommerce. For every product we wrote search led titles and listing copy, and designed the image stack above the fold and the A+ content below it for desktop and mobile, then reformatted it all for Argos and other retailers. We're now taking the work into Amazon DSP advertising and retailer campaigns.</p></div></section><section class="mod mod-results"><span class="label up">The results</span><div class="numbers"><div class="up" style="transition-delay:0ms"><b data-count="30%">30%</b><span>sales increase</span></div><div class="up" style="transition-delay:120ms"><b data-count="15">15</b><span>products shot and listed</span></div><div class="up" style="transition-delay:240ms"><b data-count="120+">120+</b><span>retouched lifestyle images</span></div></div></section><section class="mod mod-quote"><blockquote><q data-lines>“I just wanted to give you the good news that sales are already up 30%, fantastic work as always.”</q><cite class="up" style="transition-delay:450ms">Caitlyn May, Head of Commercial, Hoover</cite></blockquote></section><section class="mod"><div class="carousel" tabindex="0" aria-label="Hoover gallery"><div class="cimg rv" style="transition-delay:0ms"><img src="img/cs/hoover_1.webp" alt="Hoover work, image 1" loading="lazy"></div><div class="cimg rv" style="transition-delay:120ms"><img src="img/cs/hoover_2.webp" alt="Hoover work, image 2" loading="lazy"></div><div class="cimg rv" style="transition-delay:240ms"><img src="img/cs/hoover_3.webp" alt="Hoover work, image 3" loading="lazy"></div><div class="cimg rv" style="transition-delay:360ms"><img src="img/cs/hoover_4.webp" alt="Hoover work, image 4" loading="lazy"></div><div class="cimg rv" style="transition-delay:480ms"><img src="img/cs/hoover_5.webp" alt="Hoover work, image 5" loading="lazy"></div><div class="cimg rv" style="transition-delay:600ms"><img src="img/cs/hoover_6.webp" alt="Hoover work, image 6" loading="lazy"></div><div class="cimg rv" style="transition-delay:720ms"><img src="img/cs/hoover_7.webp" alt="Hoover work, image 7" loading="lazy"></div><div class="cimg rv" style="transition-delay:840ms"><img src="img/cs/hoover_8.webp" alt="Hoover work, image 8" loading="lazy"></div><div class="cimg rv" style="transition-delay:960ms"><img src="img/cs/hoover_9.webp" alt="Hoover work, image 9" loading="lazy"></div></div>
       <div class="carousel-nav"><button data-slide="-1" aria-label="Previous images"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg></button><button data-slide="1" aria-label="More images"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div></section><section class="mod mod-cta"><h2 class="up">Got a brief like this?</h2><a class="cta" href="/contact" data-open="contact">Start a project<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></section><nav class="cs-nav slim" aria-label="Case studies">
-        <a class="prev" href="/work/yutaka" data-case="yutaka"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>Yutaka</a>
+        <a class="prev" href="/work/apt" data-case="apt"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>Advanced Plastic Technology</a>
         <a class="back" href="/work" data-back>Back to case studies</a></nav><a class="cs-next" href="/work/rnib" data-case="rnib" data-cursor="Next" aria-label="Next project, RNIB, A learning portal for sight loss awareness">
         <div class="cs-next-frame rv"><img src="img/rnib.webp" alt="" loading="lazy">
           <div class="cs-next-meta"><span class="label" style="color:#fff;opacity:.85">Next project</span><h2>RNIB</h2><p>A learning portal for sight loss awareness</p></div></div>
@@ -1178,6 +1187,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.1a84d88c56.js"></script>
+<script type="module" src="/assets/app.3d2ac0b48e.js"></script>
 </body>
 </html>

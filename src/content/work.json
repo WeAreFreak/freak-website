@@ -498,5 +498,47 @@
    "yutaka_hand"
   ],
   "challenge": "Yutaka wanted consumers to discover its Japanese heritage, with one seasonal story that carried from their commute to the supermarket shelf and their social feeds."
+ },
+ {
+  "id": "apt",
+  "client": "Advanced Plastic Technology",
+  "title": "From click to quote",
+  "tags": [
+   "Website",
+   "CRM",
+   "Quote Automation",
+   "Email Marketing",
+   "PPC",
+   "Conversion Optimisation"
+  ],
+  "site": [
+   "advancedplastic.co.uk",
+   "https://advancedplastic.co.uk/"
+  ],
+  "img": "img/apt.webp",
+  "challenge": "Advanced Plastic Technology has machined, moulded and fabricated plastic parts in Milton Keynes since 1991. The engineering was excellent, but the old website undersold it, enquiries lived in inboxes and every quote was costed by hand.",
+  "text": [
+   "We started with a [new website](https://advancedplastic.co.uk/) built around how engineers and buyers search. Each of APT's [11 in house services](https://advancedplastic.co.uk/services/), its materials and the industries it serves has its own page, with clear calls to action throughout and an optimised [quote form](https://advancedplastic.co.uk/request-a-quote/) that takes drawings and CAD files, so a buyer can go from search to enquiry in a couple of clicks.",
+   "Behind the site we built APT its own CRM. Every enquiry from the contact form lands in one pipeline the sales team works from. Our automated quote tool reads each request, costs every process from APT's own machine and material rates and drafts the quote and covering email, ready for the team to check and send.",
+   "To fill that pipeline we rebuilt APT's PPC into structured campaigns, one for each service and search intent, so budget follows the work APT wants most. A new email system with cleaned lists sends a regular programme of [guides](https://advancedplastic.co.uk/blog/), offers and industry news to customers and prospects.",
+   "Together it supported record growth in the first six months and APT's highest ever sales month in September 2026."
+  ],
+  "numbers": [
+   [
+    "Record",
+    "sales month, September 2026"
+   ],
+   [
+    "43%",
+    "open rate on the relaunch email to 1,291 contacts"
+   ],
+   [
+    "£77",
+    "cost per PPC lead, against a £200 target"
+   ]
+  ],
+  "carousel": [
+   "apt_system"
+  ]
  }
 ]

@@ -198,6 +198,9 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .cs-head .client { font-size: 15px; font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.tags a.site { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; color: var(--ink); text-decoration: none; transition: background .2s; }
+.tags a.site:hover { background: var(--lime); }
+.tags a.site svg { width: 11px; height: 11px; }
 .mod { padding-block: 24px; border-top: 1px solid var(--rule); }
 .mod-text { display: grid; gap: 18px; }
 .mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
@@ -512,6 +515,8 @@ a.link-btn { color: var(--paper); }
 .mod-story .story { display: grid; gap: 18px; min-width: 0; }
 .mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
 .mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-story .story a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: background .2s; }
+.mod-story .story a:hover { background: rgba(166, 242, 10, .28); }
 .mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
 .mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
 a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
@@ -1692,6 +1697,9 @@ tiles.innerHTML = WORK.map(w => `
 tiles.addEventListener('click', e => { const b = e.target.closest('[data-case]'); if (b && plainClick(e)) { e.preventDefault(); go('work-' + b.dataset.case); } });
 
 function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+// case study copy can link out to the client's own site with [words](https://...), which opens in a new tab
+const rich = s => esc(s).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (m, t, u) => `<a href="${u}" target="_blank" rel="noopener">${t}</a>`);
+const arrowOut = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg>';
 const arrowL = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8H3M7 4 3 8l4 4"/></svg>';
 const arrowR = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>';
 
@@ -1704,13 +1712,13 @@ function renderCase(id) {
   const delay = ms => fx ? ` style="transition-delay:${ms}ms"` : '';
   const mods = [];
   mods.push(`<div class="cs-hero${rv}"><img src="${w.img}" alt="${esc(w.client)}, ${esc(w.title)}" width="960" height="503"></div>`);
-  mods.push(`<header class="cs-head${up}"${delay(150)}><span class="client">${esc(w.client)}</span><h1 id="csTitle">${esc(w.title)}</h1><div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div></header>`);
+  mods.push(`<header class="cs-head${up}"${delay(150)}><span class="client">${esc(w.client)}</span><h1 id="csTitle">${esc(w.title)}</h1><div class="tags">${w.tags.map(t => `<span>${esc(t)}</span>`).join('')}${w.site ? `<a class="site" href="${esc(w.site[1])}" target="_blank" rel="noopener">${esc(w.site[0])}${arrowOut}</a>` : ''}</div></header>`);
   if (w.video) mods.push(`<section class="mod mod-video${w.video.portrait ? ' portrait' : ''}${rv}"><video src="${w.video.src}" poster="${w.video.poster}" controls playsinline preload="none" aria-label="${esc(w.client)} film"></video></section>`);
   // challenge, idea, results, quote, gallery, next step: the same order on every case study
   const paras = [].concat(w.text || []);
   const challenge = w.challenge || paras[0], idea = w.challenge ? paras : paras.slice(1);
-  if (challenge) mods.push(`<section class="mod mod-story"><span class="label${up}">The challenge</span><div class="story"><p class="lead${up}"${delay(90)}>${esc(challenge)}</p></div></section>`);
-  if (idea.length) mods.push(`<section class="mod mod-story"><span class="label${up}">The idea</span><div class="story">${idea.map((t, k) => `<p class="${up.trim()}"${delay(k * 90)}>${esc(t)}</p>`).join('')}</div></section>`);
+  if (challenge) mods.push(`<section class="mod mod-story"><span class="label${up}">The challenge</span><div class="story"><p class="lead${up}"${delay(90)}>${rich(challenge)}</p></div></section>`);
+  if (idea.length) mods.push(`<section class="mod mod-story"><span class="label${up}">The idea</span><div class="story">${idea.map((t, k) => `<p class="${up.trim()}"${delay(k * 90)}>${rich(t)}</p>`).join('')}</div></section>`);
   if (w.numbers && w.numbers.length) mods.push(`<section class="mod mod-results"><span class="label${up}">The results</span><div class="numbers">${w.numbers.map(([n, l], k) => `<div class="${up.trim()}"${delay(k * 120)}><b${fx ? ` data-count="${esc(n)}"` : ''}>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div></section>`);
   if (w.quote) mods.push(fx
     ? `<section class="mod mod-quote"><blockquote><q data-lines>“${esc(w.quote[0])}”</q><cite class="up"${delay(450)}>${esc(w.quote[1])}</cite></blockquote></section>`

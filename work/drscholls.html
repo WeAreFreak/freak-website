@@ -221,6 +221,9 @@ html.intro .top .tagline { opacity: 0; transform: translateX(-8px); }
 .cs-head .client { font-size: 15px; font-weight: 600; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tags span { font-size: 13px; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--quiet); }
+.tags a.site { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid var(--ink); border-radius: 999px; padding: 4px 12px; color: var(--ink); text-decoration: none; transition: background .2s; }
+.tags a.site:hover { background: var(--lime); }
+.tags a.site svg { width: 11px; height: 11px; }
 .mod { padding-block: 24px; border-top: 1px solid var(--rule); }
 .mod-text { display: grid; gap: 18px; }
 .mod-text p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
@@ -535,6 +538,8 @@ a.link-btn { color: var(--paper); }
 .mod-story .story { display: grid; gap: 18px; min-width: 0; }
 .mod-story .story p { margin: 0; max-width: 64ch; font-size: 17px; line-height: 1.65; font-weight: 300; text-wrap: pretty; }
 .mod-story .story p.lead { font-size: clamp(19px, 1.9vw, 22px); line-height: 1.5; font-weight: 400; max-width: 58ch; }
+.mod-story .story a { color: inherit; text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 2px; text-underline-offset: 4px; transition: background .2s; }
+.mod-story .story a:hover { background: rgba(166, 242, 10, .28); }
 .mod-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding-block: 32px; }
 .mod-cta h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
 a.cta { display: inline-flex; align-items: center; gap: 10px; background: var(--lime); color: #151413; border-radius: 999px; padding: 12px 20px 12px 22px; font-weight: 600; font-size: 15px; }
@@ -873,6 +878,10 @@ a.cta svg { width: 16px; height: 16px; }
     <div class="tile-img"><img src="img/yutaka.webp" alt="Yutaka, Make Mealtimes Blossom" loading="lazy" width="960" height="503"></div>
     <div class="tile-meta"><strong>Yutaka</strong><span>Make Mealtimes Blossom</span></div>
   </a>
+  <a class="tile" href="/work/apt" data-case="apt" data-cursor="View" data-preview="vid/apt-preview.mp4">
+    <div class="tile-img"><img src="img/apt.webp" alt="Advanced Plastic Technology, From click to quote" loading="lazy" width="960" height="503"></div>
+    <div class="tile-meta"><strong>Advanced Plastic Technology</strong><span>From click to quote</span></div>
+  </a>
 </div>
   </div>
   <article class="wrap" id="caseStudy" aria-labelledby="csTitle"><div class="cs-hero rv"><img src="img/drscholls.webp" alt="Dr Scholl's, Marketing across social and ecommerce" width="960" height="503"></div><header class="cs-head up" style="transition-delay:150ms"><span class="client">Dr Scholl's</span><h1 id="csTitle">Marketing across social and ecommerce</h1><div class="tags"><span>Social Media</span><span>Ecommerce</span><span>Visual Identity</span><span>Influencer</span></div></header><section class="mod mod-video portrait rv"><video src="vid/drscholls.mp4" poster="vid/drscholls.webp" controls playsinline preload="none" aria-label="Dr Scholl's film"></video></section><section class="mod mod-story"><span class="label up">The challenge</span><div class="story"><p class="lead up" style="transition-delay:90ms">Dr. Scholl's needed one partner to run its marketing across social, ecommerce and creative strategy, for a range that goes from everyday comfort insoles to specialist pain relief. The creative has to speak to runners, to people on their feet all day at work and to everyone in between, while every piece stays unmistakably Dr. Scholl's.</p></div></section><section class="mod mod-story"><span class="label up">The idea</span><div class="story"><p class="up" style="transition-delay:0ms">Part of the job was carrying the brand through its global change of name from Scholl to Dr. Scholl's, refreshing packaging and website messaging so customers knew it was the same trusted product. We also built a proper Amazon presence from the ground up, with Brand Registry in every EU market, a dedicated Brand Store in each one and listings optimised for both Amazon search and Google.</p><p class="up" style="transition-delay:90ms">On top of that we ran influencer campaigns across six markets. The partnership started in 2022 and its scope has grown every year since.</p></div></section><section class="mod mod-results"><span class="label up">The results</span><div class="numbers"><div class="up" style="transition-delay:0ms"><b data-count="£2.7m+">£2.7m+</b><span>sales increase</span></div><div class="up" style="transition-delay:120ms"><b data-count="120m">120m</b><span>impressions</span></div><div class="up" style="transition-delay:240ms"><b data-count="4x">4x</b><span>return on ad spend</span></div></div></section><section class="mod mod-quote"><blockquote><q data-lines>“Freak always show agility and adaptation to your strategy. They are a game changer for content.”</q><cite class="up" style="transition-delay:450ms">Global eComm Director</cite></blockquote></section><section class="mod"><div class="carousel" tabindex="0" aria-label="Dr Scholl's gallery"><div class="cimg rv" style="transition-delay:0ms"><img src="img/cs/drscholls_2.webp" alt="Dr Scholl's work, image 1" loading="lazy"></div><div class="cimg rv" style="transition-delay:120ms"><img src="img/cs/drscholls_3.webp" alt="Dr Scholl's work, image 2" loading="lazy"></div><div class="cimg rv" style="transition-delay:240ms"><img src="img/cs/drscholls_4.webp" alt="Dr Scholl's work, image 3" loading="lazy"></div></div>
@@ -1178,6 +1187,6 @@ a.cta svg { width: 16px; height: 16px; }
   "three/addons/": "/vendor/three/examples/jsm/"
 } }
 </script>
-<script type="module" src="/assets/app.1a84d88c56.js"></script>
+<script type="module" src="/assets/app.3d2ac0b48e.js"></script>
 </body>
 </html>
