@@ -384,20 +384,56 @@ function loadTexture(url) {
 }
 
 /* Desktop: once the intro has landed, the desert sky swaps to its 8k version, so clouds stay sharp on large and
-   retina screens. Everyone sees the 4k sky first, and phones keep it. */
+   retina screens. Everyone sees the 4k sky first, and phones keep it.
+   The 8k image is 128 MB once decoded. Loading it as a plain image left the decode and the whole upload to the
+   first frame that drew it, which froze the world for a third of a second or more just after the intro landed.
+   So it's decoded off the main thread (createImageBitmap), sent to the GPU a strip per frame, then swapped in.
+   Browsers that can't do that keep the 4k sky. */
 let sharpened = false;
-function sharpenSky() {
+const SKY_ROWS = 64;   // rows sent per frame: 2 MB, about a millisecond on an Intel laptop GPU, so the 8k takes about a second
+async function bitmapFlips() {   // the panorama has to arrive upside down for WebGL, so check the browser honours imageOrientation
+  const c = document.createElement('canvas'); c.width = 1; c.height = 2;
+  const g = c.getContext('2d'); g.fillStyle = '#f00'; g.fillRect(0, 0, 1, 1); g.fillStyle = '#00f'; g.fillRect(0, 1, 1, 1);
+  const b = await createImageBitmap(c, { imageOrientation: 'flipY' });
+  const d = document.createElement('canvas'); d.width = 1; d.height = 2;
+  const h = d.getContext('2d', { willReadFrequently: true }); h.drawImage(b, 0, 0); b.close();
+  return h.getImageData(0, 0, 1, 1).data[2] > 128;   // blue is on top now
+}
+async function sharpenSky() {
   if (sharpened || !skybox || !renderer) return;
   sharpened = true;
   const desk = matchMedia('(min-width: 900px) and (pointer: fine)').matches;
   const room = renderer.capabilities.maxTextureSize >= 8192 && (navigator.deviceMemory || 8) >= 4;
-  if (!desk || !room) return;
-  loadTexture('img/pano-8k.webp').then(t => {
+  if (!desk || !room || !window.createImageBitmap || !renderer.capabilities.isWebGL2) return;
+  let bmp, rt;
+  try {
+    if (!(await bitmapFlips())) return;
+    const blob = await (await fetch('img/pano-8k.webp')).blob();
+    bmp = await createImageBitmap(blob, { imageOrientation: 'flipY', premultiplyAlpha: 'none' });   // WebGL ignores flipY for bitmaps
+    const W = bmp.width, H = bmp.height;
+    // An empty sRGB texture to fill: a render target is the simple way to have three.js allocate one without data
+    rt = new THREE.WebGLRenderTarget(W, H, { colorSpace: THREE.SRGBColorSpace, mapping: THREE.EquirectangularReflectionMapping,
+      minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, depthBuffer: false });
+    renderer.setRenderTarget(rt); renderer.setRenderTarget(null);   // allocates it, draws nothing
+    const g = renderer.getContext(), tex = renderer.properties.get(rt.texture).__webglTexture;
+    for (let y = 0; y < H; y += SKY_ROWS) {
+      const strip = await createImageBitmap(bmp, 0, y, W, Math.min(SKY_ROWS, H - y));
+      await new Promise(requestAnimationFrame);
+      renderer.state.bindTexture(g.TEXTURE_2D, tex);
+      g.pixelStorei(g.UNPACK_FLIP_Y_WEBGL, false);
+      g.pixelStorei(g.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+      g.pixelStorei(g.UNPACK_ALIGNMENT, 4);
+      g.pixelStorei(g.UNPACK_ROW_LENGTH, 0); g.pixelStorei(g.UNPACK_SKIP_ROWS, 0); g.pixelStorei(g.UNPACK_SKIP_PIXELS, 0);
+      g.texSubImage2D(g.TEXTURE_2D, 0, 0, y, g.RGBA, g.UNSIGNED_BYTE, strip);
+      renderer.state.unbindTexture();
+      strip.close();
+    }
     const old = skybox.material.uniforms.map.value;
-    skybox.material.uniforms.map.value = t;
-    if (old && old !== t) old.dispose();   // the reflections were made from it already
+    skybox.material.uniforms.map.value = rt.texture;
+    if (old && old !== rt.texture) old.dispose();   // the reflections were made from it already
     document.documentElement.dataset.sky = '8k';
-  }).catch(() => {});
+  } catch (e) { rt?.dispose(); }   // keep the 4k sky
+  finally { bmp?.close(); }   // the GPU has its copy, free the 128 MB one
 }
 
 async function initWorld() {
