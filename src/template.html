@@ -1055,8 +1055,11 @@ try {
 if (!gl || !renderer.getContext()) { gl = false; document.documentElement.classList.add('no-gl'); note.textContent = ''; }
 
 let angle = STOPS[0].deg, target = STOPS[0].deg, velocity = 0;   // degrees from Ken's hero view
+/* The world turns to its card on a critically damped spring: it keeps the speed a swipe or flick
+   left it with and settles on the card without passing it. rate sets how quickly (higher is snappier). */
+const SPIN = { rate: 8.5 };
+let spin = 0, sway = 1;   // spin: degrees a second. sway: how much of the idle drift is showing
 let stopIndex = 0;
-const MIN = STOPS[STOPS.length - 1].deg, MAX = STOPS[0].deg;
 const clock = new THREE.Clock();
 let paused = false;
 
@@ -1113,7 +1116,7 @@ function placeCamera(t) {
   const radius = a < 1 ? C.radius / Math.max(a, 0.48) * 0.62 : C.radius;
   const look = a < 1 ? (C.lookPhone ?? C.look) : C.look;
   const k = easeInOut(introP);
-  const drift = reduced || dragging ? 0 : Math.sin(t * 0.22) * 1.2 * k;   // slow idle sway so the world feels alive
+  const drift = reduced ? 0 : Math.sin(t * 0.22) * 1.2 * k * sway;   // slow idle sway so the world feels alive, eased out while it's being turned
   const swing = (1 - k) * INTRO.swing;
   const r = lerp(INTRO.radius * (a < 1 ? 1.35 : 1), radius, k);
   const tk = k * (1 - (diveHit ? easeIn(diveP) : 0));   // tilt fades out during the intro and the dive
@@ -1438,10 +1441,15 @@ function loop() {
     if (introP >= 1) { glint(1); setTimeout(prefetchWorlds, 1200); setTimeout(sharpenSky, 600); }   // the intro has landed: fetch the other worlds quietly
   }
   if (!dragging) {
-    const k = reduced ? 1 : 1 - Math.exp(-dt * 4.5);
-    angle += (target - angle) * k;
-    if (Math.abs(target - angle) < 0.02) angle = target;
+    if (reduced) { angle = target; spin = 0; }
+    else {   // the exact step of a critically damped spring, so it stays smooth however long the frame
+      const w = SPIN.rate, x = angle - target, e = Math.exp(-w * dt), c = spin + w * x;
+      angle = target + (x + c * dt) * e;
+      spin = (spin - w * c * dt) * e;
+      if (Math.abs(target - angle) < 0.02 && Math.abs(spin) < 0.05) { angle = target; spin = 0; }
+    }
   }
+  sway += ((dragging || wheeling ? 0 : 1) - sway) * (1 - Math.exp(-dt * 1.5));
   const te = 1 - Math.exp(-dt * TILT.ease);
   const hold = dragging ? 0 : 1;                  // settle back to centre while dragging
   tilt.x += (tilt.gx * hold - tilt.x) * te;
@@ -1535,52 +1543,74 @@ prevBtn.addEventListener('click', () => showStop(stopIndex - 1));
 nextBtn.addEventListener('click', () => showStop(stopIndex + 1));
 document.getElementById('cardOpen').addEventListener('click', () => go(STOPS[stopIndex].id));
 
-let dragging = false, startX = 0, startAngle = 0, lastX = 0, lastT = 0, startStop = 0, dragTouch = false;
-const STEP = Math.abs(STOPS[1].deg - STOPS[0].deg);      // degrees between neighbouring cards
+/* The cards sit at uneven angles round the F (AI and Resource Centre were slotted in between the
+   original four, 13° to 35° apart), so drags, flicks and the wheel are measured in cards, not degrees.
+   The same swipe then moves one card wherever you are, and never swings past a close neighbour.
+   posOf turns an angle into a card position (1.5 is halfway from the second card to the third)
+   and degOf turns it back, in straight lines between cards and past the two ends. */
+const LAST = STOPS.length - 1;
+function degOf(p) {
+  const i = Math.max(0, Math.min(LAST - 1, Math.floor(p)));
+  return STOPS[i].deg + (STOPS[i + 1].deg - STOPS[i].deg) * (p - i);
+}
+function posOf(a) {
+  for (let i = 0; i < LAST; i++) {
+    const a0 = STOPS[i].deg, a1 = STOPS[i + 1].deg;   // degrees fall as the cards go on
+    if (a >= a1 || i === LAST - 1) return i + (a - a0) / (a1 - a0);
+  }
+  return 0;
+}
+let dragging = false, dragId = null, startX = 0, startPos = 0, lastX = 0, lastT = 0, startStop = 0, dragTouch = false;
 canvas.addEventListener('pointerdown', e => {
   if (!gl) return;
   if (introP < 1) { introSpeed = 4; return; }   // a tap during the intro hurries it to the end
-  dragging = true; startX = lastX = e.clientX; startAngle = angle; lastT = performance.now(); velocity = 0;
+  if (dragging) return;                         // a second finger doesn't restart the drag
+  dragging = true; dragId = e.pointerId; startX = lastX = e.clientX; startPos = posOf(angle); lastT = performance.now();
+  velocity = 0; spin = 0;                       // a grab catches the world where it is
   startStop = stopIndex; dragTouch = e.pointerType !== 'mouse';
   try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
   canvas.classList.add('dragging'); card.classList.add('moving');
 });
 canvas.addEventListener('pointermove', e => {
-  if (!dragging) return;
+  if (!dragging || e.pointerId !== dragId) return;
   // Touch: a swipe across about a third of the screen moves one card, and one swipe never goes
-  // further than the next card. Mouse keeps the freer drag.
-  const per = dragTouch ? STEP / (Math.max(innerWidth, 320) * 0.34) : 150 / Math.max(innerWidth, 360);
-  let a = startAngle + (e.clientX - startX) * per;
+  // further than the next card. Mouse keeps the freer drag, about four cards across the screen.
+  const per = dragTouch ? 1 / (Math.max(innerWidth, 320) * 0.34) : 4.3 / Math.max(innerWidth, 360);   // cards per pixel
+  let p = startPos - (e.clientX - startX) * per;          // drag left for the next card
   if (dragTouch) {
-    const lo = startAngle - STEP, hi = startAngle + STEP;   // soft stop just past the neighbouring card
-    if (a > hi) a = hi + (a - hi) * 0.2;
-    if (a < lo) a = lo + (a - lo) * 0.2;
+    const lo = startStop - 1, hi = startStop + 1;          // soft stop just past the neighbouring card
+    if (p > hi) p = hi + (p - hi) * 0.2;
+    if (p < lo) p = lo + (p - lo) * 0.2;
   }
-  if (a > MAX) a = MAX + (a - MAX) * 0.3;                // rubber band at the ends
-  if (a < MIN) a = MIN + (a - MIN) * 0.3;
-  const now = performance.now();
-  velocity = (e.clientX - lastX) * per / Math.max(now - lastT, 1) * 1000;
-  lastX = e.clientX; lastT = now; angle = a;
-  const live = landing(a, 0);
+  if (p < 0) p *= 0.3;                                   // rubber band at the ends
+  if (p > LAST) p = LAST + (p - LAST) * 0.3;
+  const now = performance.now(), dt = Math.max(now - lastT, 1);
+  const v = -(e.clientX - lastX) * per / dt * 1000;       // cards a second
+  velocity = dt > 80 ? v : velocity + (v - velocity) * Math.min(1, dt / 40);   // smoothed, so one jumpy event can't fake a flick
+  lastX = e.clientX; lastT = now; angle = degOf(p);
+  const live = landing(p, 0);
   if (live !== stopIndex) showStop(live, false, true);   // the menu, dots and title follow as you drag
 });
 // The card a drag would land on: the nearest one, but a deliberate swipe or flick always moves at least
-// one card, and on touch one swipe never goes further than the next card.
-function landing(a, vel) {
-  let best = 0, bestD = Infinity;
-  STOPS.forEach((s, i) => { const d = Math.abs(s.deg - a); if (d < bestD) { bestD = d; best = i; } });
-  const moved = a - startAngle;
-  const intent = Math.abs(moved) > STEP * 0.18 ? Math.sign(moved) : (Math.abs(vel) > 30 ? Math.sign(vel) : 0);
-  if (best === startStop && intent) best = startStop - intent;   // angle down = next card
+// one card, and on touch one swipe never goes further than the next card. p and vel are in cards.
+function landing(p, vel) {
+  let best = Math.max(0, Math.min(LAST, Math.round(p)));
+  const moved = p - startPos;
+  const intent = Math.abs(moved) > 0.18 ? Math.sign(moved) : (Math.abs(vel) > 0.85 ? Math.sign(vel) : 0);
+  if (best === startStop && intent) best = startStop + intent;
   if (dragTouch) best = Math.max(startStop - 1, Math.min(startStop + 1, best));
-  return Math.max(0, Math.min(STOPS.length - 1, best));
+  return Math.max(0, Math.min(LAST, best));
 }
-function endDrag() {
-  if (!dragging) return;
-  dragging = false; canvas.classList.remove('dragging'); card.classList.remove('moving');
+function endDrag(e) {
+  if (!dragging || (e && e.pointerId !== dragId)) return;
+  dragging = false; dragId = null; canvas.classList.remove('dragging'); card.classList.remove('moving');
   if (performance.now() - lastT > 90) velocity = 0;       // finger paused before lifting: no flick
-  const best = landing(angle, velocity), shown = stopIndex;
+  const p = posOf(angle), best = landing(p, velocity), shown = stopIndex;
   showStop(best);
+  // The world carries on at the finger's speed and eases into the card, without passing it.
+  const towards = Math.sign(target - angle), cap = SPIN.rate * Math.abs(target - angle);
+  const flick = -velocity * (degOf(p + 0.5) - degOf(p - 0.5));   // cards a second to degrees a second here
+  spin = Math.sign(flick) === towards ? towards * Math.min(Math.abs(flick), cap) : 0;
   if (best === shown && best !== startStop) glint(best > startStop ? -1 : 1);   // the menu already moved during the drag
 }
 canvas.addEventListener('pointerup', endDrag);
@@ -1595,12 +1625,12 @@ addEventListener('wheel', e => {
   if (introP < 1) { introSpeed = 4; return; }
   const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
   const px = d * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? innerHeight : 1);
-  if (!wheeling) { wheeling = true; wheelGoal = angle; startAngle = angle; startStop = stopIndex; dragTouch = false; card.classList.add('moving'); }
-  wheelGoal -= Math.max(-160, Math.min(160, px)) * 0.1;      // scroll down, next card
-  wheelGoal = Math.max(MIN - 8, Math.min(MAX + 8, wheelGoal)); // a little give at the ends
+  if (!wheeling) { wheeling = true; wheelGoal = posOf(angle); startPos = wheelGoal; startStop = stopIndex; dragTouch = false; card.classList.add('moving'); }
+  wheelGoal += Math.max(-160, Math.min(160, px)) * 0.0035;   // in cards: scroll down, next card
+  wheelGoal = Math.max(-0.25, Math.min(LAST + 0.25, wheelGoal)); // a little give at the ends
   const live = landing(wheelGoal, 0);
   if (live !== stopIndex) showStop(live, false, true);
-  target = wheelGoal;                                        // the world eases towards the wheel, not the card, until it settles
+  target = degOf(wheelGoal);                                 // the world eases towards the wheel, not the card, until it settles
   clearTimeout(wheelTimer);
   wheelTimer = setTimeout(() => {
     wheeling = false; card.classList.remove('moving');
