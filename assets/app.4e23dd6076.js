@@ -2513,7 +2513,7 @@ WORLDS.city = (() => {
   const world = {
     id: 'city', scene, entering: 'Entering the city', exposure: 1.0,
     kicker: 'World test 02 · Contact', title: 'The City',
-    blurb: 'A rain-soaked rooftop after dark. Neon in the puddles, steam from the vents, and the skyline asking you to talk to us.',
+    blurb: 'A rain-soaked rooftop after dark. Neon in the puddles, steam from the vents and the skyline asking you to talk to us.',
     cam: { radius: 6.6, height: 0.9, look: 1.45, lookPhone: 0.6, fov: 38, far: 1200 },
     assets: () => [WDIR + (phone ? 'city-2k.jpg' : 'city.jpg'), ...(phone ? [] : [WDIR + 'city-band.jpg']), WDIR + 'puddles.png', WDIR + 'city_layout.json', WDIR + 'roof_proxy.txt',
       WDIR + 'talk.png', WDIR + 'talk_glow.png', WDIR + 'always.png', WDIR + 'always_glow.png'],
