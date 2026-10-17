@@ -8,10 +8,10 @@ import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 /* ---------------- content ---------------- */
 const STOPS = [
   { id: 'work', title: 'Work', cta: 'See the work', deg: 0 },          // Ken's hero view: sun behind the F
-  { id: 'capabilities', title: 'Capabilities', cta: 'What we do', deg: -35 },
-  { id: 'ai', title: 'AI', cta: 'Explore Freak Lab', deg: -52 },       // between Capabilities and Contact, so the other views stay as tuned
-  { id: 'contact', title: 'Contact', cta: 'Get in touch', deg: -70 },
-  { id: 'about', title: 'About', cta: 'Meet Freak', deg: -105 },
+  { id: 'capabilities', title: 'Capabilities', cta: 'What we do', deg: -24 },
+  { id: 'ai', title: 'AI', cta: 'Explore Freak Lab', deg: -47 },       // even gaps of about 24°, so each turn feels the same
+  { id: 'contact', title: 'Contact', cta: 'Get in touch', deg: -71 },
+  { id: 'about', title: 'About', cta: 'Meet Freak', deg: -94 },
   { id: 'resources', title: 'Resource Centre', cta: 'Read the guides', deg: -118 },   // just past About, before the F turns its back
 ];
 
